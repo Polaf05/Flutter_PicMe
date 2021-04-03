@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picme/services/auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class Signin extends StatefulWidget {
   //Accept class arguments
@@ -181,7 +182,9 @@ class _SigninState extends State<Signin> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0)),
                       color: Colors.red[600],
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _auth.signInWithGoogle();
+                      },
                       icon: FaIcon(
                         FontAwesomeIcons.google,
                         color: Colors.white,

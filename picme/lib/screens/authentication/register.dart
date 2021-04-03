@@ -181,7 +181,9 @@ class _RegisterState extends State<Register> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0)),
                       color: Colors.red[600],
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _auth.signInWithGoogle();
+                      },
                       icon: FaIcon(
                         FontAwesomeIcons.google,
                         color: Colors.white,
