@@ -24,22 +24,14 @@ class _SigninState extends State<Signin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'PicMe',
-            style: TextStyle(
-              fontSize: 30.0,
-            ),
-          ),
-        ),
         body: Container(
-            padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
+            padding: EdgeInsets.fromLTRB(15, 80, 15, 0),
             child: ListView(
               children: <Widget>[
                 Center(
                   child: CircleAvatar(
-                    backgroundColor: Colors.red[600],
-                    backgroundImage: AssetImage('../../assets/logo.png'),
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: AssetImage('assets/new.png'),
                     radius: 60.0,
                   ),
                 ),
@@ -74,6 +66,7 @@ class _SigninState extends State<Signin> {
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Password',
+                            
                           ),
                         ),
                       ),
