@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 class Signin extends StatefulWidget {
   //Accept class arguments
   final Function toggle;
-  Signin({this.toggle});
+  final Function toggleReset;
+  Signin({this.toggle, this.toggleReset});
 
   @override
   _SigninState createState() => _SigninState();
@@ -126,6 +127,23 @@ class _SigninState extends State<Signin> {
                       ),
                       onPressed: () {
                         widget.toggle();
+                      },
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                )),
+                Container(
+                    child: Row(
+                  children: <Widget>[
+                    Text('Forgot Password?'),
+                    FlatButton(
+                      textColor: Colors.red[400],
+                      child: Text(
+                        'RESET PASSWORD',
+                        style: TextStyle(fontSize: 15, fontFamily: 'Arial'),
+                      ),
+                      onPressed: () {
+                        widget.toggleReset();
                       },
                     )
                   ],
