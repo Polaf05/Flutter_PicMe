@@ -2,16 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picme/models/user.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final googleSignIn = GoogleSignIn();
-
+  final facebookSignIn = FacebookLogin();
   //create user model
 
   UserCreds _userFromFirebaseUser(User user) {
     return user != null
-        ? UserCreds(uid: user.uid, anon: user.isAnonymous)
+        ? UserCreds(uid: user.uid, anon: user.isAnonymous, email: user.email)
         : null;
   }
 
@@ -61,6 +62,33 @@ class AuthService {
 
   //sign in fb
 
+  Future resultFacebookSignIn() async {
+    FacebookLoginResult _result = await facebookSignIn.logIn(['email']);
+    switch (_result.status) {
+      case FacebookLoginStatus.cancelledByUser:
+        print("cancelledByUser");
+        break;
+      case FacebookLoginStatus.error:
+        print("Error");
+        break;
+      case FacebookLoginStatus.loggedIn:
+        await signInWithFacebook(_result);
+        break;
+    }
+  }
+
+  Future signInWithFacebook(FacebookLoginResult _result) async {
+    try {
+      FacebookAccessToken _accessToken = _result.accessToken;
+      AuthCredential credential =
+          FacebookAuthProvider.credential(_accessToken.token);
+      await _auth.signInWithCredential(credential);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   //sign in Goggle
 
   Future signInWithGoogle() async {
@@ -82,9 +110,11 @@ class AuthService {
   }
   //sign out
 
-  Future signOutUser() async {
+  Future<void> signOutUser() async {
     try {
-      await googleSignIn.disconnect();
+      print("basta dito");
+      await facebookSignIn.logOut();
+      await googleSignIn.signOut();
       await _auth.signOut();
     } catch (e) {
       print(e.toString());

@@ -157,7 +157,9 @@ class _SigninState extends State<Signin> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0)),
                       color: Colors.blue[800],
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _auth.resultFacebookSignIn();
+                      },
                       icon: FaIcon(
                         FontAwesomeIcons.facebookF,
                         color: Colors.white,
