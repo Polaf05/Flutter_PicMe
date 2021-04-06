@@ -23,23 +23,18 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'PicMe',
-            style: TextStyle(
-              fontSize: 30.0,
-            ),
-          ),
-        ),
         body: Container(
-            padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
+            padding: EdgeInsets.fromLTRB(15, 50, 15, 0),
             child: ListView(
               children: <Widget>[
                 Center(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.red[600],
-                    backgroundImage: AssetImage('assets/logo.png'),
-                    radius: 60.0,
+                  child: Text('Sign Up',
+                  style: TextStyle(
+                    fontFamily: 'Lato',
+                    color: Colors.red[700],
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.w600,
+                  ),
                   ),
                 ),
                 Container(
@@ -56,7 +51,35 @@ class _RegisterState extends State<Register> {
                           },
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
+                            labelText: 'Name',
+                          ),
+                        ),
+                      ),
+                       Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
+                        child: TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter an Email' : null,
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
                             labelText: 'Email',
+                          ),
+                        ),
+                      ),
+                       Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
+                        child: TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter an Email' : null,
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Password',
                           ),
                         ),
                       ),
@@ -81,7 +104,7 @@ class _RegisterState extends State<Register> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                            child: Text("Register",
+                            child: Text("Sign Up",
                                 style: TextStyle(fontSize: 20.0)),
                             style: ButtonStyle(
                                 padding: MaterialStateProperty.all<EdgeInsets>(
