@@ -17,35 +17,47 @@ class _RegisterState extends State<Register> {
 
   //text field state
   String email = "";
+  String name = "";
   String password = "";
+  String confirm = "";
   String error = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'PicMe',
-            style: TextStyle(
-              fontSize: 30.0,
-            ),
-          ),
-        ),
         body: Container(
-            padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
+            padding: EdgeInsets.fromLTRB(15, 50, 15, 0),
             child: ListView(
               children: <Widget>[
                 Center(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.red[600],
-                    backgroundImage: AssetImage('assets/logo.png'),
-                    radius: 60.0,
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      fontFamily: 'Lato',
+                      color: Colors.red[700],
+                      fontSize: 40.0,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 Container(
                   child: Form(
                     key: _formkey,
                     child: Column(children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
+                        child: TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter a Name' : null,
+                          onChanged: (val) {
+                            setState(() => name = val);
+                          },
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Name',
+                          ),
+                        ),
+                      ),
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
                         child: TextFormField(
@@ -61,12 +73,10 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
                         child: TextFormField(
-                          validator: (val) => val.length < 4
-                              ? 'Password must be 5 or more Character'
-                              : null,
-                          obscureText: true,
+                          validator: (val) =>
+                              val.length < 4 ? 'Enter an Password' : null,
                           onChanged: (val) {
                             setState(() => password = val);
                           },
@@ -76,12 +86,28 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                       ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                        child: TextFormField(
+                          validator: (val) => val != password
+                              ? 'Password does not match'
+                              : null,
+                          obscureText: true,
+                          onChanged: (val) {
+                            setState(() => confirm = val);
+                          },
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Confirm Password',
+                          ),
+                        ),
+                      ),
                       SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                            child: Text("Register",
+                            child: Text("Sign Up",
                                 style: TextStyle(fontSize: 20.0)),
                             style: ButtonStyle(
                                 padding: MaterialStateProperty.all<EdgeInsets>(
@@ -163,7 +189,9 @@ class _RegisterState extends State<Register> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0)),
                       color: Colors.blue[800],
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _auth.resultFacebookSignIn();
+                      },
                       icon: FaIcon(
                         FontAwesomeIcons.facebookF,
                         color: Colors.white,
