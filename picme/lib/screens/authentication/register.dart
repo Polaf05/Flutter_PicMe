@@ -77,6 +77,7 @@ class _RegisterState extends State<Register> {
                         child: TextFormField(
                           validator: (val) =>
                               val.length < 4 ? 'Enter an Password' : null,
+                          obscureText: true,
                           onChanged: (val) {
                             setState(() => password = val);
                           },
