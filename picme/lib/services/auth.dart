@@ -119,7 +119,6 @@ class AuthService {
 
   Future<void> signOutUser() async {
     try {
-      print("basta dito");
       await facebookSignIn.logOut();
       await googleSignIn.signOut();
       await _auth.signOut();

@@ -75,6 +75,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                             onPressed: () async {
                               if (_formkey.currentState.validate()) {
                                 await _auth.forgotPassword(email);
+                                widget.toggleReset();
                               }
                             },
                           ),
