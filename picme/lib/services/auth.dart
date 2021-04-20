@@ -1,13 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picme/models/user.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:picme/services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final googleSignIn = GoogleSignIn();
   final facebookSignIn = FacebookLogin();
+
+  static String error;
   //create user model
 
   UserCreds _userFromFirebaseUser(User user) {
@@ -41,6 +43,7 @@ class AuthService {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
       return null;
@@ -48,14 +51,22 @@ class AuthService {
   }
 
   //Register email & password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(
+      String email, String password, String name) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
+
+      //Update database
+
+      await DatabaseService(uid: user.uid)
+          .updateUserData(email, name, "client");
+
       return _userFromFirebaseUser(user);
     } catch (e) {
-      print(e.toString());
+      print(e.message);
+      error = e.message;
       return null;
     }
   }
@@ -82,7 +93,14 @@ class AuthService {
       FacebookAccessToken _accessToken = _result.accessToken;
       AuthCredential credential =
           FacebookAuthProvider.credential(_accessToken.token);
-      await _auth.signInWithCredential(credential);
+      UserCredential result = await _auth.signInWithCredential(credential);
+      User user = result.user;
+
+      //add database
+      await DatabaseService(uid: user.uid)
+          .updateUserData(user.email, user.displayName, "client");
+
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
       return null;
@@ -102,7 +120,14 @@ class AuthService {
         idToken: googleAuth.idToken,
       );
 
-      await _auth.signInWithCredential(credential);
+      UserCredential result = await _auth.signInWithCredential(credential);
+      User user = result.user;
+
+      //add database
+      await DatabaseService(uid: user.uid)
+          .updateUserData(user.email, user.displayName, "client");
+
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
       return null;

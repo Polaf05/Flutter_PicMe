@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:picme/models/user.dart';
 import 'package:picme/services/auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:picme/shared/loading.dart';
@@ -134,10 +135,10 @@ class _RegisterState extends State<Register> {
                                     });
                                     dynamic result = await _auth
                                         .registerWithEmailAndPassword(
-                                            email, password);
+                                            email, password, name);
                                     if (result == null) {
                                       setState(() {
-                                        error = 'Please supply a valid email';
+                                        error = AuthService.error;
                                         loading = false;
                                       });
                                     }
