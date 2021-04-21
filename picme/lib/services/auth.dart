@@ -25,6 +25,11 @@ class AuthService {
         .map((User user) => _userFromFirebaseUser(user));
   }
 
+  getCurrentUser() {
+    User user = _auth.currentUser;
+    return _userFromFirebaseUser(user);
+  }
+
   //sign in anonymously
   Future signInAnon() async {
     try {

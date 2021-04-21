@@ -1,4 +1,5 @@
 import "package:cloud_firestore/cloud_firestore.dart";
+import 'package:picme/models/lensman.dart';
 
 class DatabaseService {
   final String uid;
@@ -8,6 +9,9 @@ class DatabaseService {
 
   final CollectionReference clientCollection =
       FirebaseFirestore.instance.collection('Clients');
+
+  final CollectionReference employeeCollection =
+      FirebaseFirestore.instance.collection('Photographer');
 
   //Update
 
@@ -19,9 +23,20 @@ class DatabaseService {
     });
   }
 
+  //Lensman list from snapshot
+  List<Lensman> _lensmanListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Lensman(
+          name: doc.data()['name'] ?? '',
+          email: doc.data()['email'] ?? '',
+          contact: doc.data()['contact'] ?? '',
+          display: doc.data()['display'] ?? '');
+    }).toList();
+  }
+
   //get client streams
 
-  Stream<QuerySnapshot> get user {
-    return clientCollection.snapshots();
+  Stream<List<Lensman>> get lensman {
+    return employeeCollection.snapshots().map(_lensmanListFromSnapshot);
   }
 }
