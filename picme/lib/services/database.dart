@@ -13,7 +13,7 @@ class DatabaseService {
   final CollectionReference employeeCollection =
       FirebaseFirestore.instance.collection('Photographer');
 
-  //Update
+  //Create
 
   Future updateUserData(String email, String name, String role) async {
     return await clientCollection.doc(uid).set({
@@ -23,6 +23,22 @@ class DatabaseService {
     });
   }
 
+  //Fetch Specific Data
+
+  Future fetchUserData(String id) async {
+    dynamic result = await employeeCollection.doc(id).get();
+    DocumentSnapshot snapshot = result;
+    return _specificlensman(snapshot);
+  }
+
+  Lensman _specificlensman(DocumentSnapshot snapshot) {
+    return Lensman(
+        name: snapshot['name'],
+        email: snapshot['email'],
+        contact: snapshot['contact'],
+        display: snapshot['display']);
+  }
+
   //Lensman list from snapshot
   List<Lensman> _lensmanListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
@@ -30,7 +46,8 @@ class DatabaseService {
           name: doc.data()['name'] ?? '',
           email: doc.data()['email'] ?? '',
           contact: doc.data()['contact'] ?? '',
-          display: doc.data()['display'] ?? '');
+          display: doc.data()['display'] ?? '',
+          id: doc.id);
     }).toList();
   }
 

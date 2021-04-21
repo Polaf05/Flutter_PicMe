@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picme/models/lensman.dart';
+import 'package:picme/services/database.dart';
 
 class LensmanTile extends StatelessWidget {
   final Lensman lens;
@@ -19,6 +20,10 @@ class LensmanTile extends StatelessWidget {
           ),
           title: Text(lens.name),
           subtitle: Text(lens.email),
+          onTap: () async {
+            dynamic result = await DatabaseService().fetchUserData(lens.id);
+            print(result.name);
+          },
         ),
       ),
     );
