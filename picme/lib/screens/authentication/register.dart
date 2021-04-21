@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:picme/models/user.dart';
 import 'package:picme/services/auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:picme/shared/loading.dart';
