@@ -37,6 +37,7 @@ class _SignInState extends State<SignIn> {
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
+                          obscureText: true,
                           //onchange
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
