@@ -18,6 +18,7 @@ class _LensmanListState extends State<LensmanList> {
       itemCount: lensman.length,
       itemBuilder: (context, index) {
         return LensmanTile(lens: lensman[index]);
+        
       },
     );
   }
