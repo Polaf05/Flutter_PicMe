@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:picme/models/user.dart';
 import 'package:picme/screens/authentication/authenticate.dart';
 import 'package:picme/screens/home/home.dart';
+import 'package:picme/screens/home/show_details.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
@@ -13,7 +14,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return Home();
+      return ShowDetails();
     }
   }
 }
