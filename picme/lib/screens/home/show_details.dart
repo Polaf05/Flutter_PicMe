@@ -71,7 +71,7 @@ class _ShowDetailsState extends State<ShowDetails> {
                               ),
                             ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(50, 350, 50, 0),
+                  margin: EdgeInsets.fromLTRB(50, 310, 50, 0),
                   child: Column(
                       children: <Widget>[
                         Text(
@@ -97,7 +97,7 @@ class _ShowDetailsState extends State<ShowDetails> {
                     
                         SizedBox(height: 10),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                           RaisedButton(
@@ -137,7 +137,7 @@ class _ShowDetailsState extends State<ShowDetails> {
                 ),
                 
                     Positioned(
-                              top: 210,
+                              top: 170,
                               left: 0,
                               right: 0,
                               child: Center(
