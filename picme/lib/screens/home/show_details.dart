@@ -48,7 +48,7 @@ class _ShowDetailsState extends State<ShowDetails> {
           ),
                                 
                Container(
-                    height: 890,
+                    height: double.infinity,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         double innerHeight = constraints.maxHeight;
@@ -57,7 +57,7 @@ class _ShowDetailsState extends State<ShowDetails> {
                           fit: StackFit.expand,
                           children: [
                             Positioned(
-                              top:240,
+                              top:230,
                               bottom: 0,
                               left: 0,
                               right: 0,
@@ -95,15 +95,47 @@ class _ShowDetailsState extends State<ShowDetails> {
                           ),
                         ),
                     
-
+                        SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                          RaisedButton(
+                          padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0)),
+                          color: Color.fromRGBO(216,181,58,1.0),
+                          onPressed: () {},
+                          child:Text(
+                            'Accept',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                        RaisedButton(
+                          padding: EdgeInsets.fromLTRB(15, 10, 20, 10),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0)),
+                          color: Color.fromRGBO(237,237,237,1.0),
+                          onPressed: () {},
+                          child: Text(
+                            'Reject',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                       
 
                       ],
                     ),
                 ),
-                     
-
-
+                
                     Positioned(
                               top: 210,
                               left: 0,
@@ -122,12 +154,11 @@ class _ShowDetailsState extends State<ShowDetails> {
                                 ),
                               ),
                             ),
-                 Divider(
-                   color: Colors.grey[400],  
-                 ),
+                
+                SizedBox(height:40.0), 
                  Container(
-                  height: size.height * 0.60 - 56,
-                  padding: EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 24,),
+                  height: 200.0,
+                  padding: EdgeInsets.only(left: 16, right: 16, top: 340, bottom: 24,),
                   child: GridView.count(
                     crossAxisCount: 3,
                     crossAxisSpacing: 8,
@@ -148,7 +179,6 @@ class _ShowDetailsState extends State<ShowDetails> {
                     }),
                   ),
                 ),
-
                    ],
                         );
                       },
