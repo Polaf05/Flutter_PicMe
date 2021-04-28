@@ -12,6 +12,17 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+
+  //textfield
+  String username = "";
+  String name = "";
+  String address = "";
+  String contact = "";
+  String email = "";
+  String password = "";
+  String confirm = "";
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +40,10 @@ class _SignUpState extends State<SignUp> {
                 ),
                 Container(
                   child: Form(
+                    key: _formKey,
                     child: Column(children: <Widget>[
                       Container(
-                        padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
@@ -40,7 +52,30 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                        child: TextFormField(
+                          // validator: (val) =>
+                          //     val.isEmpty ? 'Enter username or company name' : null,
+                          // onChanged: (val) {
+                          //   setState(() => name = val);
+                          // },
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Company Name or Username',
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Address',
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
@@ -49,7 +84,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
@@ -99,7 +134,9 @@ class _SignUpState extends State<SignUp> {
                                             BorderRadius.circular(30.0),
                                         side: BorderSide(
                                             color: Colors.green[400])))),
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_formKey.currentState.validate()) {}
+                            },
                           ),
                         ],
                       ),
