@@ -110,7 +110,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
                 expandedHeight: 250.0,
 
-                /// your Carousel + Tabbar height(50)
                 
                 floating: true,
                 bottom: TabBar(

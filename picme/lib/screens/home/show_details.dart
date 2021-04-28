@@ -9,7 +9,7 @@ class _ShowDetailsState extends State<ShowDetails> {
   @override
    Widget build(BuildContext context) {
 
-     Size size = MediaQuery.of(context).size;
+    //  Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -42,8 +42,8 @@ class _ShowDetailsState extends State<ShowDetails> {
             child: Image.asset(
               "assets/bg.png",
               fit: BoxFit.cover,
-              width: size.width,
-              height: size.height,
+              width: double.infinity,
+              height:1200,
             ),
           ),
                                 
@@ -51,7 +51,6 @@ class _ShowDetailsState extends State<ShowDetails> {
                     height: double.infinity,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
-                        double innerHeight = constraints.maxHeight;
                         double innerWidth = constraints.maxWidth;
                         return Stack(
                           fit: StackFit.expand,
@@ -123,7 +122,7 @@ class _ShowDetailsState extends State<ShowDetails> {
                           child: Text(
                             'Reject',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Color.fromRGBO(31,31,31,1.0),
                               fontSize: 16,
                             ),
                           ),
@@ -155,10 +154,10 @@ class _ShowDetailsState extends State<ShowDetails> {
                               ),
                             ),
                 
-                SizedBox(height:40.0), 
+                
                  Container(
-                  height: 200.0,
-                  padding: EdgeInsets.only(left: 16, right: 16, top: 340, bottom: 24,),
+                  padding: EdgeInsets.only(left: 16, right: 16, top: 420.0, bottom: 0,),
+                  
                   child: GridView.count(
                     crossAxisCount: 3,
                     crossAxisSpacing: 8,
@@ -187,8 +186,6 @@ class _ShowDetailsState extends State<ShowDetails> {
                 
                 ],
               ),
-            
-
     );
   }
 }

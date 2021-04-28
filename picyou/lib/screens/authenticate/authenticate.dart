@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:picyou/screens/authenticate/reset_password.dart';
 import 'package:picyou/screens/authenticate/sign_in.dart';
+import 'package:picyou/screens/authenticate/sign_up.dart';
 
 class Authenticate extends StatefulWidget {
   @override
@@ -7,8 +9,30 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
+  bool showSignup = false;
+  bool showReset = false;
+  void toggleView() {
+    setState(() {
+      showSignup = !showSignup;
+    });
+  }
+
+  void toggleReset() {
+    setState(() {
+      showReset = !showReset;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SignIn();
+    if (!showSignup) {
+      if (!showReset) {
+        return SignIn(toggle: toggleView, toggleReset: toggleReset);
+      } else {
+        return ResetPassword(toggleReset: toggleReset);
+      }
+    } else {
+      return SignUp(toggle: toggleView);
+    }
   }
 }

@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:picyou/services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class SignUp extends StatefulWidget {
   final Function toggle;
-  final Function toggleReset;
-  SignIn({this.toggle, this.toggleReset});
+
+  SignUp({this.toggle});
 
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
-  //textfield states
-  String email = '';
-  String password = '';
+  //textfield
+  String username = "";
+  String name = "";
+  String address = "";
+  String contact = "";
+  String email = "";
+  String password = "";
+  String confirm = "";
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +40,52 @@ class _SignInState extends State<SignIn> {
                 ),
                 Container(
                   child: Form(
+                    key: _formKey,
                     child: Column(children: <Widget>[
                       Container(
-                        padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
-                          onChanged: (val) {
-                            setState(() => email = val);
-                          },
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Name',
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                        child: TextFormField(
+                          // validator: (val) =>
+                          //     val.isEmpty ? 'Enter username or company name' : null,
+                          // onChanged: (val) {
+                          //   setState(() => name = val);
+                          // },
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Company Name or Username',
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Address',
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Contact',
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                        child: TextFormField(
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Email',
@@ -50,12 +96,21 @@ class _SignInState extends State<SignIn> {
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
                           obscureText: true,
-                          onChanged: (val) {
-                            setState(() => password = val);
-                          },
+                          //onchange
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Password',
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                        child: TextFormField(
+                          obscureText: true,
+                          //onchange
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Confirm Password',
                           ),
                         ),
                       ),
@@ -64,8 +119,8 @@ class _SignInState extends State<SignIn> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                            child:
-                                Text("LOGIN", style: TextStyle(fontSize: 20.0)),
+                            child: Text("REGISTER",
+                                style: TextStyle(fontSize: 20.0)),
                             style: ButtonStyle(
                                 padding: MaterialStateProperty.all<EdgeInsets>(
                                     EdgeInsets.fromLTRB(80, 15, 80, 15)),
@@ -79,15 +134,8 @@ class _SignInState extends State<SignIn> {
                                             BorderRadius.circular(30.0),
                                         side: BorderSide(
                                             color: Colors.green[400])))),
-                            onPressed: () async {
-                              print(email);
-                              print(password);
-                              dynamic result = await _auth.signInAnon();
-                              if (result == null) {
-                                print("error signin");
-                              } else {
-                                print(result.uid);
-                              }
+                            onPressed: () {
+                              if (_formKey.currentState.validate()) {}
                             },
                           ),
                         ],
@@ -105,11 +153,11 @@ class _SignInState extends State<SignIn> {
                 Container(
                     child: Row(
                   children: <Widget>[
-                    Text('Does not have account?'),
+                    Text('Already have an account?'),
                     FlatButton(
                       textColor: Colors.green[400],
                       child: Text(
-                        'SIGN UP',
+                        'SIGN IN',
                         style: TextStyle(fontSize: 15, fontFamily: 'Arial'),
                       ),
                       onPressed: () {
@@ -130,7 +178,7 @@ class _SignInState extends State<SignIn> {
                         style: TextStyle(fontSize: 15, fontFamily: 'Arial'),
                       ),
                       onPressed: () {
-                        widget.toggleReset();
+                        //widget.toggleReset();
                       },
                     )
                   ],

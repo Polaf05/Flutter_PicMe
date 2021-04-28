@@ -62,6 +62,7 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
+                          
                           Container(
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
                             child: TextFormField(
