@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:picyou/services/auth.dart';
 
-class SignIn extends StatefulWidget {
-  final Function toggle;
+class ResetPassword extends StatefulWidget {
   final Function toggleReset;
-  SignIn({this.toggle, this.toggleReset});
 
+  ResetPassword({this.toggleReset});
   @override
-  _SignInState createState() => _SignInState();
+  _ResetPasswordState createState() => _ResetPasswordState();
 }
 
-class _SignInState extends State<SignIn> {
+class _ResetPasswordState extends State<ResetPassword> {
+
+  
   final AuthService _auth = AuthService();
+  final _formkey = GlobalKey<FormState>();
 
-  //textfield states
-  String email = '';
-  String password = '';
-
+  //text field state
+  String email = "";
+  String error = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +34,13 @@ class _SignInState extends State<SignIn> {
                 ),
                 Container(
                   child: Form(
+                    key: _formkey,
                     child: Column(children: <Widget>[
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 30),
                         child: TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter an Email' : null,
                           onChanged: (val) {
                             setState(() => email = val);
                           },
@@ -46,47 +50,30 @@ class _SignInState extends State<SignIn> {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
-                        child: TextFormField(
-                          obscureText: true,
-                          onChanged: (val) {
-                            setState(() => password = val);
-                          },
-                          decoration: InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Password',
-                          ),
-                        ),
-                      ),
                       SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                            child:
-                                Text("LOGIN", style: TextStyle(fontSize: 20.0)),
+                            child: Text("Send Password Reset Email",
+                                style: TextStyle(fontSize: 20.0)),
                             style: ButtonStyle(
                                 padding: MaterialStateProperty.all<EdgeInsets>(
                                     EdgeInsets.fromLTRB(80, 15, 80, 15)),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green[400]),
+                                        Colors.red[400]),
                                 shape: MaterialStateProperty.all<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(30.0),
                                         side: BorderSide(
-                                            color: Colors.green[400])))),
+                                            color: Colors.red[400])))),
                             onPressed: () async {
-                              print(email);
-                              print(password);
-                              dynamic result = await _auth.signInAnon();
-                              if (result == null) {
-                                print("error signin");
-                              } else {
-                                print(result.uid);
+                              if (_formkey.currentState.validate()) {
+                                await _auth.forgotPassword(email);
+                                widget.toggleReset();
                               }
                             },
                           ),
@@ -95,8 +82,8 @@ class _SignInState extends State<SignIn> {
                       SizedBox(height: 12.0),
                       Center(
                         child: Text(
-                          '',
-                          style: TextStyle(color: Colors.green, fontSize: 14.0),
+                          error,
+                          style: TextStyle(color: Colors.red, fontSize: 14.0),
                         ),
                       ),
                     ]),
@@ -105,28 +92,11 @@ class _SignInState extends State<SignIn> {
                 Container(
                     child: Row(
                   children: <Widget>[
-                    Text('Does not have account?'),
+                    Text('Already Have an Account?'),
                     FlatButton(
-                      textColor: Colors.green[400],
+                      textColor: Colors.red[400],
                       child: Text(
-                        'SIGN UP',
-                        style: TextStyle(fontSize: 15, fontFamily: 'Arial'),
-                      ),
-                      onPressed: () {
-                        widget.toggle();
-                      },
-                    )
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.center,
-                )),
-                Container(
-                    child: Row(
-                  children: <Widget>[
-                    Text('Forgot Password?'),
-                    FlatButton(
-                      textColor: Colors.green[400],
-                      child: Text(
-                        'RESET PASSWORD',
+                        'SIGN IN',
                         style: TextStyle(fontSize: 15, fontFamily: 'Arial'),
                       ),
                       onPressed: () {
@@ -136,7 +106,6 @@ class _SignInState extends State<SignIn> {
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
                 )),
-                SizedBox(height: 20),
               ],
             )));
   }
