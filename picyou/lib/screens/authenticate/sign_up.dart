@@ -45,6 +45,10 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
+                          validator: (val) => val.isEmpty ? 'Enter name' : null,
+                          onChanged: (val) {
+                            setState(() => name = val);
+                          },
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Name',
@@ -54,11 +58,12 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
-                          // validator: (val) =>
-                          //     val.isEmpty ? 'Enter username or company name' : null,
-                          // onChanged: (val) {
-                          //   setState(() => name = val);
-                          // },
+                          validator: (val) => val.isEmpty
+                              ? 'Enter username or company name'
+                              : null,
+                          onChanged: (val) {
+                            setState(() => username = val);
+                          },
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Company Name or Username',
@@ -68,6 +73,11 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter address' : null,
+                          onChanged: (val) {
+                            setState(() => address = val);
+                          },
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Address',
@@ -77,6 +87,11 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter contact' : null,
+                          onChanged: (val) {
+                            setState(() => contact = val);
+                          },
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Contact',
@@ -86,6 +101,11 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter email' : null,
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Email',
@@ -95,6 +115,11 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
+                          validator: (val) =>
+                              val.length < 6 ? 'Enter 6+ characters' : null,
+                          onChanged: (val) {
+                            setState(() => password = val);
+                          },
                           obscureText: true,
                           //onchange
                           decoration: InputDecoration(
@@ -106,6 +131,12 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                         child: TextFormField(
+                          validator: (val) => val != password
+                              ? 'Password does not match'
+                              : null,
+                          onChanged: (val) {
+                            setState(() => confirm = val);
+                          },
                           obscureText: true,
                           //onchange
                           decoration: InputDecoration(
@@ -134,18 +165,22 @@ class _SignUpState extends State<SignUp> {
                                             BorderRadius.circular(30.0),
                                         side: BorderSide(
                                             color: Colors.green[400])))),
-                            onPressed: () {
-                              if (_formKey.currentState.validate()) {}
+                            onPressed: () async {
+                              if (_formKey.currentState.validate()) {
+                                dynamic result =
+                                    await _auth.register(email, password);
+                                if (result == null) {
+                                  setState(() => error = 'supply vald email');
+                                }
+                              }
                             },
                           ),
                         ],
                       ),
-                      SizedBox(height: 12.0),
-                      Center(
-                        child: Text(
-                          '',
-                          style: TextStyle(color: Colors.green, fontSize: 14.0),
-                        ),
+                      SizedBox(height: 14.0),
+                      Text(
+                        error,
+                        style: TextStyle(color: Colors.red, fontSize: 14.0),
                       ),
                     ]),
                   ),
