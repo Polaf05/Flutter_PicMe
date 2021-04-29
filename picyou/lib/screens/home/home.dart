@@ -3,8 +3,21 @@ import 'package:picyou/services/auth.dart';
 import 'package:picyou/screens/home/edit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Home extends StatelessWidget {
+
+class Home extends StatefulWidget {
   @override
+  _HomeState createState() => _HomeState();
+}
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  final AuthService _auth = AuthService();
+  TabController tb;
+
+  @override
+  void initState() {
+    tb = TabController(initialIndex: 0, length: 2, vsync: this);
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     return Scaffold(
@@ -30,7 +43,10 @@ class Home extends StatelessWidget {
           )
         ],
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+           Navigator.of(context).push(MaterialPageRoute(
+           builder: (context) => Home()));
+          },
           child: Icon(
             Icons.keyboard_arrow_left,
             color: Colors.white,
@@ -46,7 +62,8 @@ class Home extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Stack(
+      body: 
+        Stack(
         children: <Widget>[
           Center(
             child: Image.asset(
@@ -79,7 +96,7 @@ class Home extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 290, 290, 0),
+                      margin: EdgeInsets.fromLTRB(0, 290, 230, 0),
                       child: Column(
                         children: <Widget>[
                           Text(
@@ -101,42 +118,74 @@ class Home extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height:20),
+                    Column(
+                      children: [
+                        Container(
+                                margin: EdgeInsets.fromLTRB(20, 350, 0, 0),
+                                child: Row(
+                                    mainAxisAlignment:MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Icon(Icons.home,
+                                          size: 20,
+                                          color: Color.fromRGBO(216, 181, 58, 1.0)),
+                                      Text(
+                                          "Butal Events Place",
+                                          style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                            ),
+                          ),
+                                      
+                                    ]),
+                              ),
+                      ],
+                    ),
+                          SizedBox(height: 5),
                           Container(
-                            margin: EdgeInsets.only(left: 30),
+                           margin: EdgeInsets.fromLTRB(20, 370, 0, 0),
                             child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Icon(Icons.location_pin,
                                       size: 20,
                                       color: Color.fromRGBO(216, 181, 58, 1.0)),
-                                  Text('National Capital Republic'),
+                                  Text(
+                                          "Gagalangin Tondo, Manila",
+                                          style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                            ),
+                                  ),
                                 ]),
                           ),
                           SizedBox(height: 5),
                           Container(
-                            margin: EdgeInsets.only(left: 30),
+                             margin: EdgeInsets.fromLTRB(20, 390, 0, 0),
                             child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                    MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Icon(Icons.cake_outlined,
-                                      size: 20,
-                                      color: Color.fromRGBO(216, 181, 58, 1.0)),
-                                  Text('August 5,2069'),
                                   Icon(Icons.call,
                                       size: 20,
                                       color: Color.fromRGBO(216, 181, 58, 1.0)),
-                                  Text('0969212143'),
+                                  Text(
+                                          "09213232076",
+                                          style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                            ),
+                                  ),
                                 ]),
                           ),
-                        ],
-                      ),
-                    ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(240, 220, 0, 0),
+                      margin: EdgeInsets.fromLTRB(180, 210, 0, 0),
                       child: Column(
                         children: [
                           TextButton(
@@ -144,7 +193,7 @@ class Home extends StatelessWidget {
                                 style: TextStyle(fontSize: 18.0)),
                             style: ButtonStyle(
                                 padding: MaterialStateProperty.all<EdgeInsets>(
-                                    EdgeInsets.fromLTRB(60, 15, 60, 15)),
+                                    EdgeInsets.fromLTRB(40, 15, 40, 15)),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
                                         Colors.black),
@@ -167,20 +216,55 @@ class Home extends StatelessWidget {
                     Positioned(
                       top: 150,
                       left: 0,
-                      right: 280,
+                      right: 230,
                       child: CircleAvatar(
                         backgroundColor: Colors.transparent,
                         backgroundImage: AssetImage('assets/en.jpg'),
                         radius: 60.0,
                       ),
                     ),
-                  ],
+
+      //               DefaultTabController(
+                      
+      //   length: 3,
+      //   child: Scaffold(
+      //     appBar: AppBar(
+      //       bottom: TabBar(
+      //         tabs: [
+      //           Tab(icon: Icon(Icons.directions_car)),
+      //           Tab(icon: Icon(Icons.directions_transit)),
+      //           Tab(icon: Icon(Icons.directions_bike)),
+      //         ],
+      //       ),
+      //       title: Text('Tabs Demo'),
+      //     ),
+      //     body: TabBarView(
+      //       children: [
+      //         Icon(Icons.directions_car),
+      //         Icon(Icons.directions_transit),
+      //         Icon(Icons.directions_bike),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+                  
+                ],
                 );
               },
             ),
           ),
         ],
       ),
+
     );
   }
 }
+
+// TabBarView(
+//             controller: tb,
+//             children: <Widget>[
+//               Text("Pogi ni Pau"),
+//               Text("Sobrang pogi ni pau")
+//             ],
+//           ),
+// 
