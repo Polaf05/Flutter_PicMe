@@ -13,6 +13,9 @@ class DatabaseService {
   final CollectionReference employeeCollection =
       FirebaseFirestore.instance.collection('Photographer');
 
+  final CollectionReference bookingCollection =
+      FirebaseFirestore.instance.collection('Booking');
+
   //Create
 
   Future updateUserData(String email, String name, String role) async {
@@ -36,7 +39,8 @@ class DatabaseService {
         name: snapshot['name'],
         email: snapshot['email'],
         contact: snapshot['contact'],
-        display: snapshot['display']);
+        display: snapshot['display'],
+        gallery: snapshot.data()['gallery'] ?? '');
   }
 
   //Lensman list from snapshot
@@ -47,8 +51,22 @@ class DatabaseService {
           email: doc.data()['email'] ?? '',
           contact: doc.data()['contact'] ?? '',
           display: doc.data()['display'] ?? '',
+          gallery: doc.data()['gallery'] ?? '',
           id: doc.id);
     }).toList();
+  }
+
+  //Update
+
+  Future bookLensman(String client_id, String lensman_id) async {
+    return await bookingCollection
+        .add({
+          'client_id': 'client_id',
+          'lensman_id': 'lensman_id',
+          'status': 'pending',
+        })
+        .then((value) => print("Booking Added"))
+        .catchError((error) => print("Failed to add user: $error"));
   }
 
   //get client streams
