@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:picme/screens/home/book.dart';
 
 class ShowDetails extends StatefulWidget {
   @override
@@ -99,12 +100,15 @@ class _ShowDetailsState extends State<ShowDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                          RaisedButton(
+                          FlatButton(
                           padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0)),
                           color: Color.fromRGBO(216,181,58,1.0),
-                          onPressed: () {},
+                          onPressed: () {
+                             Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Book()));
+                          },
                           child:Text(
                             'Accept',
                             style: TextStyle(
@@ -112,8 +116,9 @@ class _ShowDetailsState extends State<ShowDetails> {
                               fontSize: 15,
                             ),
                           ),
+                       
                         ),
-                        RaisedButton(
+                        FlatButton(
                           padding: EdgeInsets.fromLTRB(15, 10, 20, 10),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0)),

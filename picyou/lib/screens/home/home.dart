@@ -10,11 +10,11 @@ class Home extends StatefulWidget {
 }
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final AuthService _auth = AuthService();
-  TabController tb;
+  TabController _controller;
 
   @override
   void initState() {
-    tb = TabController(initialIndex: 0, length: 2, vsync: this);
+    _controller = TabController(initialIndex: 0, length: 2, vsync: this);
     super.initState();
   }
 
@@ -73,6 +73,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               height: 1200,
             ),
           ),
+          
           Container(
             height: double.infinity,
             child: LayoutBuilder(
@@ -184,6 +185,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ),
                                 ]),
                           ),
+                   
                     Container(
                       margin: EdgeInsets.fromLTRB(180, 210, 0, 0),
                       child: Column(
@@ -210,9 +212,102 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   builder: (context) => Edit()));
                             },
                           ),
+                  
                         ],
                       ),
                     ),
+               
+                Stack(
+                    children: [
+                    Positioned(
+                      top: 450,
+                      left: 0,
+                      right: 0,   
+                    child:Container(
+                    decoration: new BoxDecoration(color: Theme.of(context).primaryColor),
+                    child: new TabBar(
+                      controller: _controller,
+                      unselectedLabelColor:Color.fromRGBO(237,237,237,1.0),
+                        indicator: BoxDecoration(
+                        color: Color.fromRGBO(43,43,43,1.0),
+                        border: Border(
+                        top:  BorderSide(width: 4.0, color: Color.fromRGBO(216,181,58,1.0)),
+                        )
+                      ),
+                      labelColor: Color.fromRGBO(216,181,58,1.0),
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      tabs: [
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text("Gallery",
+                      style: TextStyle(fontFamily: "BarlowBold", fontSize: 15.0)),
+                    ),
+                  ),
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text("View Request",
+                      style: TextStyle(fontFamily: "BarlowBold", fontSize: 15.0)),
+                      
+                    ),
+                  ),
+                      ],
+                    ),
+                  ),
+                    ),
+                  Positioned(
+                      top: 500,
+                      left: 0,
+                      right: 0,  
+                  child: Container(
+                     padding: EdgeInsets.only(left: 16, right: 16, top: 5, bottom: 0,),
+                    height: 320,
+                    child: new TabBarView(
+                      controller: _controller,
+                      children: <Widget>[
+              
+               GridView.count(
+                 padding: EdgeInsets.zero,
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    physics: ClampingScrollPhysics(),
+                    children: List.generate(1, (index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                          image: DecorationImage(
+                            image: AssetImage("assets/" + index.toString() + ".jpg"), 
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                
+                       ListView.builder(
+                         padding: EdgeInsets.zero,
+                          itemCount: 1,
+                          itemBuilder: (context, index) {
+                        return  Card(
+                              child: new ListTile(
+                                leading: const Icon(Icons.person),
+                                title: new TextField(
+                                  decoration: const InputDecoration(hintText: 'Reniel Avellano'),
+                                ),
+                              ),
+                            );
+                      },
+                     ),
+                      ],
+                    ),
+                  ),
+                  ),
+                      ],),
+                
                     Positioned(
                       top: 150,
                       left: 0,
@@ -223,31 +318,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         radius: 60.0,
                       ),
                     ),
-
-      //               DefaultTabController(
-                      
-      //   length: 3,
-      //   child: Scaffold(
-      //     appBar: AppBar(
-      //       bottom: TabBar(
-      //         tabs: [
-      //           Tab(icon: Icon(Icons.directions_car)),
-      //           Tab(icon: Icon(Icons.directions_transit)),
-      //           Tab(icon: Icon(Icons.directions_bike)),
-      //         ],
-      //       ),
-      //       title: Text('Tabs Demo'),
-      //     ),
-      //     body: TabBarView(
-      //       children: [
-      //         Icon(Icons.directions_car),
-      //         Icon(Icons.directions_transit),
-      //         Icon(Icons.directions_bike),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-                  
                 ],
                 );
               },
@@ -259,12 +329,3 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 }
-
-// TabBarView(
-//             controller: tb,
-//             children: <Widget>[
-//               Text("Pogi ni Pau"),
-//               Text("Sobrang pogi ni pau")
-//             ],
-//           ),
-// 
