@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picme/services/auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:picme/services/database.dart';
 import 'package:picme/shared/loading.dart';
 
 class Signin extends StatefulWidget {
@@ -97,8 +98,7 @@ class _SigninState extends State<Signin> {
                                   if (_formkey.currentState.validate()) {
                                     setState(() => loading = true);
                                     dynamic result =
-                                        await _auth.signInWithEmailAndPassword(
-                                            email, password);
+                                        await DatabaseService().checkUser(email, password);
                                     if (result == null) {
                                       setState(() {
                                         error =
