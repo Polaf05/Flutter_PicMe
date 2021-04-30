@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picme/models/lensman.dart';
 import 'package:picme/services/database.dart';
-
+import 'package:picme/screens/home/book.dart';
 class LensmanTile extends StatelessWidget {
   final Lensman lens;
   LensmanTile({this.lens});
@@ -26,14 +26,7 @@ class LensmanTile extends StatelessWidget {
                 border: Border(
                     right:  BorderSide(width: 4.0, color: Color.fromRGBO(216,181,58,1.0)))),
            child: Image.network(lens.display, height: 420, width: 80, fit: BoxFit.fitWidth,),
-            // child: ClipRRect(
-            //             borderRadius: BorderRadius.circular(15.0),
-            //             child: Image(
-            //               width: 90.0,
-            //               image: NetworkImage(lens.display),
-            //               fit: BoxFit.contain,
-            //             ),
-            //           ),
+    
           ),
           title: Text(
             lens.name,
@@ -47,9 +40,12 @@ class LensmanTile extends StatelessWidget {
           ),
           trailing:
               Icon(Icons.keyboard_arrow_right, color:Color.fromRGBO(216,181,58,1.0), size: 30.0),
+            
               onTap: () async {
-              dynamic result = await DatabaseService().fetchUserData(lens.id);
-              print(result.name);
+              // dynamic result = await DatabaseService().fetchUserData(lens.id);
+              // print(result.name);
+                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Book()));
               }
               )
         ),
