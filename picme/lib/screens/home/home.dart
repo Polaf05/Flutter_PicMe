@@ -150,7 +150,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             children: <Widget>[LensmanList(), LensmanList()],
           ),
         ),
-        backgroundColor:  Color.fromRGBO(31,31,31,1.0),
+        backgroundColor:  Color.fromRGBO(237,237,237,1.0),
       ),
     );
   }
