@@ -3,11 +3,11 @@ import 'package:picyou/services/auth.dart';
 import 'package:picyou/screens/home/edit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
+
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final AuthService _auth = AuthService();
   TabController tb;
@@ -39,13 +39,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
             onPressed: () async {
               await _auth.signOut();
+              print("worki");
             },
           )
         ],
         leading: GestureDetector(
           onTap: () {
-           Navigator.of(context).push(MaterialPageRoute(
-           builder: (context) => Home()));
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => Home()));
           },
           child: Icon(
             Icons.keyboard_arrow_left,
@@ -62,8 +63,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
         centerTitle: true,
       ),
-      body: 
-        Stack(
+      body: Stack(
         children: <Widget>[
           Center(
             child: Image.asset(
@@ -121,69 +121,67 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ],
                       ),
                     ),
-                    SizedBox(height:20),
+                    SizedBox(height: 20),
                     Column(
                       children: [
                         Container(
-                                margin: EdgeInsets.fromLTRB(20, 350, 0, 0),
-                                child: Row(
-                                    mainAxisAlignment:MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Icon(Icons.home,
-                                          size: 20,
-                                          color: Color.fromRGBO(216, 181, 58, 1.0)),
-                                      Text(
-                                          "Butal Events Place",
-                                          style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                            ),
-                          ),
-                                      
-                                    ]),
-                              ),
+                          margin: EdgeInsets.fromLTRB(20, 350, 0, 0),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Icon(Icons.home,
+                                    size: 20,
+                                    color: Color.fromRGBO(216, 181, 58, 1.0)),
+                                Text(
+                                  "Butal Events Place",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ]),
+                        ),
                       ],
                     ),
-                          SizedBox(height: 5),
-                          Container(
-                           margin: EdgeInsets.fromLTRB(20, 370, 0, 0),
-                            child: Row(
-                                mainAxisAlignment:MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Icon(Icons.location_pin,
-                                      size: 20,
-                                      color: Color.fromRGBO(216, 181, 58, 1.0)),
-                                  Text(
-                                          "Gagalangin Tondo, Manila",
-                                          style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15,
+                    SizedBox(height: 5),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20, 370, 0, 0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(Icons.location_pin,
+                                size: 20,
+                                color: Color.fromRGBO(216, 181, 58, 1.0)),
+                            Text(
+                              "Gagalangin Tondo, Manila",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                              ),
                             ),
-                                  ),
-                                ]),
-                          ),
-                          SizedBox(height: 5),
-                          Container(
-                             margin: EdgeInsets.fromLTRB(20, 390, 0, 0),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Icon(Icons.call,
-                                      size: 20,
-                                      color: Color.fromRGBO(216, 181, 58, 1.0)),
-                                  Text(
-                                          "09213232076",
-                                          style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15,
+                          ]),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20, 390, 0, 0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(Icons.call,
+                                size: 20,
+                                color: Color.fromRGBO(216, 181, 58, 1.0)),
+                            Text(
+                              "09213232076",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                              ),
                             ),
-                                  ),
-                                ]),
-                          ),
+                          ]),
+                    ),
                     Container(
                       margin: EdgeInsets.fromLTRB(180, 210, 0, 0),
                       child: Column(
@@ -224,38 +222,36 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ),
                     ),
 
-      //               DefaultTabController(
-                      
-      //   length: 3,
-      //   child: Scaffold(
-      //     appBar: AppBar(
-      //       bottom: TabBar(
-      //         tabs: [
-      //           Tab(icon: Icon(Icons.directions_car)),
-      //           Tab(icon: Icon(Icons.directions_transit)),
-      //           Tab(icon: Icon(Icons.directions_bike)),
-      //         ],
-      //       ),
-      //       title: Text('Tabs Demo'),
-      //     ),
-      //     body: TabBarView(
-      //       children: [
-      //         Icon(Icons.directions_car),
-      //         Icon(Icons.directions_transit),
-      //         Icon(Icons.directions_bike),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-                  
-                ],
+                    //               DefaultTabController(
+
+                    //   length: 3,
+                    //   child: Scaffold(
+                    //     appBar: AppBar(
+                    //       bottom: TabBar(
+                    //         tabs: [
+                    //           Tab(icon: Icon(Icons.directions_car)),
+                    //           Tab(icon: Icon(Icons.directions_transit)),
+                    //           Tab(icon: Icon(Icons.directions_bike)),
+                    //         ],
+                    //       ),
+                    //       title: Text('Tabs Demo'),
+                    //     ),
+                    //     body: TabBarView(
+                    //       children: [
+                    //         Icon(Icons.directions_car),
+                    //         Icon(Icons.directions_transit),
+                    //         Icon(Icons.directions_bike),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
                 );
               },
             ),
           ),
         ],
       ),
-
     );
   }
 }
