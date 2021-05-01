@@ -90,6 +90,7 @@ class DatabaseService {
           'email': email,
           'contact': contact,
           'request': request,
+          'date': date,
           'status': 'pending',
         })
         .then((value) => print("Booking Added"))
