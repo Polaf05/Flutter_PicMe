@@ -80,11 +80,16 @@ class DatabaseService {
 
   //Update
 
-  Future bookLensman(String client_id, String lensman_id) async {
+  Future bookLensman(String client_id, String lensman_id, String name,
+      String email, String contact, String request, DateTime date) async {
     return await bookingCollection
         .add({
-          'client_id': 'client_id',
-          'lensman_id': 'lensman_id',
+          'lensman_id': lensman_id,
+          'client_id': client_id,
+          'name': name,
+          'email': email,
+          'contact': contact,
+          'request': request,
           'status': 'pending',
         })
         .then((value) => print("Booking Added"))
