@@ -1,5 +1,6 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:picme/models/lensman.dart';
+import 'package:picme/services/auth.dart';
 
 class DatabaseService {
   final String uid;
@@ -56,13 +57,40 @@ class DatabaseService {
     }).toList();
   }
 
+  //Check user role
+
+  Future checkUser(String email, String password) async {
+    try {
+      print(email);
+      await clientCollection
+          .where("email", isEqualTo: email)
+          .get()
+          .then((value) {
+        value.docs.forEach((snapshot) {
+          if (snapshot.data()['email'] == email) {
+            AuthService().signInWithEmailAndPassword(email, password);
+          }
+        });
+      }).onError((error, stackTrace) => null);
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
   //Update
 
-  Future bookLensman(String client_id, String lensman_id) async {
+  Future bookLensman(String client_id, String lensman_id, String name,
+      String email, String contact, String request, DateTime date) async {
     return await bookingCollection
         .add({
-          'client_id': 'client_id',
-          'lensman_id': 'lensman_id',
+          'lensman_id': lensman_id,
+          'client_id': client_id,
+          'name': name,
+          'email': email,
+          'contact': contact,
+          'request': request,
+          'date': date,
           'status': 'pending',
         })
         .then((value) => print("Booking Added"))

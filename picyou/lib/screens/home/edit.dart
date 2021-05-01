@@ -200,7 +200,7 @@ class Edit extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                          
-                        RaisedButton(
+                        FlatButton(
                           padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0)),
@@ -214,7 +214,7 @@ class Edit extends StatelessWidget {
                             ),
                           ),
                         ),
-                         RaisedButton(
+                         FlatButton(
                           padding: EdgeInsets.fromLTRB(35, 10, 35, 10),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0)),
