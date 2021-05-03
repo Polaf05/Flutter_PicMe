@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:picyou/services/auth.dart';
-import 'package:picyou/screens/home/home.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:picme/models/lensman.dart';
+import 'package:picme/services/auth.dart';
+import 'package:picme/screens/home/home.dart';
+import 'package:picme/screens/home/client.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 
 
 class Edit extends StatelessWidget {
