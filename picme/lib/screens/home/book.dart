@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:picme/models/user.dart';
 import 'package:picme/screens/home/home.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -7,8 +8,9 @@ import 'package:picme/services/database.dart';
 
 class Book extends StatefulWidget {
   final String id;
+  final UserCreds user;
 
-  Book({this.id});
+  Book({this.id, this.user});
 
   @override
   _BookState createState() => _BookState();
@@ -58,8 +60,8 @@ class _BookState extends State<Book> {
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Home()));
+            // Navigator.of(context)
+            //     .push(MaterialPageRoute(builder: (context) => Home()));
           },
           child: Icon(
             Icons.keyboard_arrow_left,
@@ -310,10 +312,12 @@ class _BookState extends State<Book> {
                                               contact,
                                               message,
                                               date);
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Home()));
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Home()),
+                                            (Route<dynamic> route) => false,
+                                          );
                                         }
                                       },
                                       child: Text(
