@@ -85,22 +85,18 @@ class DatabaseService {
   //Check user role
 
   Future checkUser(String email, String password) async {
-    try {
-      print(email);
-      await clientCollection
-          .where("email", isEqualTo: email)
-          .get()
-          .then((value) {
-        value.docs.forEach((snapshot) {
-          if (snapshot.data()['email'] == email) {
-            AuthService().signInWithEmailAndPassword(email, password);
-          }
-        });
-      }).onError((error, stackTrace) => null);
-    } catch (e) {
-      print(e);
-      return null;
-    }
+    bool find = false;
+    dynamic result =
+        await clientCollection.where("email", isEqualTo: email).get();
+    QuerySnapshot snapshot = result;
+
+    snapshot.docs.forEach((element) {
+      if (element.data()['email'] == email) {
+        find = true;
+      }
+    });
+
+    return find;
   }
 
   //Update
