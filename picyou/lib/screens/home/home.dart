@@ -43,17 +43,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             },
           )
         ],
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Home()));
-          },
-          child: Icon(
-            Icons.keyboard_arrow_left,
-            color: Colors.white,
-            size: 32,
-          ),
-        ),
         title: Text(
           "Profile",
           style: TextStyle(
@@ -64,15 +53,21 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         centerTitle: true,
       ),
       body: Stack(
-        children: <Widget>[
-          Center(
-            child: Image.asset(
-              "assets/backg.png",
-              fit: BoxFit.contain,
-              width: double.infinity,
-              height: 1200,
-            ),
-          ),
+          alignment: Alignment.bottomCenter,
+          overflow: Overflow.visible,
+        children: <Widget>[      
+                Row(children: <Widget>[
+                        Expanded(child: 
+                        Container(
+                        decoration: BoxDecoration(                          
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/1.jpg'),
+                          )
+                        ),
+                      ),)
+                ],
+                  ),
           Container(
             height: double.infinity,
             child: LayoutBuilder(
@@ -104,7 +99,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 22,
+                              fontSize: 25,
                             ),
                           ),
                           SizedBox(
@@ -117,11 +112,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               fontSize: 14,
                             ),
                           ),
-                          SizedBox(height: 20),
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
                     Column(
                       children: [
                         Container(
@@ -131,20 +124,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Icon(Icons.home,
-                                    size: 20,
+                                    size: 25,
                                     color: Color.fromRGBO(216, 181, 58, 1.0)),
                                 Text(
                                   "Butal Events Place",
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 15,
+                                    fontSize: 16,
                                   ),
                                 ),
                               ]),
                         ),
                       ],
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 10),
                     Container(
                       margin: EdgeInsets.fromLTRB(20, 370, 0, 0),
                       child: Row(
@@ -152,32 +145,32 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Icon(Icons.location_pin,
-                                size: 20,
+                                size: 25,
                                 color: Color.fromRGBO(216, 181, 58, 1.0)),
                             Text(
                               "Gagalangin Tondo, Manila",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 15,
+                                fontSize: 16,
                               ),
                             ),
                           ]),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 10),
                     Container(
-                      margin: EdgeInsets.fromLTRB(20, 390, 0, 0),
+                      margin: EdgeInsets.fromLTRB(20,390, 0, 0),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Icon(Icons.call,
-                                size: 20,
+                                size: 25,
                                 color: Color.fromRGBO(216, 181, 58, 1.0)),
                             Text(
                               "09213232076",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 15,
+                                fontSize: 16,
                               ),
                             ),
                           ]),
@@ -211,16 +204,25 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ],
                       ),
                     ),
-                    Positioned(
-                      top: 150,
-                      left: 0,
-                      right: 230,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: AssetImage('assets/en.jpg'),
-                        radius: 60.0,
+              Positioned(
+                        top: 140.0,
+                        left: 20,
+                        child: Container(
+                          height: 130.0,
+                          width: 130.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage('assets/11.jpg'),
+                            ),
+                            border: Border.all(
+                              color:Colors.white,
+                              width: 6.0
+                            )
+                          ),
+                        ),
                       ),
-                    ),
 
                     //               DefaultTabController(
 

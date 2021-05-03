@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picyou/services/auth.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class SignIn extends StatefulWidget {
   final Function toggle;
@@ -26,13 +28,25 @@ class _SignInState extends State<SignIn> {
             padding: EdgeInsets.fromLTRB(15, 80, 15, 0),
             child: ListView(
               children: <Widget>[
-                Center(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: AssetImage('assets/new.png'),
-                    radius: 60.0,
-                  ),
-                ),
+               Center(
+                            child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12.0),
+                          child: Image.asset(
+                            'assets/kiven.png',
+                            width: 100,
+                            height: 100,
+                          ),
+                        )),
+                        Center(
+                            child: Text(
+                          'PICYOU',
+                          style: GoogleFonts.montserrat(
+                            color: Color.fromRGBO(216, 181, 58, 1.0),
+                            letterSpacing: 6.0,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )),
                 Container(
                   child: Form(
                     key: _formKey,
@@ -70,22 +84,13 @@ class _SignInState extends State<SignIn> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextButton(
-                            child:
-                                Text("LOGIN", style: TextStyle(fontSize: 20.0)),
-                            style: ButtonStyle(
-                                padding: MaterialStateProperty.all<EdgeInsets>(
-                                    EdgeInsets.fromLTRB(80, 15, 80, 15)),
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.green[400]),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
+                               FlatButton(
+                                    padding:
+                                        EdgeInsets.fromLTRB(135, 10, 135, 10),
+                                    shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(30.0),
-                                        side: BorderSide(
-                                            color: Colors.green[400])))),
+                                            BorderRadius.circular(8.0)),
+                                    color: Color.fromRGBO(216, 181, 58, 1.0),
                             onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 dynamic result =
@@ -95,6 +100,15 @@ class _SignInState extends State<SignIn> {
                                 }
                               }
                             },
+                             child: Text(
+                                      'LOGIN',
+                                      style: GoogleFonts.poppins(
+                                        color: Color.fromRGBO(31, 31, 31, 1.0),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                        letterSpacing: 2.0,
+                                      ),
+                                    ),
                           ),
                         ],
                       ),
@@ -111,7 +125,7 @@ class _SignInState extends State<SignIn> {
                   children: <Widget>[
                     Text('Does not have account?'),
                     FlatButton(
-                      textColor: Colors.green[400],
+                      textColor: Color.fromRGBO(216, 181, 58, 1.0),
                       child: Text(
                         'SIGN UP',
                         style: TextStyle(fontSize: 15, fontFamily: 'Arial'),
@@ -128,7 +142,7 @@ class _SignInState extends State<SignIn> {
                   children: <Widget>[
                     Text('Forgot Password?'),
                     FlatButton(
-                      textColor: Colors.green[400],
+                      textColor: Color.fromRGBO(216, 181, 58, 1.0),
                       child: Text(
                         'RESET PASSWORD',
                         style: TextStyle(fontSize: 15, fontFamily: 'Arial'),

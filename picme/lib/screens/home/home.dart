@@ -5,6 +5,10 @@ import 'package:picme/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:picme/screens/home/lensman_list.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:picme/screens/home/client.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+
 
 
 class Home extends StatefulWidget {
@@ -56,6 +60,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 flexibleSpace: FlexibleSpaceBar(
                   background:
 
+            
                       /// _buildCarousel() in your case....
             Container(
                 height: 200.0,
@@ -63,6 +68,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                
               child: ListView(
                 children: <Widget>[
+                  FlatButton( 
+                    padding:
+                     EdgeInsets.fromLTRB(30, 10, 30, 10),
+                    shape: RoundedRectangleBorder(
+                    borderRadius:BorderRadius.circular(8.0)),
+                    color: Color.fromRGBO(237, 237, 237, 1.0),
+                          onPressed: () {
+                               Navigator.of(context).push(MaterialPageRoute(
+                               builder: (context) => Client()));
+                              },
+                    child: Text(
+                        'Profile',
+                          style: TextStyle(
+                         color: Color.fromRGBO(31, 31, 31, 1.0),
+                              fontSize: 20,),
+                  ),
+                ),
                   SizedBox(
                     width: double.infinity,  
                     height: 170.0,  
@@ -149,6 +171,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             controller: tb,
             children: <Widget>[LensmanList(), LensmanList()],
           ),
+          
         ),
         backgroundColor:  Color.fromRGBO(237,237,237,1.0),
       ),
