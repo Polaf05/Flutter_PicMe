@@ -3,6 +3,7 @@ import 'package:picme/models/lensman.dart';
 import 'package:picme/models/user.dart';
 import 'package:picme/screens/home/show_details.dart';
 import 'package:picme/services/auth.dart';
+import 'package:picme/services/database.dart';
 
 class LensmanTile extends StatelessWidget {
   final Lensman lens;
@@ -56,13 +57,16 @@ class LensmanTile extends StatelessWidget {
                     trailing: Icon(Icons.keyboard_arrow_right,
                         color: Color.fromRGBO(216, 181, 58, 1.0), size: 30.0),
                     onTap: () async {
-                      UserCreds result = await AuthService().getCurrentUser();
+                      dynamic result = await AuthService().getCurrentUser();
+
+                      dynamic user =
+                          await DatabaseService().fetchClientData(result.uid);
                       // print(result.name);
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                ShowDetails(lens: lens, user: result)),
+                                ShowDetails(lens: lens, user: user)),
                         (Route<dynamic> route) => false,
                       );
                     })),

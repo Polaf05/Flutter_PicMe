@@ -5,7 +5,7 @@ import 'package:picme/models/lensman.dart';
 
 class ShowDetails extends StatefulWidget {
   final Lensman lens;
-  final UserCreds user;
+  final Client user;
 
   ShowDetails({this.lens, this.user});
 
@@ -41,12 +41,8 @@ class _ShowDetailsState extends State<ShowDetails> {
       body: Stack(
         children: <Widget>[
           Center(
-            child: Image.asset(
-              "assets/bg.png",
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height:1024
-            ),
+            child: Image.asset("assets/bg.png",
+                fit: BoxFit.cover, width: double.infinity, height: 1024),
           ),
           Container(
             height: double.infinity,
@@ -172,7 +168,7 @@ class _ShowDetailsState extends State<ShowDetails> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Book(
-                                        id: widget.lens.id, user: widget.user)),
+                                        lens: widget.lens, user: widget.user)),
                                 (Route<dynamic> route) => false,
                               );
                             },

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:picme/models/lensman.dart';
 import 'package:picme/models/user.dart';
 import 'package:picme/screens/home/home.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:picme/services/auth.dart';
 import 'package:picme/services/database.dart';
-import 'package:picme/screens/home/client.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:picme/services/email.dart';
 
 class Book extends StatefulWidget {
-  final String id;
-  final UserCreds user;
+  final Lensman lens;
+  final Client user;
 
-  Book({this.id, this.user});
+  Book({this.lens, this.user});
 
   @override
   _BookState createState() => _BookState();
@@ -22,6 +22,7 @@ class Book extends StatefulWidget {
 class _BookState extends State<Book> {
   final DatabaseService _db = DatabaseService();
   final AuthService _auth = AuthService();
+  final MailerService _mail = MailerService();
   final _formkey = GlobalKey<FormState>();
 
   DateTime _date = DateTime.now();
@@ -45,63 +46,82 @@ class _BookState extends State<Book> {
     }
   }
 
-   Future <void>_showMyDialog() async {
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4)
-      ),
-     child: Stack(
-        overflow: Overflow.visible,
-        alignment: Alignment.topCenter,
-        children: [
-          Container(
-            height: 300,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 100, 10, 10),
-              child: Column(
-                children: [
-                  Text('Request Sent!!', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                  SizedBox(height: 10,),
-                  Text('Your request sent successfully, wait for confirmation.',textAlign: TextAlign.center, style: GoogleFonts.lato(fontSize: 20,),),
-                  SizedBox(height: 20,),
-                FlatButton( 
-                    padding:
-                     EdgeInsets.fromLTRB(30, 10, 30, 10),
-                    shape: RoundedRectangleBorder(
-                    borderRadius:BorderRadius.circular(8.0)),
-                    color: Color.fromRGBO(237, 237, 237, 1.0),
-                          onPressed: () {
-                              Navigator.of(context).pop();
-                              },
-                    child: Text(
-                        'Proceed',
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+            child: Stack(
+              overflow: Overflow.visible,
+              alignment: Alignment.topCenter,
+              children: [
+                Container(
+                  height: 300,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 100, 10, 10),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Request Sent!!',
                           style: TextStyle(
-                         color: Color.fromRGBO(31, 31, 31, 1.0),
-                              fontSize: 20,),
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Your request sent successfully, wait for confirmation.',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.lato(
+                            fontSize: 20,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        FlatButton(
+                          padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          color: Color.fromRGBO(237, 237, 237, 1.0),
+                          onPressed: () {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => Home()),
+                              (Route<dynamic> route) => false,
+                            );
+                          },
+                          child: Text(
+                            'Proceed',
+                            style: TextStyle(
+                              color: Color.fromRGBO(31, 31, 31, 1.0),
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: -60,
-            child: CircleAvatar(
-              backgroundColor: Color.fromRGBO(31, 31,31,1.0),
-              radius: 60,
-              child: Icon(Icons.thumb_up_alt_outlined, color: Colors.white, size: 50,),
-            )
-          ),
-        ],
-      )
+                Positioned(
+                    top: -60,
+                    child: CircleAvatar(
+                      backgroundColor: Color.fromRGBO(31, 31, 31, 1.0),
+                      radius: 60,
+                      child: Icon(
+                        Icons.thumb_up_alt_outlined,
+                        color: Colors.white,
+                        size: 50,
+                      ),
+                    )),
+              ],
+            ));
+      },
     );
-    },
-  );
-}
+  }
 
   //Text field State
 
@@ -363,24 +383,39 @@ class _BookState extends State<Book> {
                                               BorderRadius.circular(8.0)),
                                       color: Color.fromRGBO(31, 31, 31, 1.0),
                                       onPressed: () async {
-                                        // if (_formkey.currentState.validate()) {
-                                        //   dynamic id = _auth.getCurrentUser();
-                                        //   dynamic result = _db.bookLensman(
-                                        //       id.uid,
-                                        //       widget.id,
-                                        //       name,
-                                        //       email,
-                                        //       contact,
-                                        //       message,
-                                        //       date);
-                                        //   Navigator.pushAndRemoveUntil(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) => Home()),
-                                        //     (Route<dynamic> route) => false,
-                                        //   );
-                                        // }
-                                       _showMyDialog();
+                                        if (_formkey.currentState.validate()) {
+                                          dynamic result =
+                                              await _db.bookLensman(
+                                                  widget.user.id,
+                                                  widget.lens.id,
+                                                  name,
+                                                  email,
+                                                  contact,
+                                                  message,
+                                                  date);
+
+                                          print(result.id);
+
+                                          await _mail.sendReciept(
+                                              widget.user.email,
+                                              widget.user.name,
+                                              widget.lens.email,
+                                              widget.lens.name,
+                                              result.id,
+                                              message,
+                                              date);
+
+                                          await _mail.sendRequest(
+                                              widget.user.email,
+                                              widget.user.name,
+                                              widget.lens.email,
+                                              widget.lens.name,
+                                              result.id,
+                                              message,
+                                              date);
+
+                                          _showMyDialog();
+                                        }
                                       },
                                       child: Text(
                                         'Send',

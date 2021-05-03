@@ -41,7 +41,7 @@ class DatabaseService {
   }
 
   Future fetchClientData(String id) async {
-    dynamic result = await employeeCollection.doc(id).get();
+    dynamic result = await clientCollection.doc(id).get();
     DocumentSnapshot snapshot = result;
     return _userDetails(snapshot);
   }
@@ -55,7 +55,8 @@ class DatabaseService {
         role: snapshot['role'],
         contact: snapshot['contact'],
         address: snapshot['address'],
-        display: snapshot['displayPicture']);
+        display: snapshot['displayPicture'],
+        id: snapshot.id);
   }
 
   Lensman _specificlensman(DocumentSnapshot snapshot) {
@@ -64,7 +65,8 @@ class DatabaseService {
         email: snapshot['email'],
         contact: snapshot['contact'],
         display: snapshot['display'],
-        gallery: snapshot.data()['gallery'] ?? '');
+        gallery: snapshot['gallery'],
+        id: snapshot.id);
   }
 
   //Lensman list from snapshot
@@ -103,19 +105,18 @@ class DatabaseService {
 
   Future bookLensman(String client_id, String lensman_id, String name,
       String email, String contact, String request, DateTime date) async {
-    return await bookingCollection
-        .add({
-          'lensman_id': lensman_id,
-          'client_id': client_id,
-          'name': name,
-          'email': email,
-          'contact': contact,
-          'request': request,
-          'date': date,
-          'status': 'pending',
-        })
-        .then((value) => print("Booking Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+    DocumentReference result = await bookingCollection.add({
+      'lensman_id': lensman_id,
+      'client_id': client_id,
+      'name': name,
+      'email': email,
+      'contact': contact,
+      'request': request,
+      'date': date,
+      'status': 'pending',
+    });
+
+    return result;
   }
 
   //get client streams
