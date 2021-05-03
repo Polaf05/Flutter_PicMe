@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:picme/services/auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:picme/shared/loading.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class Register extends StatefulWidget {
   //Accept class arguments
@@ -36,9 +38,8 @@ class _RegisterState extends State<Register> {
                     Center(
                       child: Text(
                         'Sign Up',
-                        style: TextStyle(
-                          fontFamily: 'Lato',
-                          color: Colors.red[700],
+                        style:  GoogleFonts.lato(
+                          color: Color.fromRGBO(216, 181, 58, 1.0),
                           fontSize: 40.0,
                           fontWeight: FontWeight.w600,
                         ),
@@ -120,14 +121,14 @@ class _RegisterState extends State<Register> {
                                         EdgeInsets.fromLTRB(80, 15, 80, 15)),
                                     foregroundColor:
                                         MaterialStateProperty.all<Color>(
-                                            Colors.red[400]),
+                                            Color.fromRGBO(216, 181, 58, 1.0)),
                                     shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
                                             side: BorderSide(
-                                                color: Colors.red[400])))),
+                                                color: Color.fromRGBO(216, 181, 58, 1.0))))),
                                 onPressed: () async {
                                   if (_formkey.currentState.validate()) {
                                     setState(() {
@@ -163,7 +164,7 @@ class _RegisterState extends State<Register> {
                       children: <Widget>[
                         Text('Already have an account?'),
                         FlatButton(
-                          textColor: Colors.red[400],
+                          textColor: Color.fromRGBO(216, 181, 58, 1.0),
                           child: Text(
                             'SIGN IN',
                             style: TextStyle(fontSize: 15, fontFamily: 'Arial'),
@@ -182,10 +183,9 @@ class _RegisterState extends State<Register> {
                         children: <Widget>[
                           Text(
                             '━━━━━━━ OR CONNECT WITH ━━━━━━━',
-                            style: TextStyle(
-                              color: Colors.grey[400],
+                            style: GoogleFonts.lato(
+                              color: Colors.black54,
                               fontSize: 15,
-                              fontFamily: 'Arial',
                             ),
                           ),
                         ],

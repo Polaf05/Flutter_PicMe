@@ -67,8 +67,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         children: <Widget>[
           Center(
             child: Image.asset(
-              "assets/bg.png",
-              fit: BoxFit.cover,
+              "assets/backg.png",
+              fit: BoxFit.contain,
               width: double.infinity,
               height: 1200,
             ),

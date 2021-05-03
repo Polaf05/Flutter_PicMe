@@ -45,7 +45,7 @@ class _ShowDetailsState extends State<ShowDetails> {
               "assets/bg.png",
               fit: BoxFit.cover,
               width: double.infinity,
-              height: 1200,
+              height:1024
             ),
           ),
           Container(
