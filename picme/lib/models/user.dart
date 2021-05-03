@@ -10,6 +10,15 @@ class Client {
   final String name;
   final String email;
   final String role;
+  final String address;
+  final String contact;
+  final String display;
 
-  Client({this.name, this.email, this.role});
+  Client(
+      {this.name,
+      this.email,
+      this.role,
+      this.address,
+      this.contact,
+      this.display});
 }
