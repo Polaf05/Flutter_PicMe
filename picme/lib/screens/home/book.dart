@@ -80,10 +80,10 @@ class _BookState extends State<Book> {
         children: <Widget>[
           Center(
             child: Image.asset(
-              "assets/bg.png",
+              "assets/back.png",
               fit: BoxFit.cover,
               width: double.infinity,
-              height: 1200,
+              height: 1024,
             ),
           ),
           Container(
@@ -103,7 +103,7 @@ class _BookState extends State<Book> {
                         height: 10,
                         width: innerWidth,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(35),
+                          borderRadius: BorderRadius.circular(12),
                           color: Colors.white,
                         ),
                       ),
@@ -280,7 +280,7 @@ class _BookState extends State<Book> {
                                           EdgeInsets.fromLTRB(30, 10, 30, 10),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(18.0)),
+                                              BorderRadius.circular(8.0)),
                                       color: Color.fromRGBO(237, 237, 237, 1.0),
                                       onPressed: () {},
                                       child: Text(
@@ -294,10 +294,10 @@ class _BookState extends State<Book> {
                                     ),
                                     FlatButton(
                                       padding:
-                                          EdgeInsets.fromLTRB(35, 10, 35, 10),
+                                          EdgeInsets.fromLTRB(45, 10, 45, 10),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(18.0)),
+                                              BorderRadius.circular(8.0)),
                                       color: Color.fromRGBO(31, 31, 31, 1.0),
                                       onPressed: () async {
                                         if (_formkey.currentState.validate()) {
@@ -317,7 +317,7 @@ class _BookState extends State<Book> {
                                         }
                                       },
                                       child: Text(
-                                        'Save',
+                                        'Send',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,

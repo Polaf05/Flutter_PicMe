@@ -38,7 +38,7 @@ class Edit extends StatelessWidget {
         children: <Widget>[
           Center(
             child: Image.asset(
-              "assets/bg.png",
+              "assets/backg.png",
               fit: BoxFit.cover,
               width: double.infinity,
               height: 1200,
