@@ -24,7 +24,11 @@ class DatabaseService {
     return await clientCollection.doc(uid).set({
       'email': email,
       'name': name,
+      'contact': "",
+      'address': "",
       'role': role,
+      'displayPicture':
+          'https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20dp%2F360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg?alt=media&token=b1ae5147-b094-4e53-b7ac-518a6f4c218c',
     });
   }
 
@@ -39,14 +43,19 @@ class DatabaseService {
   Future fetchClientData(String id) async {
     dynamic result = await employeeCollection.doc(id).get();
     DocumentSnapshot snapshot = result;
-    return _specificlensman(snapshot);
+    return _userDetails(snapshot);
   }
+
+  //Object Model
 
   Client _userDetails(DocumentSnapshot snapshot) {
     return Client(
         name: snapshot['name'],
         email: snapshot['email'],
-        role: snapshot['role']);
+        role: snapshot['role'],
+        contact: snapshot['contact'],
+        address: snapshot['address'],
+        display: snapshot['displayPicture']);
   }
 
   Lensman _specificlensman(DocumentSnapshot snapshot) {
