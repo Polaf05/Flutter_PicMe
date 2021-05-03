@@ -4,6 +4,8 @@ class Lensman {
   final String contact;
   final String display;
   final String id;
+  final String address;
+  final String username;
   final dynamic gallery;
 
   Lensman(
@@ -12,5 +14,7 @@ class Lensman {
       this.contact,
       this.display,
       this.id,
+      this.address,
+      this.username,
       this.gallery});
 }

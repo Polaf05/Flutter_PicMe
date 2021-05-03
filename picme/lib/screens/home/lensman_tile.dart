@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:picme/models/lensman.dart';
+import 'package:picme/models/user.dart';
 import 'package:picme/screens/home/show_details.dart';
+import 'package:picme/services/auth.dart';
 
 class LensmanTile extends StatelessWidget {
   final Lensman lens;
@@ -54,10 +56,15 @@ class LensmanTile extends StatelessWidget {
                     trailing: Icon(Icons.keyboard_arrow_right,
                         color: Color.fromRGBO(216, 181, 58, 1.0), size: 30.0),
                     onTap: () async {
-                      // dynamic result = await DatabaseService().fetchUserData(lens.id);
+                      UserCreds result = await AuthService().getCurrentUser();
                       // print(result.name);
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ShowDetails(lens: lens)));
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ShowDetails(lens: lens, user: result)),
+                        (Route<dynamic> route) => false,
+                      );
                     })),
           ),
         ));

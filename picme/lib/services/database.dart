@@ -1,5 +1,6 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:picme/models/lensman.dart';
+import 'package:picme/models/user.dart';
 import 'package:picme/services/auth.dart';
 
 class DatabaseService {
@@ -12,7 +13,7 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('Clients');
 
   final CollectionReference employeeCollection =
-      FirebaseFirestore.instance.collection('Photographer');
+      FirebaseFirestore.instance.collection('lensmen');
 
   final CollectionReference bookingCollection =
       FirebaseFirestore.instance.collection('Booking');
@@ -35,6 +36,19 @@ class DatabaseService {
     return _specificlensman(snapshot);
   }
 
+  Future fetchClientData(String id) async {
+    dynamic result = await employeeCollection.doc(id).get();
+    DocumentSnapshot snapshot = result;
+    return _specificlensman(snapshot);
+  }
+
+  Client _userDetails(DocumentSnapshot snapshot) {
+    return Client(
+        name: snapshot['name'],
+        email: snapshot['email'],
+        role: snapshot['role']);
+  }
+
   Lensman _specificlensman(DocumentSnapshot snapshot) {
     return Lensman(
         name: snapshot['name'],
@@ -51,7 +65,9 @@ class DatabaseService {
           name: doc.data()['name'] ?? '',
           email: doc.data()['email'] ?? '',
           contact: doc.data()['contact'] ?? '',
-          display: doc.data()['display'] ?? '',
+          display: doc.data()['displayPicture'] ?? '',
+          address: doc.data()['address'] ?? '',
+          username: doc.data()['username'] ?? '',
           gallery: doc.data()['gallery'] ?? '',
           id: doc.id);
     }).toList();
