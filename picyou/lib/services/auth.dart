@@ -74,4 +74,10 @@ class AuthService {
       return null;
     }
   }
+
+  //get current user id
+  getCurrentUser() {
+    User user = _auth.currentUser;
+    return _userFromFirebaseUser(user);
+  }
 }

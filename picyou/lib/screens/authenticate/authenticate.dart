@@ -16,13 +16,11 @@ class _AuthenticateState extends State<Authenticate> {
       showSignup = !showSignup;
     });
   }
-
   void toggleReset() {
     setState(() {
       showReset = !showReset;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     if (!showSignup) {

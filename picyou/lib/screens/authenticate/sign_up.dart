@@ -12,6 +12,7 @@ class SignUp extends StatefulWidget {
   _SignUpState createState() => _SignUpState();
 }
 
+
 class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
@@ -25,7 +26,7 @@ class _SignUpState extends State<SignUp> {
   String password = "";
   String confirm = "";
   String error = "";
-  List<String> gallery = null;
+  List<String> gallery = List<String>(1);//value = type:null
   String displayPicture =
       "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Lensman%2Ftest1%2F160279455_3725976577479855_6794694972857135677_n.jpg?alt=media&token=36e1a30c-62d7-42ec-917c-0d1a304b8d57";
   String role = 'lensmen';
