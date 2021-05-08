@@ -10,6 +10,7 @@ class AuthService {
   final facebookSignIn = FacebookLogin();
 
   static String error;
+
   //create user model
 
   UserCreds _userFromFirebaseUser(User user) {
@@ -25,6 +26,7 @@ class AuthService {
         .map((User user) => _userFromFirebaseUser(user));
   }
 
+  //Get and checks the current user on the app
   getCurrentUser() {
     User user = _auth.currentUser;
     return _userFromFirebaseUser(user);

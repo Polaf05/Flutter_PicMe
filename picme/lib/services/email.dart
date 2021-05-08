@@ -45,8 +45,8 @@ class MailerService {
 
     final message = Message()
       ..from = Address(username, 'PICME')
-      ..recipients.add(clientEmail)
-      ..subject = 'Booking Reciept'
+      ..recipients.add(lensmanEmail)
+      ..subject = 'Booking Request Reciept'
       ..html =
           "<h1>ID: $bookingId</h1>\n<h3>CLient</h3><p>Name:<b>$clientName</b>\nEmail:<b>$clientEmail</b>\nPrefered Date:<b>$prefereDate</b>\n<h3>Request</h3>\n<p>$request</p> \n<h3>Booked to:</h3>\nName:<b>$lensmanName</b>\nEmail:<b>$lensmanEmail</b></p>";
 

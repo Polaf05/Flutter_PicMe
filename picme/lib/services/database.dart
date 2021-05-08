@@ -1,7 +1,6 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:picme/models/lensman.dart';
 import 'package:picme/models/user.dart';
-import 'package:picme/services/auth.dart';
 
 class DatabaseService {
   final String uid;
@@ -101,7 +100,7 @@ class DatabaseService {
     return find;
   }
 
-  //Update
+  //Booking
 
   Future bookLensman(String client_id, String lensman_id, String name,
       String email, String contact, String request, DateTime date) async {
