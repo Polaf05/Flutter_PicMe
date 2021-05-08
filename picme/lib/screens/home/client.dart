@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:picme/screens/home/edit.dart';
 import 'package:picme/services/auth.dart';
 import 'package:picme/services/database.dart';
+import 'package:picme/screens/home/lensman_tile.dart';
+
 
 class ClientProfile extends StatefulWidget {
   @override
@@ -105,6 +107,7 @@ class _ClientProfileState extends State<ClientProfile> {
                     children: <Widget>[
                       Icon(Icons.location_pin,
                           size: 20, color: Color.fromRGBO(216, 181, 58, 1.0)),
+                    SizedBox(width: 5),
                       Text(
                         "Gagalangin Tondo, Manila",
                         style: TextStyle(
@@ -121,6 +124,7 @@ class _ClientProfileState extends State<ClientProfile> {
                     children: <Widget>[
                       Icon(Icons.call,
                           size: 20, color: Color.fromRGBO(216, 181, 58, 1.0)),
+                          SizedBox(width: 5),
                       Text(
                         "09213232076",
                         style: TextStyle(
@@ -132,8 +136,9 @@ class _ClientProfileState extends State<ClientProfile> {
                   ),
                   Row(
                     children: <Widget>[
-                      Icon(Icons.link_off_outlined,
+                      Icon(Icons.link_outlined,
                           size: 30, color: Color.fromRGBO(216, 181, 58, 1.0)),
+                  SizedBox(width: 5),
                       Text(
                         "Social Media Account",
                         style: TextStyle(

@@ -7,16 +7,11 @@ import 'package:picme/screens/home/lensman_list.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:picme/screens/home/client.dart';
 import 'package:google_fonts/google_fonts.dart';
-<<<<<<< HEAD
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 
-
-=======
-// import 'package:convex_bottom_bar/convex_bottom_bar.dart';
->>>>>>> f32cda13b6a4079309000c6514b4a9b4bd5e9fa2
 
 class Home extends StatefulWidget {
   @override
@@ -25,7 +20,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     final controller = TextEditingController();
      return StreamProvider<List<Lensman>>.value(
       value: DatabaseService().lensman,
@@ -142,9 +136,5 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
     ),
     );
-  
-=======
-    return Container();
->>>>>>> f32cda13b6a4079309000c6514b4a9b4bd5e9fa2
   }
 }
