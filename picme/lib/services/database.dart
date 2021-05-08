@@ -1,10 +1,15 @@
 import "package:cloud_firestore/cloud_firestore.dart";
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:picme/models/lensman.dart';
 import 'package:picme/models/user.dart';
+import 'package:nanoid/nanoid.dart';
 
 class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
+
+  final _storage = FirebaseStorage.instance;
 
   // collection references
 
@@ -49,22 +54,22 @@ class DatabaseService {
 
   Client _userDetails(DocumentSnapshot snapshot) {
     return Client(
-        name: snapshot['name'],
-        email: snapshot['email'],
-        role: snapshot['role'],
-        contact: snapshot['contact'],
-        address: snapshot['address'],
-        display: snapshot['displayPicture'],
+        name: snapshot.data()['name'] ?? '',
+        email: snapshot.data()['email'] ?? '',
+        role: snapshot.data()['role'] ?? '',
+        contact: snapshot.data()['contact'] ?? '',
+        address: snapshot.data()['address'] ?? '',
+        display: snapshot.data()['displayPicture'] ?? '',
         id: snapshot.id);
   }
 
   Lensman _specificlensman(DocumentSnapshot snapshot) {
     return Lensman(
-        name: snapshot['name'],
-        email: snapshot['email'],
-        contact: snapshot['contact'],
-        display: snapshot['display'],
-        gallery: snapshot['gallery'],
+        name: snapshot.data()['name'] ?? '',
+        email: snapshot.data()['email'] ?? '',
+        contact: snapshot.data()['contact'] ?? '',
+        display: snapshot.data()['displayPicture'] ?? '',
+        gallery: snapshot.data()['gallery'] ?? '',
         id: snapshot.id);
   }
 
@@ -122,5 +127,15 @@ class DatabaseService {
 
   Stream<List<Lensman>> get lensman {
     return employeeCollection.snapshots().map(_lensmanListFromSnapshot);
+  }
+
+  //Upload Image
+  Future uploadImageToFirebase(String email, dynamic file) async {
+    String id = nanoid();
+
+    dynamic snapshot = await _storage.ref().child('Client/' + id).putFile(file);
+
+    String url = await snapshot.ref.getDownloadURL();
+    print(url);
   }
 }
