@@ -1,96 +1,123 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:picme/models/lensman.dart';
 import 'package:picme/services/auth.dart';
 import 'package:picme/screens/home/home.dart';
 import 'package:picme/screens/home/client.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:picme/services/database.dart';
 
 class Edit extends StatefulWidget {
+  final dynamic user;
+
+  Edit({this.user});
+
   @override
   _EditState createState() => _EditState();
 }
 
 class _EditState extends State<Edit> {
-  @override
-  Widget build(BuildContext context) {
-    Future<void> _showMyDialog() async {
-      return showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4)),
-              child: Stack(
-                  overflow: Overflow.visible,
-                  alignment: Alignment.topCenter,
-                  children: [
-                    Container(
-                      height: 300,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 100, 10, 10),
-                        child: Column(
-                          children: [
-                            Text(
-                              ' Successfully Saved!!',
-                              style: GoogleFonts.lato(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+  DatabaseService _db = DatabaseService();
+
+  uploadImage() async {
+    final _picker = ImagePicker();
+
+    PickedFile image;
+
+    //Check Permission
+
+    //Select Image
+    image = await _picker.getImage(source: ImageSource.gallery);
+    dynamic file = File(image.path);
+
+    if (image != null) {
+      _db.uploadImageToFirebase(widget.user.email, file);
+    } else {
+      print("No path Recieved");
+    }
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+            child: Stack(
+                overflow: Overflow.visible,
+                alignment: Alignment.topCenter,
+                children: [
+                  Container(
+                    height: 300,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 100, 10, 10),
+                      child: Column(
+                        children: [
+                          Text(
+                            ' Successfully Saved!!',
+                            style: GoogleFonts.lato(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Your request sent successfully, wait for confirmation.',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.lato(
+                              fontSize: 20,
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Your request sent successfully, wait for confirmation.',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.lato(
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          FlatButton(
+                            padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                            color: Color.fromRGBO(237, 237, 237, 1.0),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              'Proceed',
+                              style: TextStyle(
+                                color: Color.fromRGBO(31, 31, 31, 1.0),
                                 fontSize: 20,
                               ),
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            FlatButton(
-                              padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0)),
-                              color: Color.fromRGBO(237, 237, 237, 1.0),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text(
-                                'Proceed',
-                                style: TextStyle(
-                                  color: Color.fromRGBO(31, 31, 31, 1.0),
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                    Positioned(
-                      top: -60,
-                      child: GestureDetector(
-                          onTap: () {
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Color.fromRGBO(31, 31, 31, 1.0),
-                            radius: 60,
-                            child: Icon(
-                              Icons.thumb_up_alt_outlined,
-                              color: Colors.white,
-                              size: 50,
-                            ),
-                          )),
-                    ),
-            ])
-          );
-        },
-      );
-    }
+                  ),
+                  Positioned(
+                    top: -60,
+                    child: GestureDetector(
+                        onTap: () {},
+                        child: CircleAvatar(
+                          backgroundColor: Color.fromRGBO(31, 31, 31, 1.0),
+                          radius: 60,
+                          child: Icon(
+                            Icons.thumb_up_alt_outlined,
+                            color: Colors.white,
+                            size: 50,
+                          ),
+                        )),
+                  ),
+                ]));
+      },
+    );
+  }
 
-    final AuthService _auth = AuthService();
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
@@ -138,8 +165,8 @@ class _EditState extends State<Edit> {
             top: 150,
             left: 300,
             child: GestureDetector(
-              onTap: () {
-              
+              onTap: () async {
+                uploadImage();
               },
               child: Container(
                 height: 40,
