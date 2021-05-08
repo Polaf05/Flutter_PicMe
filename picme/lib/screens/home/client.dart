@@ -85,18 +85,6 @@ class _ClientState extends State<Client> {
                       padding: EdgeInsets.only(left: 10.0,right: 10.0),
                       child: Column(
                         children: <Widget>[
-                          Row(children: <Widget>[
-                            Icon(Icons.home,
-                                    size: 30,
-                                    color: Color.fromRGBO(216, 181, 58, 1.0)),
-                                Text(
-                                  "Butal Events Place",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                          ],),
                           SizedBox(height: 10.0,),
                           Row(children: <Widget>[
                             Icon(Icons.location_pin,
@@ -124,6 +112,18 @@ class _ClientState extends State<Client> {
                             ),
                             ],
                           ),
+                          Row(children: <Widget>[
+                            Icon(Icons.link_off_outlined,
+                                    size: 30,
+                                    color: Color.fromRGBO(216, 181, 58, 1.0)),
+                                Text(
+                                  "Social Media Account",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                          ],),
 
                           SizedBox(height: 20.0,),
                           Center(

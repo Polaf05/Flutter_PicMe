@@ -5,7 +5,12 @@ import 'package:picme/screens/home/home.dart';
 import 'package:picme/screens/home/client.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Edit extends StatelessWidget {
+class Edit extends StatefulWidget {
+  @override
+  _EditState createState() => _EditState();
+}
+
+class _EditState extends State<Edit> {
   @override
   Widget build(BuildContext context) {
     Future<void> _showMyDialog() async {
@@ -79,7 +84,8 @@ class Edit extends StatelessWidget {
                             ),
                           )),
                     ),
-                  ]));
+            ])
+          );
         },
       );
     }
