@@ -159,7 +159,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Icon(Icons.home,
+                                  Icon(Icons.link,
                                       size: 20,
                                       color: Color.fromRGBO(216, 181, 58, 1.0)),
                                   Text(
