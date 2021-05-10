@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picme/services/auth.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class ResetPassword extends StatefulWidget {
   final Function toggleReset;
@@ -26,12 +28,24 @@ class _ResetPasswordState extends State<ResetPassword> {
             child: ListView(
               children: <Widget>[
                 Center(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: AssetImage('assets/new.png'),
-                    radius: 60.0,
-                  ),
-                ),
+                            child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12.0),
+                          child: Image.asset(
+                            'assets/kiven.png',
+                            width: 100,
+                            height: 100,
+                          ),
+                        )),
+                        Center(
+                            child: Text(
+                          'PICME',
+                          style: GoogleFonts.montserrat(
+                            color: Color.fromRGBO(216, 181, 58, 1.0),
+                            letterSpacing: 6.0,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )),
                 Container(
                   child: Form(
                     key: _formkey,
@@ -94,7 +108,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   children: <Widget>[
                     Text('Already Have an Account?'),
                     FlatButton(
-                      textColor: Colors.red[400],
+                      textColor:  Color.fromRGBO(26, 181, 158, 1.0),
                       child: Text(
                         'SIGN IN',
                         style: TextStyle(fontSize: 15, fontFamily: 'Arial'),

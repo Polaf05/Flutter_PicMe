@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:picme/models/user.dart';
 import 'package:picme/screens/home/book.dart';
 import 'package:picme/models/lensman.dart';
@@ -186,6 +187,26 @@ class _ClientProfileState extends State<ClientProfile> {
                       color: Colors.grey,
                     ),
                   ),
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 40, 50, 0),
+                        child: Icon(
+                         FontAwesomeIcons.photoVideo,
+                         size: 110,
+                         color: Colors.black12,
+                        ),
+                      ),
+                    SizedBox(height: 30,),
+                    Text(
+                      'No Photos/Videos to show',
+                      style: GoogleFonts.lato(
+                        color:Colors.grey, 
+                        fontSize: 18,
+                      ),
+                    )
+                    ],
+                  )
                 ]))
           ])
         ]));

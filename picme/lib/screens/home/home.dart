@@ -20,6 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
+      final AuthService _auth = AuthService();
     final controller = TextEditingController();
      return StreamProvider<List<Lensman>>.value(
       value: DatabaseService().lensman,

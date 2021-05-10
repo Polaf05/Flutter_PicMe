@@ -7,6 +7,12 @@ import 'package:picyou/model/lensmen.dart';
 import 'package:picyou/screens/home/lensmen_list.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+
+
+
 
 class Home extends StatefulWidget {
   @override
@@ -85,7 +91,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           title: Text(
             "Profile",
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               color: Colors.black,
               fontSize: 22,
             ),
@@ -125,32 +131,39 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 290, 230, 0),
+                        margin: EdgeInsets.fromLTRB(0, 270, 0, 0),
                         child: Column(
                           children: <Widget>[
-                            Text(
-                              username,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
+                            Container(
+                              margin: EdgeInsets.only(left: 25),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                username,
+                                style: GoogleFonts.poppins(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 26,
+                                ),
                               ),
                             ),
                             SizedBox(
-                              height: 4,
+                              height: 3,
                             ),
-                            Text(
-                              email,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
+                            Container(
+                              margin: EdgeInsets.only(left: 25),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                email,
+                                style: GoogleFonts.lato(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
-                            SizedBox(height: 20),
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 30),
                       Column(
                         children: [
                           Container(
@@ -164,7 +177,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       color: Color.fromRGBO(216, 181, 58, 1.0)),
                                   Text(
                                     name,
-                                    style: TextStyle(
+                                    style: GoogleFonts.montserrat(
                                       color: Colors.black,
                                       fontSize: 15,
                                     ),
@@ -185,7 +198,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   color: Color.fromRGBO(216, 181, 58, 1.0)),
                               Text(
                                 address,
-                                style: TextStyle(
+                                style:  GoogleFonts.montserrat(
                                   color: Colors.black,
                                   fontSize: 15,
                                 ),
@@ -204,7 +217,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   color: Color.fromRGBO(216, 181, 58, 1.0)),
                               Text(
                                 contact,
-                                style: TextStyle(
+                                style:  GoogleFonts.montserrat(
                                   color: Colors.black,
                                   fontSize: 15,
                                 ),
@@ -237,6 +250,25 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     builder: (context) => Edit()));
                               },
                             ),
+                           
+
+                       Container(
+                         height: 40,
+                         margin: EdgeInsets.fromLTRB(40, 100, 10, 0),
+                         child: LiteRollingSwitch(
+                            value: true,
+                            textOn: 'URGENT',
+                            textOff: 'URGENT',
+                            colorOn:  Color.fromRGBO(216, 181, 58, 1.0),
+                            colorOff: Color.fromRGBO(31, 31, 31, 1.0),
+                            iconOn: Icons.done,
+                            iconOff: FontAwesomeIcons.exclamationCircle,
+                            textSize: 18.0,
+                            onChanged: (bool state) {
+                            },
+                        ),
+                       ),
+
                           ],
                         ),
                       ),
@@ -301,29 +333,49 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               child: new TabBarView(
                                 controller: _controller,
                                 children: <Widget>[
-                                  GridView.builder(
-                                      gridDelegate:
-                                          SliverGridDelegateWithMaxCrossAxisExtent(
-                                              maxCrossAxisExtent: 150,
-                                              childAspectRatio: 1,
-                                              crossAxisSpacing: 10,
-                                              mainAxisSpacing: 10),
-                                      itemCount: gallery.length,
-                                      itemBuilder: (BuildContext ctx, index) {
-                                        return Container(
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color: Colors.amber,
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            image: DecorationImage(
-                                              image:
-                                                  NetworkImage(gallery[index]),
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                        );
-                                      }),
+                   Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 60, 50, 0),
+                        child: Icon(
+                         FontAwesomeIcons.photoVideo,
+                         size: 110,
+                         color: Colors.black12,
+                        ),
+                      ),
+                    SizedBox(height: 30,),
+                    Text(
+                      'No Photos/Videos to show',
+                      style: GoogleFonts.lato(
+                        color:Colors.grey, 
+                        fontSize: 18,
+                      ),
+                    )
+                    ],
+                  ),
+                                  // GridView.builder(
+                                  //     gridDelegate:
+                                  //         SliverGridDelegateWithMaxCrossAxisExtent(
+                                  //             maxCrossAxisExtent: 150,
+                                  //             childAspectRatio: 1,
+                                  //             crossAxisSpacing: 10,
+                                  //             mainAxisSpacing: 10),
+                                  //     itemCount: gallery.length,
+                                  //     itemBuilder: (BuildContext ctx, index) {
+                                  //       return Container(
+                                  //         alignment: Alignment.center,
+                                  //         decoration: BoxDecoration(
+                                  //           color: Colors.amber,
+                                  //           borderRadius:
+                                  //               BorderRadius.circular(15),
+                                  //           image: DecorationImage(
+                                  //             image:
+                                  //                 NetworkImage(gallery[index]),
+                                  //             fit: BoxFit.fill,
+                                  //           ),
+                                  //         ),
+                                  //       );
+                                  //     }),
                                   ListView.builder(
                                     padding: EdgeInsets.zero,
                                     itemCount: 1,
@@ -339,6 +391,99 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       );
                                     },
                                   ),
+
+                          // Container(
+                          //     padding: EdgeInsets.zero,
+                          //     margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          //     height: 100,
+                          //     child: GestureDetector(
+                          //       onTap: () {
+                          //       },
+                          //       child: Padding(
+                          //         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
+                          //         child: Card(
+                          //           clipBehavior: Clip.antiAlias,
+                          //           shape: RoundedRectangleBorder(
+                          //             borderRadius: BorderRadius.circular(5),
+                          //           ),
+                          //           child: Row(
+                          //             children: [
+                          //               Container(
+                          //                 margin: EdgeInsets.fromLTRB(10, 0, 10, 170),
+                          //                 height: 100,
+                          //                 width: 120,
+                          //                 decoration: BoxDecoration(
+                          //                   borderRadius: BorderRadius.circular(8),
+                          //                   color: Colors.black,
+                          //                   image: DecorationImage(
+                          //                     fit: BoxFit.cover,
+                          //                     image: AssetImage('assets/11.jpg'),
+                          //                   ),
+                          //                 ),
+                          //               ),
+                          //               Flexible(
+                          //                 child: Padding(
+                          //                   padding: const EdgeInsets.all(12),
+                          //                   child: Column(
+                          //                     crossAxisAlignment: CrossAxisAlignment.start,
+                          //                     children: [
+                          //                       Text(
+                          //                       'Monkey D, Luffy',
+                          //                         overflow: TextOverflow.ellipsis,
+                          //                         style: GoogleFonts.poppins(
+                          //                           fontSize: 20,
+                          //                           fontWeight: FontWeight.bold,
+                          //                         ),
+                          //                       ),
+                          //                       SizedBox(height: 7),
+                          //                       Row(
+                          //                         children: [
+                          //                           Icon(
+                          //                             Icons.email,
+                          //                             color: Color.fromRGBO(216, 181, 58, 1.0),
+                          //                             size: 15,
+                          //                           ),
+                          //                           SizedBox(width: 5),
+                          //                           Text('payraclea19@gmail.com'),
+                          //                         ],
+                          //                       ),
+                          //                       SizedBox(height: 5),
+                          //                       Row(
+                          //                         children: [
+                          //                           Icon(
+                          //                             Icons.location_on,
+                          //                             color: Color.fromRGBO(216, 181, 58, 1.0),
+                          //                             size: 15,
+                          //                           ),
+                          //                           SizedBox(width: 5),
+                          //                           Text('Tondo Manila'),
+                          //                         ],
+                          //                       ),
+                          //                       SizedBox(height: 5),
+                          //                       Row(
+                          //                         children: [
+                          //                           Icon(
+                          //                             Icons.call,
+                          //                             color: Color.fromRGBO(216, 181, 58, 1.0),
+                          //                             size: 15,
+                          //                           ),
+                          //                           SizedBox(width: 5),
+                          //                           Text('09568076691'),
+                          //                         ],
+                          //                       ),
+                          //                     ],
+                          //                   ),
+                          //                 ),
+                          //               )
+                          //             ],
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                            
+
+
                                 ],
                               ),
                             ),

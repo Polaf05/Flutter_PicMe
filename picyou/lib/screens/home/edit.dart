@@ -169,8 +169,8 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
             ],
           ),
           Positioned(
-            top: 150,
-            left: 300,
+            top: 170,
+            left: 330,
             child: Container(
               height: 40,
               width: 40,
@@ -259,8 +259,8 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                                           borderSide: BorderSide(
                                               color: Color.fromRGBO(
                                                   216, 181, 58, 1.0))),
-                                      hintText: 'Enter Company Name',
-                                      labelText: username,
+                                      hintText: username,
+                                      labelText: 'Company Name',
                                       prefixIcon: const Icon(
                                         Icons.house_outlined,
                                         color:
@@ -282,8 +282,8 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                                           borderSide: BorderSide(
                                               color: Color.fromRGBO(
                                                   216, 181, 58, 1.0))),
-                                      hintText: 'Fullname',
-                                      labelText: name,
+                                      hintText: name,
+                                      labelText: 'Fullname',
                                       prefixIcon: const Icon(
                                         Icons.person_add_outlined,
                                         color:
@@ -305,8 +305,8 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                                           borderSide: BorderSide(
                                               color: Color.fromRGBO(
                                                   216, 181, 58, 1.0))),
-                                      hintText: 'Enter Email',
-                                      labelText: email,
+                                      hintText: email,
+                                      labelText: 'Enter Email',
                                       prefixIcon: const Icon(
                                         Icons.email_outlined,
                                         color:
@@ -328,8 +328,8 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                                           borderSide: BorderSide(
                                               color: Color.fromRGBO(
                                                   216, 181, 58, 1.0))),
-                                      hintText: 'Enter Address',
-                                      labelText: address,
+                                      hintText: address,
+                                      labelText: 'Enter Address',
                                       prefixIcon: const Icon(
                                         Icons.location_on_outlined,
                                         color:
@@ -374,7 +374,7 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                                           EdgeInsets.fromLTRB(30, 10, 30, 10),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(18.0)),
+                                              BorderRadius.circular(8.0)),
                                       color: Color.fromRGBO(237, 237, 237, 1.0),
                                       onPressed: () {
                                         Navigator.of(context).push(
@@ -395,7 +395,7 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                                           EdgeInsets.fromLTRB(35, 10, 35, 10),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(18.0)),
+                                              BorderRadius.circular(8.0)),
                                       color: Color.fromRGBO(31, 31, 31, 1.0),
                                       onPressed: () async {
                                         await _db.updateData(
