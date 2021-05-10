@@ -12,6 +12,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 
+import 'client.dart';
+import 'client.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -19,32 +22,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  Widget build(BuildContext context) {
-      final AuthService _auth = AuthService();
-    final controller = TextEditingController();
-     return StreamProvider<List<Lensman>>.value(
-      value: DatabaseService().lensman,
-      initialData: List(),
-    child: Scaffold(
-      bottomNavigationBar: ConvexAppBar(
-          items: [
-            TabItem(icon: FontAwesomeIcons.home),
-            TabItem(icon: FontAwesomeIcons.userCircle),
-            TabItem(icon: Icons.notifications),
-          ],
-          
-          activeColor: Color.fromRGBO(31, 31, 31, 1.0),
-          backgroundColor: Color.fromRGBO(216, 181, 58, 1.0)),
-      
-      
-      body: Stack(
+
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  final List<Widget> _widgetOptions = <Widget>[
+     Stack(
         children: <Widget>[
            Container(
              height: 52,
               margin: const EdgeInsets.fromLTRB(16, 45, 16, 16),
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextFormField(
-                controller: controller,
+                controller: TextEditingController(),
                    decoration: InputDecoration(
                    border: OutlineInputBorder(
                        borderRadius:
@@ -135,6 +125,45 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     )
         ],
       ),
+    ClientProfile(),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+     return StreamProvider<List<Lensman>>.value(
+      value: DatabaseService().lensman,
+      initialData: List(),
+    child: Scaffold(
+      bottomNavigationBar: ConvexAppBar(
+          items: [
+            TabItem(icon: FontAwesomeIcons.home),
+            TabItem(icon: FontAwesomeIcons.userCircle),
+            TabItem(icon: Icons.notifications),
+          ],
+          initialActiveIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          
+          activeColor: Color.fromRGBO(31, 31, 31, 1.0),
+          backgroundColor: Color.fromRGBO(216, 181, 58, 1.0)
+          ),
+
+      
+      
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      
+
     ),
     );
   }
