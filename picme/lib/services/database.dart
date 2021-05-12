@@ -186,6 +186,7 @@ class DataController extends GetxController {
   Future queryData(String queryString) async {
     return employeeCollection
         .where('name', isGreaterThanOrEqualTo: queryString)
+        .where('name', isLessThan: queryString + 'z')
         .get();
   }
 }
