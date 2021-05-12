@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:picme/services/database.dart';
+import 'package:flutter/services.dart';
 
 class Edit extends StatefulWidget {
   final dynamic user;
@@ -23,19 +24,63 @@ class Edit extends StatefulWidget {
 class _EditState extends State<Edit> {
   DatabaseService _db = DatabaseService();
 
-  uploadImage() async {
+  String name = "";
+  String email = "";
+  String address = "";
+  String contact = "";
+  String display = "";
+  String cover = "";
+  String bio = "";
+  String id = "";
+
+  TextEditingController _name = new TextEditingController();
+  TextEditingController _address = new TextEditingController();
+  TextEditingController _contact = new TextEditingController();
+  TextEditingController _bio = new TextEditingController();
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        name = widget.user.name;
+        email = widget.user.email;
+        address = widget.user.address;
+        contact = widget.user.contact;
+        display = widget.user.display;
+        cover = widget.user.cover;
+        bio = widget.user.bio;
+        id = widget.user.id;
+
+        _name.text = name;
+        _contact.text = contact;
+        _address.text = address;
+        _bio.text = bio;
+      });
+      print(name);
+    });
+  }
+
+  uploadImage(int loc) async {
     final _picker = ImagePicker();
 
     PickedFile image;
-
-    //Check Permission
 
     //Select Image
     image = await _picker.getImage(source: ImageSource.gallery);
     dynamic file = File(image.path);
 
     if (image != null) {
-      _db.uploadImageToFirebase(widget.user.email, file);
+      String path = await _db.uploadImageToFirebase(widget.user.email, file);
+
+      if (loc == 1) {
+        setState(() {
+          cover = path;
+        });
+      } else {
+        setState(() {
+          display = path;
+        });
+      }
     } else {
       print("No path Recieved");
     }
@@ -155,7 +200,7 @@ class _EditState extends State<Edit> {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage('assets/1.jpg'),
+                    image: NetworkImage(cover),
                   )),
                 ),
               )
@@ -166,7 +211,7 @@ class _EditState extends State<Edit> {
             left: 300,
             child: GestureDetector(
               onTap: () async {
-                uploadImage();
+                uploadImage(1);
               },
               child: Container(
                 height: 40,
@@ -215,7 +260,7 @@ class _EditState extends State<Edit> {
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: AssetImage('assets/11.jpg'),
+                                image: NetworkImage(display),
                               ),
                               border:
                                   Border.all(color: Colors.white, width: 6.0)),
@@ -225,17 +270,22 @@ class _EditState extends State<Edit> {
                     Positioned(
                       top: 260,
                       left: 220,
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        child: Icon(
-                          Icons.add_a_photo,
-                          color: Colors.white,
+                      child: GestureDetector(
+                        onTap: () async {
+                          uploadImage(2); // ayaw gumana prettier
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          child: Icon(
+                            Icons.add_a_photo,
+                            color: Colors.white,
+                          ),
+                          decoration: BoxDecoration(
+                              color: Color.fromRGBO(216, 181, 58, 1.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
                         ),
-                        decoration: BoxDecoration(
-                            color: Color.fromRGBO(216, 181, 58, 1.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
                       ),
                     ),
                     Container(
@@ -250,26 +300,10 @@ class _EditState extends State<Edit> {
                                 Container(
                                   margin: EdgeInsets.only(bottom: 20),
                                   child: TextFormField(
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                          borderSide: BorderSide(
-                                              color: Color.fromRGBO(
-                                                  216, 181, 58, 1.0))),
-                                      hintText: 'Enter Company Name',
-                                      labelText: 'Company Name',
-                                      prefixIcon: const Icon(
-                                        Icons.house_outlined,
-                                        color:
-                                            Color.fromRGBO(216, 181, 58, 1.0),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(bottom: 20),
-                                  child: TextFormField(
+                                    controller: _name,
+                                    onChanged: (_name) {
+                                      name = _name;
+                                    },
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -290,6 +324,10 @@ class _EditState extends State<Edit> {
                                 Container(
                                   margin: EdgeInsets.only(bottom: 20),
                                   child: TextFormField(
+                                    controller: _bio,
+                                    onChanged: (_bio) {
+                                      name = _bio;
+                                    },
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -297,8 +335,8 @@ class _EditState extends State<Edit> {
                                           borderSide: BorderSide(
                                               color: Color.fromRGBO(
                                                   216, 181, 58, 1.0))),
-                                      hintText: 'Enter Email',
-                                      labelText: 'Email',
+                                      hintText: 'Enter Bio',
+                                      labelText: 'Bio',
                                       prefixIcon: const Icon(
                                         Icons.email_outlined,
                                         color:
@@ -310,6 +348,10 @@ class _EditState extends State<Edit> {
                                 Container(
                                   margin: EdgeInsets.only(bottom: 20),
                                   child: TextFormField(
+                                    controller: _address,
+                                    onChanged: (_address) {
+                                      name = _address;
+                                    },
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -330,6 +372,14 @@ class _EditState extends State<Edit> {
                                 Container(
                                   margin: EdgeInsets.only(bottom: 20),
                                   child: TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    controller: _contact,
+                                    onChanged: (_contact) {
+                                      name = _contact;
+                                    },
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:

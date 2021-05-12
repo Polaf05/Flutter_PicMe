@@ -20,6 +20,15 @@ class _ClientProfileState extends State<ClientProfile> {
   DatabaseService _db = DatabaseService();
 
   dynamic info;
+  String name = "";
+  String email = "";
+  String address = "";
+  String contact = "";
+  String display = "";
+  String cover = "";
+  String bio = "";
+  String id = "";
+  
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -27,6 +36,14 @@ class _ClientProfileState extends State<ClientProfile> {
       dynamic fetch = await _db.fetchClientData(id.uid);
       setState(() {
         info = fetch;
+        name = fetch.name;
+        email = fetch.email;
+        address = fetch.address;
+        contact = fetch.contact;
+        display = fetch.display;
+        cover = fetch.cover;
+        bio = fetch.bio;
+        id = fetch.id;
       });
     });
   }
@@ -50,7 +67,7 @@ class _ClientProfileState extends State<ClientProfile> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('assets/1.jpg'),
+                            image: NetworkImage(cover),
                           )),
                         ),
                       )
@@ -65,7 +82,7 @@ class _ClientProfileState extends State<ClientProfile> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('assets/11.jpg'),
+                            image: NetworkImage(display),
                           ),
                           border: Border.all(color: Colors.white, width: 6.0)),
                     ),
@@ -80,7 +97,7 @@ class _ClientProfileState extends State<ClientProfile> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Monkey D. Luffy',
+                    name,
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
                   ),
@@ -92,7 +109,7 @@ class _ClientProfileState extends State<ClientProfile> {
             ),
             Container(
                 child: Text(
-              'luffy@example.com',
+              email,
               style: TextStyle(fontSize: 18.0),
             )),
             SizedBox(
@@ -110,7 +127,7 @@ class _ClientProfileState extends State<ClientProfile> {
                           size: 20, color: Color.fromRGBO(216, 181, 58, 1.0)),
                     SizedBox(width: 5),
                       Text(
-                        "Gagalangin Tondo, Manila",
+                        address,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 15,
@@ -127,7 +144,7 @@ class _ClientProfileState extends State<ClientProfile> {
                           size: 20, color: Color.fromRGBO(216, 181, 58, 1.0)),
                           SizedBox(width: 5),
                       Text(
-                        "09213232076",
+                        contact,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 15,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picme/models/lensman.dart';
+import 'package:picme/screens/home/search.dart';
 import 'package:picme/services/auth.dart';
 import 'package:picme/services/database.dart';
 import 'package:provider/provider.dart';
@@ -126,10 +127,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ],
       ),
     ClientProfile(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    Search(),
   ];
 
   void _onItemTapped(int index) {
