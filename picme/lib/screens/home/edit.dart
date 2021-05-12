@@ -110,16 +110,6 @@ class _EditState extends State<Edit> {
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
                           SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Your request sent successfully, wait for confirmation.',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.lato(
-                              fontSize: 20,
-                            ),
-                          ),
-                          SizedBox(
                             height: 20,
                           ),
                           FlatButton(
@@ -127,8 +117,15 @@ class _EditState extends State<Edit> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0)),
                             color: Color.fromRGBO(237, 237, 237, 1.0),
-                            onPressed: () {
-                              Navigator.of(context).pop();
+                            onPressed: () async {
+                              await _db.updateUserInformation(id, cover,
+                                  display, name, address, contact, bio);
+
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => Home()),
+                                (Route<dynamic> route) => false,
+                              );
                             },
                             child: Text(
                               'Proceed',
@@ -326,7 +323,7 @@ class _EditState extends State<Edit> {
                                   child: TextFormField(
                                     controller: _bio,
                                     onChanged: (_bio) {
-                                      name = _bio;
+                                      bio = _bio;
                                     },
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
@@ -350,7 +347,7 @@ class _EditState extends State<Edit> {
                                   child: TextFormField(
                                     controller: _address,
                                     onChanged: (_address) {
-                                      name = _address;
+                                      address = _address;
                                     },
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
@@ -378,7 +375,7 @@ class _EditState extends State<Edit> {
                                     ],
                                     controller: _contact,
                                     onChanged: (_contact) {
-                                      name = _contact;
+                                      contact = _contact;
                                     },
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(

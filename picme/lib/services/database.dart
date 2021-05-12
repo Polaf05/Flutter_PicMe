@@ -170,11 +170,6 @@ class DatabaseService {
     String url = await snapshot.ref.getDownloadURL();
     return url;
   }
-
-  //Get all user Data
-  Future getAllLensman() async {
-    return await employeeCollection.get();
-  }
 }
 
 class DataController extends GetxController {
