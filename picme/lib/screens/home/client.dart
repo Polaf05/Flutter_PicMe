@@ -82,7 +82,7 @@ class _ClientProfileState extends State<ClientProfile> {
                   Text(
                     'Monkey D. Luffy',
                     style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
+                        GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 28.0),
                   ),
                 ],
               ),
@@ -93,11 +93,24 @@ class _ClientProfileState extends State<ClientProfile> {
             Container(
                 child: Text(
               'luffy@example.com',
-              style: TextStyle(fontSize: 18.0),
+              style: GoogleFonts.montserrat(fontSize: 18.0),
             )),
-            SizedBox(
-              height: 20.0,
+             SizedBox(
+              height: 10.0,
             ),
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 20, 15,20),
+              child: Text(
+              'Will never be someones favorite. || Straw Hat ||  Soon to be Pirate King || Monkey D. Luffy sails with his crew of Straw Hat Pirates through the Grand Line to find the treasure One Piece ... Luffy learns about Buggys history with Shanks.',
+              style: GoogleFonts.montserrat(fontSize: 18.0),
+              textAlign: TextAlign.center,
+            )),
+             Container(
+                    child: Divider(
+                    height: 30,
+                    color: Color.fromRGBO(216, 181, 58, 1.0),
+                    ),
+             ),
             Container(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Column(children: <Widget>[
@@ -108,12 +121,12 @@ class _ClientProfileState extends State<ClientProfile> {
                     children: <Widget>[
                       Icon(Icons.location_pin,
                           size: 20, color: Color.fromRGBO(216, 181, 58, 1.0)),
-                    SizedBox(width: 5),
+                    SizedBox(width: 10),
                       Text(
                         "Gagalangin Tondo, Manila",
-                        style: TextStyle(
+                        style: GoogleFonts.montserrat(
                           color: Colors.black,
-                          fontSize: 15,
+                          fontSize: 18,
                         ),
                       ),
                     ],
@@ -125,26 +138,29 @@ class _ClientProfileState extends State<ClientProfile> {
                     children: <Widget>[
                       Icon(Icons.call,
                           size: 20, color: Color.fromRGBO(216, 181, 58, 1.0)),
-                          SizedBox(width: 5),
+                          SizedBox(width: 10),
                       Text(
                         "09213232076",
-                        style: TextStyle(
+                        style: GoogleFonts.montserrat(
                           color: Colors.black,
-                          fontSize: 15,
+                          fontSize: 18,
                         ),
                       ),
                     ],
                   ),
+                   SizedBox(
+                    height: 10.0,
+                  ),
                   Row(
                     children: <Widget>[
                       Icon(Icons.link_outlined,
-                          size: 30, color: Color.fromRGBO(216, 181, 58, 1.0)),
-                  SizedBox(width: 5),
+                          size: 20, color: Color.fromRGBO(216, 181, 58, 1.0)),
+                  SizedBox(width: 10),
                       Text(
                         "Social Media Account",
-                        style: TextStyle(
+                        style: GoogleFonts.montserrat(
                           color: Colors.black,
-                          fontSize: 16,
+                          fontSize: 18,
                         ),
                       ),
                     ],
@@ -168,13 +184,15 @@ class _ClientProfileState extends State<ClientProfile> {
                               (Route<dynamic> route) => false,
                             );
                           },
-                          child: Text(
-                            'Edit Profile',
-                            style: GoogleFonts.poppins(
-                              color: Color.fromRGBO(31, 31, 31, 1.0),
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 2.0,
+                          child: Center(
+                            child: Text(
+                              'Edit Profile',
+                              style: GoogleFonts.poppins(
+                                color: Color.fromRGBO(31, 31, 31, 1.0),
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 2.0,
+                              ),
                             ),
                           ),
                         ),
@@ -182,31 +200,8 @@ class _ClientProfileState extends State<ClientProfile> {
                     ),
                   ),
                   Container(
-                    height: 10.0,
-                    child: Divider(
-                      color: Colors.grey,
-                    ),
+                    margin: EdgeInsets.all(30),
                   ),
-                  Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(10, 40, 50, 0),
-                        child: Icon(
-                         FontAwesomeIcons.photoVideo,
-                         size: 110,
-                         color: Colors.black12,
-                        ),
-                      ),
-                    SizedBox(height: 30,),
-                    Text(
-                      'No Photos/Videos to show',
-                      style: GoogleFonts.lato(
-                        color:Colors.grey, 
-                        fontSize: 18,
-                      ),
-                    )
-                    ],
-                  )
                 ]))
           ])
         ]));

@@ -18,7 +18,7 @@ class LensmanTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.zero,
       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-      height: 160,
+      height: 170,
       child: GestureDetector(
         onTap: () {
           Navigator.of(context)

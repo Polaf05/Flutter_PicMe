@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:picme/main.dart';
 import 'package:picme/models/lensman.dart';
+import 'package:picme/screens/home/search_tab.dart';
 import 'package:picme/services/auth.dart';
 import 'package:picme/services/database.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +15,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 
 import 'client.dart';
-import 'client.dart';
+import 'search_tab.dart';
+import 'notification.dart';
 
 
 class Home extends StatefulWidget {
@@ -29,30 +32,30 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final List<Widget> _widgetOptions = <Widget>[
      Stack(
         children: <Widget>[
-           Container(
-             height: 52,
-              margin: const EdgeInsets.fromLTRB(16, 45, 16, 16),
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: TextFormField(
-                controller: TextEditingController(),
-                   decoration: InputDecoration(
-                   border: OutlineInputBorder(
-                       borderRadius:
-                            BorderRadius.circular(12.0),
-                            borderSide: BorderSide(
-                            color: Color.fromRGBO(216, 181, 58, 1.0))),
-                            hintText: 'Search Lensman',
-                            hintStyle: GoogleFonts.raleway(color: Colors.grey, fontSize: 20),
-                            prefixIcon: const Icon(Icons.search,
-                            color: Color.fromRGBO(216, 181, 58, 1.0),
-                              ),
-                            ),
-                        ),
-              ),
+          //  Container(
+          //    height: 52,
+          //     margin: const EdgeInsets.fromLTRB(16, 45, 16, 16),
+          //     padding: const EdgeInsets.symmetric(horizontal: 8),
+          //     child: TextFormField(
+          //       controller: TextEditingController(),
+          //          decoration: InputDecoration(
+          //          border: OutlineInputBorder(
+          //              borderRadius:
+          //                   BorderRadius.circular(12.0),
+          //                   borderSide: BorderSide(
+          //                   color: Color.fromRGBO(216, 181, 58, 1.0))),
+          //                   hintText: 'Search Lensman',
+          //                   hintStyle: GoogleFonts.raleway(color: Colors.grey, fontSize: 20),
+          //                   prefixIcon: const Icon(Icons.search,
+          //                   color: Color.fromRGBO(216, 181, 58, 1.0),
+          //                     ),
+          //                   ),
+          //               ),
+          //     ),
                                            
          
           Container(
-          margin: EdgeInsets.fromLTRB(30,120,30,20),
+          margin: EdgeInsets.fromLTRB(30,60,30,20),
           width: double.infinity,
           height: 170.0,
           child: Carousel(
@@ -90,7 +93,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
    Container(
      width: 500,
-     margin: EdgeInsets.only(top: 300),
+     margin: EdgeInsets.only(top: 250),
       child: DefaultTabController(
             length: 2,
             child: Column(
@@ -98,17 +101,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ButtonsTabBar(
                   buttonMargin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   contentPadding: EdgeInsets.fromLTRB(40, 0, 45, 0),
-                  backgroundColor: Color.fromRGBO(237, 237, 237, 1.0),
-                  unselectedBackgroundColor: Color.fromRGBO(216, 181, 58, 1.0),
+                  backgroundColor: Color.fromRGBO(216, 181, 58, 1.0),
+                  unselectedBackgroundColor: Color.fromRGBO(237, 237, 237, 1.0),
                   tabs: [
                     Tab(
                       child:Text("Scheduled",
-                      style: GoogleFonts.montserrat(fontSize: 15.0, color:Colors.black)),
+                      style: GoogleFonts.montserrat(fontSize: 15.0, color:Color.fromRGBO(31, 31, 31, 1.0)  )),
                     ),
                
                     Tab(
                       child: Text("Urgent",
-                      style: GoogleFonts.montserrat(fontSize: 15.0)),
+                      style: GoogleFonts.montserrat(fontSize: 15.0,  color:Color.fromRGBO(31, 31, 31, 1.0) )),
                      ),
                   ],
                 ),
@@ -126,10 +129,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ],
       ),
     ClientProfile(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    NotificationTab(),
+    SearchTab(),
   ];
 
   void _onItemTapped(int index) {
@@ -149,6 +150,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             TabItem(icon: FontAwesomeIcons.home),
             TabItem(icon: FontAwesomeIcons.userCircle),
             TabItem(icon: Icons.notifications),
+            TabItem(icon: FontAwesomeIcons.search),
           ],
           initialActiveIndex: _selectedIndex,
           onTap: _onItemTapped,

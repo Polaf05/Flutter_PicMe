@@ -262,6 +262,34 @@ class _BookState extends State<Book> {
                                     ),
                                   ),
                                 ),
+                                 Container(
+                                  margin: EdgeInsets.only(bottom: 20),
+                                  child: TextFormField(
+                                    validator: (val) => val.isEmpty
+                                        ? 'Please input the service you need'
+                                        : null,
+                                    onChanged: (val) {
+                                      setState(() => message = val);
+                                    },
+                                    maxLines: 5,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                          borderSide: BorderSide(
+                                              width: 5.0,
+                                              color: Color.fromRGBO(
+                                                  216, 181, 58, 1.0))),
+                                      hintText: 'Request',
+                                      labelText: 'Whats your request?',
+                                      prefixIcon: const Icon(
+                                        Icons.person_add_outlined,
+                                        color:
+                                            Color.fromRGBO(216, 181, 58, 1.0),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 Container(
                                   margin: EdgeInsets.only(bottom: 20),
                                   child: TextFormField(
