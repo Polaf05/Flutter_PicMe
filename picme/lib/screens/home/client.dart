@@ -9,7 +9,6 @@ import 'package:picme/services/auth.dart';
 import 'package:picme/services/database.dart';
 import 'package:picme/screens/home/lensman_tile.dart';
 
-
 class ClientProfile extends StatefulWidget {
   @override
   _ClientProfileState createState() => _ClientProfileState();
@@ -20,6 +19,16 @@ class _ClientProfileState extends State<ClientProfile> {
   DatabaseService _db = DatabaseService();
 
   dynamic info;
+
+  String name = "";
+  String email = "";
+  String address = "";
+  String contact = "";
+  String display = "";
+  String cover = "";
+  String bio = "";
+  String id = "";
+
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -27,6 +36,14 @@ class _ClientProfileState extends State<ClientProfile> {
       dynamic fetch = await _db.fetchClientData(id.uid);
       setState(() {
         info = fetch;
+        name = fetch.name;
+        email = fetch.email;
+        address = fetch.address;
+        contact = fetch.contact;
+        display = fetch.display;
+        cover = fetch.cover;
+        bio = fetch.bio;
+        id = fetch.id;
       });
     });
   }
@@ -50,7 +67,7 @@ class _ClientProfileState extends State<ClientProfile> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('assets/1.jpg'),
+                            image: NetworkImage(cover),
                           )),
                         ),
                       )
@@ -65,7 +82,7 @@ class _ClientProfileState extends State<ClientProfile> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('assets/11.jpg'),
+                            image: NetworkImage(display),
                           ),
                           border: Border.all(color: Colors.white, width: 6.0)),
                     ),
@@ -80,9 +97,9 @@ class _ClientProfileState extends State<ClientProfile> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Monkey D. Luffy',
-                    style:
-                        GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 28.0),
+                    name,
+                    style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold, fontSize: 28.0),
                   ),
                 ],
               ),
@@ -92,25 +109,25 @@ class _ClientProfileState extends State<ClientProfile> {
             ),
             Container(
                 child: Text(
-              'luffy@example.com',
+              email,
               style: GoogleFonts.montserrat(fontSize: 18.0),
             )),
-             SizedBox(
+            SizedBox(
               height: 10.0,
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(20, 20, 15,20),
-              child: Text(
-              'Will never be someones favorite. || Straw Hat ||  Soon to be Pirate King || Monkey D. Luffy sails with his crew of Straw Hat Pirates through the Grand Line to find the treasure One Piece ... Luffy learns about Buggys history with Shanks.',
-              style: GoogleFonts.montserrat(fontSize: 18.0),
-              textAlign: TextAlign.center,
-            )),
-             Container(
-                    child: Divider(
-                    height: 30,
-                    color: Color.fromRGBO(216, 181, 58, 1.0),
-                    ),
-             ),
+                padding: EdgeInsets.fromLTRB(20, 20, 15, 20),
+                child: Text(
+                  bio,
+                  style: GoogleFonts.montserrat(fontSize: 18.0),
+                  textAlign: TextAlign.center,
+                )),
+            Container(
+              child: Divider(
+                height: 30,
+                color: Color.fromRGBO(216, 181, 58, 1.0),
+              ),
+            ),
             Container(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Column(children: <Widget>[
@@ -121,9 +138,9 @@ class _ClientProfileState extends State<ClientProfile> {
                     children: <Widget>[
                       Icon(Icons.location_pin,
                           size: 20, color: Color.fromRGBO(216, 181, 58, 1.0)),
-                    SizedBox(width: 10),
+                      SizedBox(width: 10),
                       Text(
-                        "Gagalangin Tondo, Manila",
+                        address,
                         style: GoogleFonts.montserrat(
                           color: Colors.black,
                           fontSize: 18,
@@ -138,9 +155,9 @@ class _ClientProfileState extends State<ClientProfile> {
                     children: <Widget>[
                       Icon(Icons.call,
                           size: 20, color: Color.fromRGBO(216, 181, 58, 1.0)),
-                          SizedBox(width: 10),
+                      SizedBox(width: 10),
                       Text(
-                        "09213232076",
+                        contact,
                         style: GoogleFonts.montserrat(
                           color: Colors.black,
                           fontSize: 18,
@@ -148,14 +165,14 @@ class _ClientProfileState extends State<ClientProfile> {
                       ),
                     ],
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 10.0,
                   ),
                   Row(
                     children: <Widget>[
                       Icon(Icons.link_outlined,
                           size: 20, color: Color.fromRGBO(216, 181, 58, 1.0)),
-                  SizedBox(width: 10),
+                      SizedBox(width: 10),
                       Text(
                         "Social Media Account",
                         style: GoogleFonts.montserrat(

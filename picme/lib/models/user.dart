@@ -13,6 +13,8 @@ class Client {
   final String address;
   final String contact;
   final String display;
+  final String cover;
+  final String bio;
   final String id;
 
   Client(
@@ -22,5 +24,7 @@ class Client {
       this.address,
       this.contact,
       this.display,
+      this.cover,
+      this.bio,
       this.id});
 }

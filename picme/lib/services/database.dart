@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:picme/models/lensman.dart';
 import 'package:picme/models/user.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:get/get.dart';
 
 class DatabaseService {
   final String uid;
@@ -28,9 +29,12 @@ class DatabaseService {
     return await clientCollection.doc(uid).set({
       'email': email,
       'name': name,
-      'contact': "",
-      'address': "",
+      'contact': "Contact unavailable",
+      'address': "Address unavailable",
+      'bio': "Bio unavailable",
       'role': role,
+      'coverPicture':
+          "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fpb.png?alt=media&token=62a61f29-5f5e-4ee8-bcd9-5c08dbd9091b",
       'displayPicture':
           'https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20dp%2F360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg?alt=media&token=b1ae5147-b094-4e53-b7ac-518a6f4c218c',
     });
@@ -60,10 +64,24 @@ class DatabaseService {
         contact: snapshot.data()['contact'] ?? '',
         address: snapshot.data()['address'] ?? '',
         display: snapshot.data()['displayPicture'] ?? '',
+        bio: snapshot.data()['bio'] ?? '',
+        cover: snapshot.data()['coverPicture'] ?? '',
         id: snapshot.id);
   }
 
   Lensman _specificlensman(DocumentSnapshot snapshot) {
+    return Lensman(
+        name: snapshot.data()['name'] ?? '',
+        email: snapshot.data()['email'] ?? '',
+        contact: snapshot.data()['contact'] ?? '',
+        display: snapshot.data()['displayPicture'] ?? '',
+        gallery: snapshot.data()['gallery'] ?? '',
+        id: snapshot.id);
+  }
+
+  //Get Lensman
+
+  Lensman searchLensman(DocumentSnapshot snapshot) {
     return Lensman(
         name: snapshot.data()['name'] ?? '',
         email: snapshot.data()['email'] ?? '',
@@ -105,6 +123,20 @@ class DatabaseService {
     return find;
   }
 
+  //Save updated Credentials
+
+  Future updateUserInformation(String id, String cover, String display,
+      String name, String address, String contact, String bio) async {
+    await clientCollection.doc(id).update({
+      'coverPicture': cover,
+      'displayPicture': display,
+      'name': name,
+      'address': address,
+      'contact': contact,
+      'bio': bio,
+    });
+  }
+
   //Booking
 
   Future bookLensman(String client_id, String lensman_id, String name,
@@ -136,6 +168,25 @@ class DatabaseService {
     dynamic snapshot = await _storage.ref().child('Client/' + id).putFile(file);
 
     String url = await snapshot.ref.getDownloadURL();
-    print(url);
+    return url;
+  }
+}
+
+class DataController extends GetxController {
+  final CollectionReference employeeCollection =
+      FirebaseFirestore.instance.collection('lensmen');
+
+  Future getData(String collection) async {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    QuerySnapshot snapshot = await firestore.collection(collection).get();
+
+    return snapshot.docs;
+  }
+
+  Future queryData(String queryString) async {
+    return employeeCollection
+        .where('name', isGreaterThanOrEqualTo: queryString)
+        .where('name', isLessThan: queryString + 'z')
+        .get();
   }
 }
