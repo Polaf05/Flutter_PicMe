@@ -18,11 +18,11 @@ class LensmanTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.zero,
       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-      height: 170,
+      height: 180,
       child: GestureDetector(
         onTap: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ClientProfile()));
+              .push(MaterialPageRoute(builder: (context) => ShowDetails()));
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -53,7 +53,7 @@ class LensmanTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                        'Monkey D, Luffy',
+                          'Monkey D, Luffy',
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.poppins(
                             fontSize: 20,

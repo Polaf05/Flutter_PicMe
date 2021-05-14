@@ -186,34 +186,39 @@ class _ClientProfileState extends State<ClientProfile> {
                     height: 20.0,
                   ),
                   Center(
-                    child: Row(
-                      children: <Widget>[
-                        FlatButton(
-                          padding: EdgeInsets.fromLTRB(125, 10, 125, 10),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                          color: Color.fromRGBO(216, 181, 58, 1.0),
-                          onPressed: () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Edit(user: info)),
-                              (Route<dynamic> route) => false,
-                            );
-                          },
-                          child: Center(
-                            child: Text(
-                              'Edit Profile',
-                              style: GoogleFonts.poppins(
-                                color: Color.fromRGBO(31, 31, 31, 1.0),
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 2.0,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          FlatButton(
+                            padding: EdgeInsets.fromLTRB(125, 10, 125, 10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                            color: Color.fromRGBO(216, 181, 58, 1.0),
+                            onPressed: () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Edit(user: info)),
+                                (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Center(
+                              child: Text(
+                                'Edit Profile',
+                                style: GoogleFonts.poppins(
+                                  color: Color.fromRGBO(31, 31, 31, 1.0),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 2.0,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Container(

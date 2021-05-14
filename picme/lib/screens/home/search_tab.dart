@@ -69,14 +69,14 @@ class _SearchTabState extends State<SearchTab>
                   children: [
                     AnimatedPositioned(
                       duration: Duration(milliseconds: 375),
-                      top: 6.0,
+                      top: 0,
                       right: 7.0,
                       curve: Curves.easeOut,
                       child: AnimatedOpacity(
                         opacity: (toggle == 0) ? 0.0 : 1.0,
                         duration: Duration(milliseconds: 200),
                         child: Container(
-                          padding: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                             color: Color(0xffF2F3F7),
                             borderRadius: BorderRadius.circular(30.0),
