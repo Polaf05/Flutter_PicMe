@@ -8,6 +8,7 @@ import 'package:picme/services/auth.dart';
 import 'package:picme/services/database.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:picme/services/email.dart';
+import 'package:picme/screens/home/show_details.dart';
 
 class Book extends StatefulWidget {
   final Lensman lens;
@@ -24,6 +25,17 @@ class _BookState extends State<Book> {
   final AuthService _auth = AuthService();
   final MailerService _mail = MailerService();
   final _formkey = GlobalKey<FormState>();
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        name = widget.user.name;
+        email = widget.user.email;
+        contact = widget.user.contact;
+      });
+    });
+  }
 
   DateTime _date = DateTime.now();
   TextEditingController _datecontroller = new TextEditingController();
@@ -141,8 +153,13 @@ class _BookState extends State<Book> {
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-            // Navigator.of(context)
-            //     .push(MaterialPageRoute(builder: (context) => Home()));
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ShowDetails(lens: widget.lens, user: widget.user)),
+              (Route<dynamic> route) => false,
+            );
           },
           child: Icon(
             Icons.keyboard_arrow_left,
@@ -215,11 +232,8 @@ class _BookState extends State<Book> {
                                 Container(
                                   margin: EdgeInsets.only(bottom: 20),
                                   child: TextFormField(
-                                    validator: (val) =>
-                                        val.isEmpty ? 'Enter your Name' : null,
-                                    onChanged: (val) {
-                                      setState(() => name = val);
-                                    },
+                                    enabled: false,
+                                    initialValue: widget.user.name,
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -240,11 +254,8 @@ class _BookState extends State<Book> {
                                 Container(
                                   margin: EdgeInsets.only(bottom: 20),
                                   child: TextFormField(
-                                    validator: (val) =>
-                                        val.isEmpty ? 'Enter your Email' : null,
-                                    onChanged: (val) {
-                                      setState(() => email = val);
-                                    },
+                                    enabled: false,
+                                    initialValue: widget.user.email,
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -262,43 +273,11 @@ class _BookState extends State<Book> {
                                     ),
                                   ),
                                 ),
-                                 Container(
-                                  margin: EdgeInsets.only(bottom: 20),
-                                  child: TextFormField(
-                                    validator: (val) => val.isEmpty
-                                        ? 'Please input the service you need'
-                                        : null,
-                                    onChanged: (val) {
-                                      setState(() => message = val);
-                                    },
-                                    maxLines: 5,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                          borderSide: BorderSide(
-                                              width: 5.0,
-                                              color: Color.fromRGBO(
-                                                  216, 181, 58, 1.0))),
-                                      hintText: 'Request',
-                                      labelText: 'Whats your request?',
-                                      prefixIcon: const Icon(
-                                        Icons.person_add_outlined,
-                                        color:
-                                            Color.fromRGBO(216, 181, 58, 1.0),
-                                      ),
-                                    ),
-                                  ),
-                                ),
                                 Container(
                                   margin: EdgeInsets.only(bottom: 20),
                                   child: TextFormField(
-                                    validator: (val) => val.length != 11
-                                        ? 'Contact Number must be 11 digit'
-                                        : null,
-                                    onChanged: (val) {
-                                      setState(() => contact = val);
-                                    },
+                                    enabled: false,
+                                    initialValue: widget.user.contact,
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -393,7 +372,14 @@ class _BookState extends State<Book> {
                                           borderRadius:
                                               BorderRadius.circular(8.0)),
                                       color: Color.fromRGBO(237, 237, 237, 1.0),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Home()),
+                                          (Route<dynamic> route) => false,
+                                        );
+                                      },
                                       child: Text(
                                         'Cancel',
                                         style: TextStyle(

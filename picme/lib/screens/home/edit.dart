@@ -56,7 +56,6 @@ class _EditState extends State<Edit> {
         _address.text = address;
         _bio.text = bio;
       });
-      print(name);
     });
   }
 

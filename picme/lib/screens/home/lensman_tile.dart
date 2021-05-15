@@ -20,9 +20,13 @@ class LensmanTile extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
       height: 180,
       child: GestureDetector(
-        onTap: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ShowDetails()));
+        onTap: () async {
+          dynamic result = await AuthService().getCurrentUser();
+
+          dynamic user = await DatabaseService().fetchClientData(result.uid);
+
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ShowDetails(lens: lens, user: user)));
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -41,9 +45,7 @@ class LensmanTile extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.black,
                     image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/11.jpg'),
-                    ),
+                        fit: BoxFit.cover, image: NetworkImage(lens.display)),
                   ),
                 ),
                 Flexible(
@@ -53,7 +55,7 @@ class LensmanTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Monkey D, Luffy',
+                          lens.name,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.poppins(
                             fontSize: 20,
@@ -69,7 +71,10 @@ class LensmanTile extends StatelessWidget {
                               size: 15,
                             ),
                             SizedBox(width: 5),
-                            Text('payraclea19@gmail.com'),
+                            Text(
+                              lens.email,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
                         ),
                         SizedBox(height: 5),
@@ -81,7 +86,10 @@ class LensmanTile extends StatelessWidget {
                               size: 15,
                             ),
                             SizedBox(width: 5),
-                            Text('Tondo Manila'),
+                            Text(
+                              lens.address,
+                              overflow: TextOverflow.ellipsis,
+                            )
                           ],
                         ),
                         SizedBox(height: 5),
@@ -93,19 +101,22 @@ class LensmanTile extends StatelessWidget {
                               size: 15,
                             ),
                             SizedBox(width: 5),
-                            Text('09568076691'),
+                            Text(
+                              lens.contact,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
                         ),
                         SizedBox(height: 5),
                         Container(
                           child: RatingBarIndicator(
-                            itemBuilder: (_, __) {
-                              return Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                              );
-                            },
-                            itemSize: 20,
+                            rating: 2.75,
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            itemCount: 5,
+                            itemSize: 20.0,
                           ),
                         ),
                       ],

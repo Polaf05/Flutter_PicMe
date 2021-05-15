@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:picme/models/user.dart';
 import 'package:picme/screens/home/book.dart';
 import 'package:picme/models/lensman.dart';
+import 'package:picme/screens/home/home.dart';
 
 class ShowDetails extends StatefulWidget {
   final Lensman lens;
@@ -22,7 +23,10 @@ class _ShowDetailsState extends State<ShowDetails> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => Home()));
+          },
           child: Icon(
             Icons.keyboard_arrow_left,
             color: Colors.white,
@@ -71,7 +75,7 @@ class _ShowDetailsState extends State<ShowDetails> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            widget.lens.username,
+                            widget.lens.name,
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
@@ -105,7 +109,7 @@ class _ShowDetailsState extends State<ShowDetails> {
                                     size: 20,
                                     color: Color.fromRGBO(216, 181, 58, 1.0)),
                                 Text(
-                                  "Butal Events Place",
+                                  widget.lens.username,
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
