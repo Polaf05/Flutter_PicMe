@@ -39,7 +39,7 @@ class _RegisterState extends State<Register> {
                       child: Text(
                         'Sign Up',
                         style:  GoogleFonts.lato(
-                          color: Color.fromRGBO(26, 181, 158, 1.0),
+                          color: Color.fromRGBO(216, 181, 158, 1.0),
                           fontSize: 40.0,
                           fontWeight: FontWeight.w600,
                         ),

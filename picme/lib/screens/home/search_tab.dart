@@ -45,7 +45,7 @@ class _SearchTabState extends State<SearchTab>
             padding: EdgeInsets.all(20.0),
             child: Container(
               height: 100.0,
-              width: 350.0,
+              width: double.infinity,
               color: Colors.transparent,
               alignment: Alignment(-1.0, 0.0),
               child: AnimatedContainer(
@@ -76,7 +76,7 @@ class _SearchTabState extends State<SearchTab>
                         opacity: (toggle == 0) ? 0.0 : 1.0,
                         duration: Duration(milliseconds: 200),
                         child: Container(
-                          padding: EdgeInsets.all(5.0),
+                          padding: EdgeInsets.all(0.5),
                           decoration: BoxDecoration(
                             color: Color(0xffF2F3F7),
                             borderRadius: BorderRadius.circular(30.0),

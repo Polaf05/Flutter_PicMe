@@ -3,6 +3,10 @@ import 'package:picme/models/user.dart';
 import 'package:picme/screens/home/book.dart';
 import 'package:picme/models/lensman.dart';
 import 'package:picme/screens/home/home.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 
 class ShowDetails extends StatefulWidget {
   final Lensman lens;
@@ -14,8 +18,15 @@ class ShowDetails extends StatefulWidget {
   _ShowDetailsState createState() => _ShowDetailsState();
 }
 
-class _ShowDetailsState extends State<ShowDetails> {
+class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixin
+{
+  TabController _controller;
   @override
+  void initState() {
+    _controller = TabController(initialIndex: 0, length: 2, vsync: this);
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -35,7 +46,7 @@ class _ShowDetailsState extends State<ShowDetails> {
         ),
         title: Text(
           "Profile",
-          style: TextStyle(
+          style: GoogleFonts.poppins(
             color: Colors.black,
             fontSize: 22,
           ),
@@ -71,91 +82,128 @@ class _ShowDetailsState extends State<ShowDetails> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 290, 230, 0),
+                      margin: EdgeInsets.fromLTRB(0, 135, 0, 0),
                       child: Column(
                         children: <Widget>[
-                          Text(
-                            widget.lens.name,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 145, 0, 0),
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(left: 25),
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    widget.lens.name,
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 26,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(left: 25),
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    widget.lens.email,
+                                    style: GoogleFonts.lato(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            height: 4,
+                          SizedBox(height: 20.0),
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              width: 350,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Color.fromRGBO(216, 181, 58, 1.0),
+                                      width: 3.0)),
+                              child: Container(
+                                  padding: EdgeInsets.fromLTRB(20, 20, 15, 20),
+                                  child: Text(
+                                    'AASBDHSABDIASHBDIDBASIUCBASIUCBASUICBASUICBASUCBASUICBSUCBASICUABS',
+                                    style: GoogleFonts.lato(fontSize: 16.0),
+                                    textAlign: TextAlign.center,
+                                  )),
+                            ),
                           ),
-                          Text(
-                            widget.lens.email,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
+                          Container(
+                            // margin: EdgeInsets.only(top:230),
+                            padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(Icons.person,
+                                        size: 20,
+                                        color:
+                                            Color.fromRGBO(216, 181, 58, 1.0)),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      widget.lens.username,
+                                      style: GoogleFonts.montserrat(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(Icons.location_pin,
+                                        size: 20,
+                                        color:
+                                            Color.fromRGBO(216, 181, 58, 1.0)),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      widget.lens.address,
+                                      style: GoogleFonts.montserrat(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(Icons.call,
+                                        size: 20,
+                                        color:
+                                            Color.fromRGBO(216, 181, 58, 1.0)),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      widget.lens.contact,
+                                      style: GoogleFonts.montserrat(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                           SizedBox(height: 20),
                         ],
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(20, 350, 0, 0),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Icon(Icons.home,
-                                    size: 20,
-                                    color: Color.fromRGBO(216, 181, 58, 1.0)),
-                                Text(
-                                  widget.lens.username,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ]),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20, 370, 0, 0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Icon(Icons.location_pin,
-                                size: 20,
-                                color: Color.fromRGBO(216, 181, 58, 1.0)),
-                            Text(
-                              widget.lens.address,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ]),
-                    ),
-                    SizedBox(height: 5),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20, 390, 0, 0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Icon(Icons.call,
-                                size: 20,
-                                color: Color.fromRGBO(216, 181, 58, 1.0)),
-                            Text(
-                              widget.lens.contact,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ]),
                     ),
                     Container(
                       margin: EdgeInsets.fromLTRB(140, 0, 0, 350),
@@ -211,14 +259,69 @@ class _ShowDetailsState extends State<ShowDetails> {
                         radius: 60.0,
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        left: 16,
-                        right: 16,
-                        top: 420.0,
-                        bottom: 0,
-                      ),
-                      child: GridView.builder(
+              
+                    Stack(
+                      children: [
+                        Positioned(
+                          top: 580,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            decoration: new BoxDecoration(
+                                color: Theme.of(context).primaryColor),
+                            child: new TabBar(
+                              controller: _controller,
+                              unselectedLabelColor:
+                                  Color.fromRGBO(237, 237, 237, 1.0),
+                              indicator: BoxDecoration(
+                                  color: Color.fromRGBO(43, 43, 43, 1.0),
+                                  border: Border(
+                                    top: BorderSide(
+                                        width: 4.0,
+                                        color:
+                                            Color.fromRGBO(216, 181, 58, 1.0)),
+                                  )),
+                              labelColor: Color.fromRGBO(216, 181, 58, 1.0),
+                              indicatorSize: TabBarIndicatorSize.tab,
+                              tabs: [
+                                Tab(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text("Gallery",
+                                        style: TextStyle(
+                                            fontFamily: "BarlowBold",
+                                            fontSize: 15.0)),
+                                  ),
+                                ),
+                                Tab(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text("Review and Ratings",
+                                        style: TextStyle(
+                                            fontFamily: "BarlowBold",
+                                            fontSize: 15.0)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 630,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            padding: EdgeInsets.only(
+                              left: 8,
+                              right: 8,
+                              top: 5,
+                              bottom: 0,
+                            ),
+                            height: 320,
+                            child: new TabBarView(
+                              controller: _controller,
+                              children: <Widget>[
+                                GridView.builder(
                           padding: EdgeInsets.zero,
                           gridDelegate:
                               SliverGridDelegateWithMaxCrossAxisExtent(
@@ -241,6 +344,86 @@ class _ShowDetailsState extends State<ShowDetails> {
                               ),
                             );
                           }),
+                               
+         ListView.builder(
+           padding: EdgeInsets.zero,
+            itemCount: 5,
+            shrinkWrap:true,
+            itemBuilder:(BuildContext context, int index) => 
+            Container(width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
+            child: Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3.0),
+                ),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                   children: [
+                      Container(
+                        width: 55.5,
+                        height: 75.5,
+                        color: Colors.transparent,
+                        child: CircleAvatar(
+                         backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage(
+                            'assets/en.jpg',
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 5.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                        'Monkey D. Luffy',
+                        style:
+                            GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 18.0),
+                      ),
+                      Text(
+                          'Bastos yan si kiben',
+                          style: GoogleFonts.montserrat(fontSize: 12.0)),
+                       Container(
+                          child: RatingBarIndicator(
+                            rating: 2.75,
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            itemCount: 5,
+                            itemSize: 20.0,
+                          ),
+                        ),
+                      ],
+                    )
+                    ],
+                    ),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                     child:Icon(
+                        FontAwesomeIcons.arrowCircleRight,
+                      )
+                    ),
+                ],
+                ),
+              ),
+            ),
+            )
+      ),
+             ],
+      ),
+   ),
+                        ),
+                      ],
                     ),
                   ],
                 );

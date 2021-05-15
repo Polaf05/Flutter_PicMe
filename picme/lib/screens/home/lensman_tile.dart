@@ -54,14 +54,14 @@ class LensmanTile extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          lens.name,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                       Text(
+                            lens.name,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
                         SizedBox(height: 7),
                         Row(
                           children: [
@@ -71,9 +71,11 @@ class LensmanTile extends StatelessWidget {
                               size: 15,
                             ),
                             SizedBox(width: 5),
-                            Text(
-                              lens.email,
-                              overflow: TextOverflow.ellipsis,
+                            Expanded(
+                               child: Text(
+                                lens.email,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
@@ -86,9 +88,11 @@ class LensmanTile extends StatelessWidget {
                               size: 15,
                             ),
                             SizedBox(width: 5),
-                            Text(
-                              lens.address,
-                              overflow: TextOverflow.ellipsis,
+                            Expanded(
+                              child: Text(
+                                lens.address,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             )
                           ],
                         ),
@@ -101,9 +105,11 @@ class LensmanTile extends StatelessWidget {
                               size: 15,
                             ),
                             SizedBox(width: 5),
-                            Text(
-                              lens.contact,
-                              overflow: TextOverflow.ellipsis,
+                            Expanded(
+                                child: Text(
+                                lens.contact,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),

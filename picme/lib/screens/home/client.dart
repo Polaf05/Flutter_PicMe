@@ -116,12 +116,17 @@ class _ClientProfileState extends State<ClientProfile> {
               height: 10.0,
             ),
             Container(
-                padding: EdgeInsets.fromLTRB(20, 20, 15, 20),
-                child: Text(
-                  bio,
-                  style: GoogleFonts.montserrat(fontSize: 18.0),
-                  textAlign: TextAlign.center,
-                )),
+              width: 350,
+              decoration: BoxDecoration(
+                border: Border.all(color:Color.fromRGBO(216, 181, 58, 1.0),width: 3.0)),
+              child: Container(
+                  padding: EdgeInsets.fromLTRB(20, 20, 15, 20),
+                  child: Text(
+                    bio,
+                    style: GoogleFonts.montserrat(fontSize: 18.0),
+                    textAlign: TextAlign.center,
+                  )),
+            ),
             Container(
               child: Divider(
                 height: 30,
@@ -151,6 +156,7 @@ class _ClientProfileState extends State<ClientProfile> {
                   SizedBox(
                     height: 10.0,
                   ),
+                  
                   Row(
                     children: <Widget>[
                       Icon(Icons.call,

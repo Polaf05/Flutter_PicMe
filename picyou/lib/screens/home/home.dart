@@ -10,6 +10,9 @@ import 'package:picyou/screens/home/lensmen_list.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'request.dart';
+
 
 
 
@@ -34,7 +37,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    _controller = TabController(initialIndex: 0, length: 2, vsync: this);
+    _controller = TabController(initialIndex: 0, length: 3, vsync: this);
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       dynamic id = _auth.getCurrentUser();
@@ -163,6 +166,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           ],
                         ),
                       ),
+                      
                       SizedBox(height: 30),
                       Column(
                         children: [
@@ -314,6 +318,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                               fontSize: 15.0)),
                                     ),
                                   ),
+                                  Tab(
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text("Reviews",
+                                          style: TextStyle(
+                                              fontFamily: "BarlowBold",
+                                              fontSize: 15.0)),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -353,139 +366,159 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     )
                     ],
                   ),
-                                  // GridView.builder(
-                                  //     gridDelegate:
-                                  //         SliverGridDelegateWithMaxCrossAxisExtent(
-                                  //             maxCrossAxisExtent: 150,
-                                  //             childAspectRatio: 1,
-                                  //             crossAxisSpacing: 10,
-                                  //             mainAxisSpacing: 10),
-                                  //     itemCount: gallery.length,
-                                  //     itemBuilder: (BuildContext ctx, index) {
-                                  //       return Container(
-                                  //         alignment: Alignment.center,
-                                  //         decoration: BoxDecoration(
-                                  //           color: Colors.amber,
-                                  //           borderRadius:
-                                  //               BorderRadius.circular(15),
-                                  //           image: DecorationImage(
-                                  //             image:
-                                  //                 NetworkImage(gallery[index]),
-                                  //             fit: BoxFit.fill,
-                                  //           ),
-                                  //         ),
-                                  //       );
-                                  //     }),
-                                  ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    itemCount: 1,
-                                    itemBuilder: (context, index) {
-                                      return Card(
-                                        child: new ListTile(
-                                          leading: const Icon(Icons.person),
-                                          title: new TextField(
-                                            decoration: const InputDecoration(
-                                                hintText: 'Reniel Avellano'),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-
-                          // Container(
-                          //     padding: EdgeInsets.zero,
-                          //     margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          //     height: 100,
-                          //     child: GestureDetector(
-                          //       onTap: () {
-                          //       },
-                          //       child: Padding(
-                          //         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
-                          //         child: Card(
-                          //           clipBehavior: Clip.antiAlias,
-                          //           shape: RoundedRectangleBorder(
-                          //             borderRadius: BorderRadius.circular(5),
-                          //           ),
-                          //           child: Row(
-                          //             children: [
-                          //               Container(
-                          //                 margin: EdgeInsets.fromLTRB(10, 0, 10, 170),
-                          //                 height: 100,
-                          //                 width: 120,
-                          //                 decoration: BoxDecoration(
-                          //                   borderRadius: BorderRadius.circular(8),
-                          //                   color: Colors.black,
-                          //                   image: DecorationImage(
-                          //                     fit: BoxFit.cover,
-                          //                     image: AssetImage('assets/11.jpg'),
-                          //                   ),
-                          //                 ),
-                          //               ),
-                          //               Flexible(
-                          //                 child: Padding(
-                          //                   padding: const EdgeInsets.all(12),
-                          //                   child: Column(
-                          //                     crossAxisAlignment: CrossAxisAlignment.start,
-                          //                     children: [
-                          //                       Text(
-                          //                       'Monkey D, Luffy',
-                          //                         overflow: TextOverflow.ellipsis,
-                          //                         style: GoogleFonts.poppins(
-                          //                           fontSize: 20,
-                          //                           fontWeight: FontWeight.bold,
-                          //                         ),
-                          //                       ),
-                          //                       SizedBox(height: 7),
-                          //                       Row(
-                          //                         children: [
-                          //                           Icon(
-                          //                             Icons.email,
-                          //                             color: Color.fromRGBO(216, 181, 58, 1.0),
-                          //                             size: 15,
-                          //                           ),
-                          //                           SizedBox(width: 5),
-                          //                           Text('payraclea19@gmail.com'),
-                          //                         ],
-                          //                       ),
-                          //                       SizedBox(height: 5),
-                          //                       Row(
-                          //                         children: [
-                          //                           Icon(
-                          //                             Icons.location_on,
-                          //                             color: Color.fromRGBO(216, 181, 58, 1.0),
-                          //                             size: 15,
-                          //                           ),
-                          //                           SizedBox(width: 5),
-                          //                           Text('Tondo Manila'),
-                          //                         ],
-                          //                       ),
-                          //                       SizedBox(height: 5),
-                          //                       Row(
-                          //                         children: [
-                          //                           Icon(
-                          //                             Icons.call,
-                          //                             color: Color.fromRGBO(216, 181, 58, 1.0),
-                          //                             size: 15,
-                          //                           ),
-                          //                           SizedBox(width: 5),
-                          //                           Text('09568076691'),
-                          //                         ],
-                          //                       ),
-                          //                     ],
-                          //                   ),
-                          //                 ),
-                          //               )
-                          //             ],
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                            
-
-
-                                ],
+               ListView.builder(
+           padding: EdgeInsets.zero,
+            itemCount: 5,
+            shrinkWrap:true,
+            itemBuilder:(BuildContext context, int index) => 
+            Container(width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
+            child: Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3.0),
+                ),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                   children: [
+                      Container(
+                        width: 55.5,
+                        height: 75.5,
+                        color: Colors.transparent,
+                        child: CircleAvatar(
+                         backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage(
+                            'assets/en.jpg',
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 15.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 20),
+                          child: Text(
+                          'Monkey D. Luffy',
+                          style:
+                              GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 18.0),
+                      ),
+                        ),
+                      Text(
+                          'kiben@yahoo.com',
+                          style: GoogleFonts.montserrat(fontSize: 14.0)),
+                      ],
+                    )
+                    ],
+                    ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                    child:IconButton(
+                      icon: Icon(FontAwesomeIcons.arrowCircleRight),
+                      onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Request()));
+                              },
+                    ),
                               ),
+                          ],
+                          ),
+                        ),
+                      ),
+                      )
+                ),
+ ListView.builder(
+           padding: EdgeInsets.zero,
+            itemCount: 5,
+            shrinkWrap:true,
+            itemBuilder:(BuildContext context, int index) => 
+            Container(width: MediaQuery.of(context).size.width,
+            height: 200,
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
+            child: Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3.0),
+                ),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                   children: [
+                      Center(
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          color: Colors.transparent,
+                          child: CircleAvatar(
+                           backgroundColor: Colors.transparent,
+                            backgroundImage: AssetImage(
+                              'assets/en.jpg',
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 15.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                         Container(
+                          margin: EdgeInsets.only(top: 10),
+                        child:Text(
+                        'Monkey D. Luffy',
+                        style:
+                            GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 20.0),
+                      ),
+                         ),
+                      SizedBox(height: 7.0),
+                      Container(
+                        width: 180,
+                        padding: EdgeInsets.only(right: 5),
+                        child: Text(
+                            'Bastos yan si kiben asdfndjdkads fjkadbsfkj dsfsdfsdfa fasdfsaf dfsdfa ',
+                            style: GoogleFonts.montserrat(fontSize: 14.0),
+                           ),
+                      ),
+                      SizedBox(height: 7.0),
+                       Container(
+                          child: RatingBarIndicator(
+                            rating: 2.75,
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            itemCount: 5,
+                            itemSize: 25.0,
+                          ),
+                        ),
+                      ],
+                    )
+                    ],
+                    ),
+                ],
+                ),
+              ),
+            ),
+            )
+      ),
+            ],
+                ),
                             ),
                           ),
                         ],
