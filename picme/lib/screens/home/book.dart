@@ -402,13 +402,13 @@ class _BookState extends State<Book> {
                                               await _db.bookLensman(
                                                   widget.user.id,
                                                   widget.lens.id,
-                                                  name,
-                                                  email,
-                                                  contact,
+                                                  widget.user.name,
+                                                  widget.user.email,
+                                                  widget.user.contact,
                                                   message,
+                                                  widget.lens.name,
+                                                  widget.lens.email,
                                                   date);
-
-                                          print(result.id);
 
                                           await _mail.sendReciept(
                                               widget.user.email,

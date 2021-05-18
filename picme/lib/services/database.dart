@@ -1,10 +1,12 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:picme/models/booking.dart';
 import 'package:picme/models/lensman.dart';
 import 'package:picme/models/user.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:get/get.dart';
+import 'package:picme/services/auth.dart';
 
 class DatabaseService {
   final String uid;
@@ -22,6 +24,9 @@ class DatabaseService {
 
   final CollectionReference bookingCollection =
       FirebaseFirestore.instance.collection('Booking');
+
+  final CollectionReference ratingCollection =
+      FirebaseFirestore.instance.collection('Ratings');
 
   //Create
 
@@ -106,6 +111,23 @@ class DatabaseService {
     }).toList();
   }
 
+  List<Booking> _bookingListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Booking(
+          clientName: doc.data()['client_name'] ?? '',
+          clientEmail: doc.data()['client_email'] ?? '',
+          clientContact: doc.data()['client_contact'] ?? '',
+          lensmanEmail: doc.data()['lensman_email'] ?? '',
+          lensmanName: doc.data()['lensman_name'] ?? '',
+          clientId: doc.data()['client_id'] ?? '',
+          lensmanId: doc.data()['lensman_id'] ?? '',
+          status: doc.data()['status'] ?? '',
+          request: doc.data()['request'] ?? '',
+          date: doc.data()['date'] ?? '',
+          id: doc.id ?? '');
+    }).toList();
+  }
+
   //Check user role
 
   Future checkUser(String email, String password) async {
@@ -139,26 +161,61 @@ class DatabaseService {
 
   //Booking
 
-  Future bookLensman(String client_id, String lensman_id, String name,
-      String email, String contact, String request, DateTime date) async {
+  Future bookLensman(
+      String client_id,
+      String lensman_id,
+      String clientName,
+      String clientEmail,
+      String clientContact,
+      String request,
+      String lensmanName,
+      String lensmanEmail,
+      DateTime date) async {
     DocumentReference result = await bookingCollection.add({
       'lensman_id': lensman_id,
       'client_id': client_id,
-      'name': name,
-      'email': email,
-      'contact': contact,
+      'client_name': clientName,
+      'client_email': clientEmail,
+      'client_contact': clientContact,
+      'lensman_name': lensmanName,
+      'lensman_email': lensmanEmail,
       'request': request,
       'date': date,
-      'status': 'pending',
+      'status': 'Pending',
     });
 
     return result;
+  }
+
+  //Ratings
+
+  Future rateLensman(String clientId, String lensmanId, String comment,
+      int rate, String id) async {
+    await ratingCollection.doc(id).set({
+      'lensman_id': lensmanId,
+      'client_id': clientId,
+      'request': comment,
+      'rating': rate,
+    });
+
+    await bookingCollection.doc(id).update({
+      'status': 'Done',
+    });
   }
 
   //get client streams
 
   Stream<List<Lensman>> get lensman {
     return employeeCollection.snapshots().map(_lensmanListFromSnapshot);
+  }
+
+  Stream<List<Booking>> get booking {
+    dynamic uid = AuthService().getCurrentUser();
+
+    return bookingCollection
+        .where('client_id', isEqualTo: uid.uid)
+        .snapshots()
+        .map(_bookingListFromSnapshot);
   }
 
   //Upload Image
