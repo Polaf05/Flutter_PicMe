@@ -118,24 +118,24 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                               ],
                             ),
                           ),
-                          SizedBox(height: 20.0),
-                          Center(
-                            child: Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              width: 350,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Color.fromRGBO(216, 181, 58, 1.0),
-                                      width: 3.0)),
-                              child: Container(
-                                  padding: EdgeInsets.fromLTRB(20, 20, 15, 20),
-                                  child: Text(
-                                    'AASBDHSABDIASHBDIDBASIUCBASIUCBASUICBASUICBASUCBASUICBSUCBASICUABS',
-                                    style: GoogleFonts.lato(fontSize: 16.0),
-                                    textAlign: TextAlign.center,
-                                  )),
-                            ),
-                          ),
+                          // SizedBox(height: 20.0),
+                          // Center(
+                          //   child: Container(
+                          //     margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          //     width: 350,
+                          //     decoration: BoxDecoration(
+                          //         border: Border.all(
+                          //             color: Color.fromRGBO(216, 181, 58, 1.0),
+                          //             width: 3.0)),
+                          //     child: Container(
+                          //         padding: EdgeInsets.fromLTRB(20, 20, 15, 20),
+                          //         child: Text(
+                          //           'AASBDHSABDIASHBDIDBASIUCBASIUCBASUICBASUICBASUCBASUICBSUCBASICUABS',
+                          //           style: GoogleFonts.lato(fontSize: 16.0),
+                          //           textAlign: TextAlign.center,
+                          //         )),
+                          //   ),
+                          // ),
                           Container(
                             // margin: EdgeInsets.only(top:230),
                             padding: EdgeInsets.only(left: 10.0, right: 10.0),
@@ -259,11 +259,10 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                         radius: 60.0,
                       ),
                     ),
-              
                     Stack(
                       children: [
                         Positioned(
-                          top: 580,
+                          top: 450,
                           left: 0,
                           right: 0,
                           child: Container(
@@ -307,7 +306,7 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                           ),
                         ),
                         Positioned(
-                          top: 630,
+                          top: 500,
                           left: 0,
                           right: 0,
                           child: Container(
@@ -344,20 +343,24 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                               ),
                             );
                           }),
-                               
          ListView.builder(
            padding: EdgeInsets.zero,
             itemCount: 5,
             shrinkWrap:true,
             itemBuilder:(BuildContext context, int index) => 
-            Container(width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
+            Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical:0),
             child: Card(
-              elevation: 3,
+              elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(3.0),
                 ),
               child: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Color.fromRGBO(216,181,58, 1.0),width: 1),
+                  ) ),
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
               child: Row(
@@ -366,10 +369,10 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                 children: <Widget>[
                   Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                 mainAxisAlignment: MainAxisAlignment.start,
                    children: [
                       Container(
-                        width: 55.5,
+                        width: 60,
                         height: 75.5,
                         color: Colors.transparent,
                         child: CircleAvatar(
@@ -379,18 +382,37 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                           ),
                         ),
                       ),
-                      SizedBox(width: 5.0),
+                      SizedBox(width: 15.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                        'Monkey D. Luffy',
-                        style:
-                            GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 18.0),
+                        Row(
+                          children: [
+                            Text(
+                            'Monkey D. Luffy',
+                            style:
+                                GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 18.0),
                       ),
-                      Text(
-                          'Bastos yan si kiben',
-                          style: GoogleFonts.montserrat(fontSize: 12.0)),
+                      SizedBox(width: 5),
+                      Container(
+                        child: Text(
+                              'luffytaro@gmail.com',
+                              style:
+                                  GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 10.0,
+                                  color: Colors.black38),
+                              overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                          ],
+                        ),
+                      SizedBox(height: 7), 
+                      Container(
+                        width: 255,
+                        child: Text(
+                            'Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben',
+                            style: GoogleFonts.montserrat(fontSize: 12.0)),
+                      ),
+                      SizedBox(height: 7),
                        Container(
                           child: RatingBarIndicator(
                             rating: 2.75,
@@ -398,30 +420,23 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                               Icons.star,
                               color: Colors.amber,
                             ),
-                            itemCount: 5,
+                            itemCount: 5, 
                             itemSize: 20.0,
                           ),
-                        ),
+                              ),
+                            ],
+                          )
+                          ],
+                          ),
                       ],
-                    )
-                    ],
+                      ),
                     ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-                     child:Icon(
-                        FontAwesomeIcons.arrowCircleRight,
-                      )
-                    ),
-                ],
-                ),
-              ),
+                  ),
+                  )
             ),
-            )
-      ),
-             ],
-      ),
-   ),
+                  ],
+            ),
+        ),
                         ),
                       ],
                     ),
