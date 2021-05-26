@@ -80,17 +80,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               },
             )
           ],
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Home()));
-            },
-            child: Icon(
-              Icons.keyboard_arrow_left,
-              color: Colors.black,
-              size: 32,
-            ),
-          ),
           title: Text(
             "Profile",
             style: GoogleFonts.poppins(

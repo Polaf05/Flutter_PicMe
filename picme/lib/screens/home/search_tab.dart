@@ -45,13 +45,13 @@ class _SearchTabState extends State<SearchTab>
             padding: EdgeInsets.all(20.0),
             child: Container(
               height: 100.0,
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width,
               color: Colors.transparent,
               alignment: Alignment(-1.0, 0.0),
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 375),
                 height: 52.0,
-                width: (toggle == 0) ? 52.0 : 350.0,
+                width: (toggle == 0) ? 52.0 : MediaQuery.of(context).size.width,
                 curve: Curves.easeOut,
                 decoration: BoxDecoration(
                   color: Colors.white,
