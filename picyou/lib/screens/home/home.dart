@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:picyou/screens/home/request_display.dart';
 import 'package:picyou/services/auth.dart';
 import 'package:picyou/screens/home/edit.dart';
 import 'package:picyou/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:picyou/model/lensmen.dart';
-import 'package:picyou/screens/home/lensmen_list.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:picyou/screens/home/request_list.dart';
+import 'package:picyou/model/booking.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'request.dart';
-
-
-
-
 
 class Home extends StatefulWidget {
   @override
@@ -33,8 +29,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String contact = ' ';
   String email = ' ';
   dynamic gallery = ' ';
-  String displayPicture = '';
-
+  String displayPicture = ' ';
+  String coverPicture = ' ';
+  String def_pic =
+      "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20dp%2F360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg?alt=media&token=b1ae5147-b094-4e53-b7ac-518a6f4c218c";
+  String def_cover =
+      "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fpb.png?alt=media&token=62a61f29-5f5e-4ee8-bcd9-5c08dbd9091b";
   @override
   void initState() {
     _controller = TabController(initialIndex: 0, length: 3, vsync: this);
@@ -50,6 +50,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         email = fetch.email;
         gallery = fetch.gallery;
         displayPicture = fetch.displayPicture;
+        coverPicture = fetch.coverPicture;
       });
     });
   }
@@ -89,8 +90,21 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           centerTitle: false,
         ),
+<<<<<<< Updated upstream
         body: ListView(children: <Widget>[
           new Column(children: <Widget>[
+=======
+        body: Stack(
+          children: <Widget>[
+            Center(
+              child: Image.asset(
+                'assets/en.jpg',
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 1200,
+              ),
+            ),
+>>>>>>> Stashed changes
             Container(
               child: Stack(
                 alignment: Alignment.bottomCenter,
@@ -193,6 +207,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           ],
                         ),
                       ),
+<<<<<<< Updated upstream
             SizedBox(
               height: 10.0,
             ),
@@ -247,6 +262,111 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         style: GoogleFonts.montserrat(
                           color: Colors.black,
                           fontSize: 18,
+=======
+                      SizedBox(height: 30),
+                      Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(20, 350, 0, 0),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Icon(Icons.link,
+                                      size: 20,
+                                      color: Color.fromRGBO(216, 181, 58, 1.0)),
+                                  Text(
+                                    name,
+                                    style: GoogleFonts.montserrat(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 370, 0, 0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Icon(Icons.location_pin,
+                                  size: 20,
+                                  color: Color.fromRGBO(216, 181, 58, 1.0)),
+                              Text(
+                                address,
+                                style: GoogleFonts.montserrat(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ]),
+                      ),
+                      SizedBox(height: 5),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 390, 0, 0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Icon(Icons.call,
+                                  size: 20,
+                                  color: Color.fromRGBO(216, 181, 58, 1.0)),
+                              Text(
+                                contact,
+                                style: GoogleFonts.montserrat(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ]),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(180, 210, 0, 0),
+                        child: Column(
+                          children: [
+                            TextButton(
+                              child: Text("Edit Profile",
+                                  style: TextStyle(fontSize: 18.0)),
+                              style: ButtonStyle(
+                                  padding: MaterialStateProperty.all<EdgeInsets>(
+                                      EdgeInsets.fromLTRB(40, 15, 40, 15)),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.black),
+                                  shape:
+                                      MaterialStateProperty.all<RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30.0),
+                                              side: BorderSide(
+                                                  color: Color.fromRGBO(
+                                                      216, 181, 58, 1.0))))),
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Edit()));
+                              },
+                            ),
+                            Container(
+                              height: 40,
+                              margin: EdgeInsets.fromLTRB(40, 100, 10, 0),
+                              child: LiteRollingSwitch(
+                                value: true,
+                                textOn: 'URGENT',
+                                textOff: 'URGENT',
+                                colorOn: Color.fromRGBO(216, 181, 58, 1.0),
+                                colorOff: Color.fromRGBO(31, 31, 31, 1.0),
+                                iconOn: Icons.done,
+                                iconOff: FontAwesomeIcons.exclamationCircle,
+                                textSize: 18.0,
+                                onChanged: (bool state) {},
+                              ),
+                            ),
+                          ],
+>>>>>>> Stashed changes
                         ),
                       ),
                     ],
@@ -314,6 +434,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               child: new TabBarView(
                                 controller: _controller,
                                 children: <Widget>[
+<<<<<<< Updated upstream
                    Column(
                     children: [
                       Container(
@@ -944,7 +1065,210 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 //           ],
 //         ),
 
+=======
+                                  GridView.builder(
+                                      gridDelegate:
+                                          SliverGridDelegateWithMaxCrossAxisExtent(
+                                              maxCrossAxisExtent: 150,
+                                              childAspectRatio: 1,
+                                              crossAxisSpacing: 10,
+                                              mainAxisSpacing: 10),
+                                      itemCount: gallery.length,
+                                      itemBuilder: (BuildContext ctx, index) {
+                                        return Container(
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.amber,
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            image: DecorationImage(
+                                              image:
+                                                  NetworkImage(gallery[index]),
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                      //Request
+                                  RequestDisp(),
+
+                                  ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      itemCount: 5,
+                                      shrinkWrap: true,
+                                      itemBuilder: (BuildContext context,
+                                              int index) =>
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 200,
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10.0,
+                                                vertical: 3.0),
+                                            child: Card(
+                                              elevation: 3,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(3.0),
+                                              ),
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 18.0,
+                                                    vertical: 18.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      children: [
+                                                        Center(
+                                                          child: Container(
+                                                            width: 100,
+                                                            height: 100,
+                                                            color: Colors
+                                                                .transparent,
+                                                            child: CircleAvatar(
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              backgroundImage:
+                                                                  AssetImage(
+                                                                'assets/en.jpg',
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 15.0),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      top: 10),
+                                                              child: Text(
+                                                                'Monkey D. Luffy',
+                                                                style: GoogleFonts.lato(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        20.0),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                                height: 7.0),
+                                                            Container(
+                                                              width: 180,
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      right: 5),
+                                                              child: Text(
+                                                                'Bastos yan si kiben asdfndjdkads fjkadbsfkj dsfsdfsdfa fasdfsaf dfsdfa ',
+                                                                style: GoogleFonts
+                                                                    .montserrat(
+                                                                        fontSize:
+                                                                            14.0),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                                height: 7.0),
+                                                            Container(
+                                                              child:
+                                                                  RatingBarIndicator(
+                                                                rating: 2.75,
+                                                                itemBuilder:
+                                                                    (context,
+                                                                            index) =>
+                                                                        Icon(
+                                                                  Icons.star,
+                                                                  color: Colors
+                                                                      .amber,
+                                                                ),
+                                                                itemCount: 5,
+                                                                itemSize: 25.0,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          )),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        top: 150,
+                        left: 0,
+                        right: 230,
+                        child: Center(
+                          child: Container(
+                            height: 130.0,
+                            width: 130.0,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: (displayPicture != '')
+                                      ? NetworkImage(displayPicture)
+                                      : NetworkImage(def_pic),
+                                ),
+                                border: Border.all(
+                                    color: Colors.white, width: 6.0)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+>>>>>>> Stashed changes
       ),
     );
   }
 }
+
+
+// children: [
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(10, 60, 50, 0),
+//                         child: Icon(
+//                          FontAwesomeIcons.photoVideo,
+//                          size: 110,
+//                          color: Colors.black12,
+//                         ),
+//                       ),
+//                     SizedBox(height: 30,),
+//                     Text(
+//                       'No Photos/Videos to show',
+//                       style: GoogleFonts.lato(
+//                         color:Colors.grey, 
+//                         fontSize: 18,
+//                       ),
+//                     )
+//                     ],

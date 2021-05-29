@@ -7,6 +7,7 @@ class Lensmen {
   final dynamic gallery;
   final String displayPicture;
   final String role;
+  final String coverPicture;
 
   Lensmen(
       {this.username,
@@ -16,5 +17,6 @@ class Lensmen {
       this.displayPicture,
       this.email,
       this.gallery,
-      this.role});
+      this.role,
+      this.coverPicture});
 }

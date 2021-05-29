@@ -4,8 +4,13 @@ import 'package:picyou/screens/home/home.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:picyou/services/database.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
 
 class Edit extends StatefulWidget {
+  final dynamic user;
+  Edit({this.user});
   @override
   _EditState createState() => _EditState();
 }
@@ -20,14 +25,17 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
   String contact = ' ';
   String email = ' ';
   dynamic gallery = ' ';
-  String displayPicture = '';
-
+  String displayPicture = ' ';
+  String coverPicture = ' ';
   String cuser = ' ';
   String cname = ' ';
   String cadd = ' ';
   String ccon = ' ';
   String cemail = ' ';
-
+  String def_pic =
+      "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20dp%2F360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg?alt=media&token=b1ae5147-b094-4e53-b7ac-518a6f4c218c";
+  String def_cover =
+      "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fpb.png?alt=media&token=62a61f29-5f5e-4ee8-bcd9-5c08dbd9091b";
   @override
   void initState() {
     super.initState();
@@ -47,8 +55,30 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
         cadd = fetch.address;
         ccon = fetch.contact;
         cemail = fetch.email;
+        coverPicture = fetch.coverPicture;
       });
     });
+  }
+
+  uploadImage() async {
+    final _picker = ImagePicker();
+    PickedFile image;
+
+    //checkPermission
+    //SelectImage
+    image = await _picker.getImage(source: ImageSource.gallery);
+    dynamic file = File(image.path);
+    if (image != null) {
+      //upload firebase
+      String path = await _db.uploadImageToFirebase(email, file);
+      setState(() {
+        displayPicture = path;
+      });
+    } else {
+      print("no path");
+    }
+
+    //UploadImage
   }
 
   Widget build(BuildContext context) {
@@ -162,7 +192,9 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage('assets/1.jpg'),
+                    image: (coverPicture != '')
+                        ? NetworkImage(coverPicture)
+                        : NetworkImage(def_cover),
                   )),
                 ),
               )
@@ -217,7 +249,10 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: AssetImage('assets/11.jpg'),
+                                image:
+                                    //(displayPicture != '') ?
+                                    NetworkImage(displayPicture),
+                                // : NetworkImage(def_pic),
                               ),
                               border:
                                   Border.all(color: Colors.white, width: 6.0)),
@@ -227,17 +262,12 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                     Positioned(
                       top: 260,
                       left: 220,
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        child: Icon(
-                          Icons.add_a_photo,
-                          color: Colors.white,
-                        ),
-                        decoration: BoxDecoration(
-                            color: Color.fromRGBO(216, 181, 58, 1.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
+                      child: IconButton(
+                        icon: Icon(Icons.add_a_photo),
+                        color: Colors.white,
+                        onPressed: () async {
+                          uploadImage();
+                        },
                       ),
                     ),
                     Container(
@@ -351,7 +381,7 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                                           borderSide: BorderSide(
                                               color: Color.fromRGBO(
                                                   216, 181, 58, 1.0))),
-                                      hintText: 'Enter Contact',
+                                      hintText: contact,
                                       labelText: 'Contact Number',
                                       prefixIcon: const Icon(
                                         Icons.call_outlined,
