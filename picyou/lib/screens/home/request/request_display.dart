@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:picyou/services/database.dart';
-import 'package:picyou/screens/home/request_list.dart';
+import 'package:picyou/screens/home/request/request_list.dart';
 import 'package:picyou/model/booking.dart';
 
 class RequestDisp extends StatefulWidget {

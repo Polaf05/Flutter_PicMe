@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picyou/model/booking.dart';
 import 'package:provider/provider.dart';
-import 'package:picyou/screens/home/request_tile.dart';
+import 'package:picyou/screens/home/request/request_tile.dart';
 
 class RequestList extends StatefulWidget {
   @override

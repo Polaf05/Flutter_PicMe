@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'home.dart';
+import 'package:provider/provider.dart';
+import 'package:picyou/services/database.dart';
 
 class Request extends StatefulWidget {
   @override
@@ -32,17 +34,15 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                             'You have accepted the clients request!!',
                             style: GoogleFonts.lato(
                                 fontWeight: FontWeight.bold, fontSize: 20),
-                              textAlign: TextAlign.center,
+                            textAlign: TextAlign.center,
                           ),
                           SizedBox(
                             height: 20,
                           ),
-
                           Text(
                             'We will notify the client for further details',
-                            style: GoogleFonts.lato(
-                                fontSize: 16),
-                              textAlign: TextAlign.center,
+                            style: GoogleFonts.lato(fontSize: 16),
+                            textAlign: TextAlign.center,
                           ),
                           SizedBox(
                             height: 20,
@@ -89,118 +89,114 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-          return Dialog(
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-              child: Stack(
-                  overflow: Overflow.visible,
-                  alignment: Alignment.topCenter,
-                  children: [
-                    Container(
-                      height: 370,
-                      width: 300,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 100, 10, 10),
-                        child: Column(
-                          children: [
-                            Text(
-                              "That's sad to hear!",
-                              style: GoogleFonts.lato(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            Text(
-                              'Tell us more about your experience.',
-                              style: GoogleFonts.lato(
-                                  fontSize: 18),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                         Container(
-                                  margin: EdgeInsets.fromLTRB(10,0,10,20),
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                          borderSide: BorderSide(
-                                              color: Color.fromRGBO(
-                                                  216, 181, 58, 1.0))),
-                                      hintText: 'Enter comment',
-                                      labelText: 'Review',
-                                    ),
-                                  ),
-                                ),
-                        Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                            FlatButton(
-                              padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0)),
-                              color: Color.fromRGBO(237, 237, 237, 1.0),
-                              onPressed: () async {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => Home()),
-                                  (Route<dynamic> route) => false,
-                                );
-                              },
-                              child: Text(
-                                'Cancel',
-                                style: TextStyle(
-                                  color: Color.fromRGBO(31, 31, 31, 1.0),
-                                  fontSize: 20,
-                                ),
+        return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+            child: Stack(
+                overflow: Overflow.visible,
+                alignment: Alignment.topCenter,
+                children: [
+                  Container(
+                    height: 370,
+                    width: 300,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 100, 10, 10),
+                      child: Column(
+                        children: [
+                          Text(
+                            "That's sad to hear!",
+                            style: GoogleFonts.lato(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          Text(
+                            'Tell us more about your experience.',
+                            style: GoogleFonts.lato(fontSize: 18),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color.fromRGBO(216, 181, 58, 1.0))),
+                                hintText: 'Enter comment',
+                                labelText: 'Review',
                               ),
                             ),
-                          FlatButton(
-                                      padding:
-                                          EdgeInsets.fromLTRB(30, 10, 30, 10),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0)),
-                                      color: Color.fromRGBO(31, 31, 31, 1.0),
-                                      onPressed: () {
-                                        Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Home()),
-                                          (Route<dynamic> route) => false,
-                                        );
-                                      },
-                                      child: Text(
-                                        'Submit',
-                                        style: TextStyle(
-                                          color:
-                                             Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              FlatButton(
+                                padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0)),
+                                color: Color.fromRGBO(237, 237, 237, 1.0),
+                                onPressed: () async {
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()),
+                                    (Route<dynamic> route) => false,
+                                  );
+                                },
+                                child: Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(31, 31, 31, 1.0),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                              FlatButton(
+                                padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0)),
+                                color: Color.fromRGBO(31, 31, 31, 1.0),
+                                onPressed: () {
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()),
+                                    (Route<dynamic> route) => false,
+                                  );
+                                },
+                                child: Text(
+                                  'Submit',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
-                        ),
-                          ],
-                        ),
                       ),
                     ),
-                    Positioned(
-                      top: -60,
-                      child: GestureDetector(
-                          onTap: () {},
-                          child: CircleAvatar(
-                            backgroundColor: Color.fromRGBO(31, 31, 31, 1.0),
-                            radius: 60,
-                            child: Icon(
-                              FontAwesomeIcons.sadTear,
-                              color: Colors.white,
-                              size: 50,
-                            ),
-                          )),
-                    ),
-                  ]));
-        },
+                  ),
+                  Positioned(
+                    top: -60,
+                    child: GestureDetector(
+                        onTap: () {},
+                        child: CircleAvatar(
+                          backgroundColor: Color.fromRGBO(31, 31, 31, 1.0),
+                          radius: 60,
+                          child: Icon(
+                            FontAwesomeIcons.sadTear,
+                            color: Colors.white,
+                            size: 50,
+                          ),
+                        )),
+                  ),
+                ]));
+      },
     );
   }
 
@@ -230,7 +226,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-          child:Stack(
+        child: Stack(
           alignment: Alignment.bottomCenter,
           overflow: Overflow.visible,
           children: <Widget>[
@@ -282,8 +278,8 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                   fit: BoxFit.cover,
                                   image: AssetImage('assets/11.jpg'),
                                 ),
-                                border:
-                                    Border.all(color: Colors.white, width: 6.0)),
+                                border: Border.all(
+                                    color: Colors.white, width: 6.0)),
                           ),
                         ),
                       ),
@@ -291,233 +287,231 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                         margin: EdgeInsets.only(top: 120),
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                               Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.fromLTRB(0, 0, 230, 10),
-                                        child: Text(
-                                          'Fullname:',
-                                          style: GoogleFonts.lato(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color.fromRGBO(
-                                                  216, 181, 58, 1.0)),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 350,
-                                        padding: EdgeInsets.all(20),
-                                        margin: EdgeInsets.only(bottom: 10),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black38,
-                                            width: 0.9,
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Clea Payra',
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 18.0,
-                                              color:
-                                                  Color.fromRGBO(31, 31, 31, 1.0)),
-                                        ),
-                                      ),
-                                    ],
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(0, 0, 230, 10),
+                                    child: Text(
+                                      'Fullname:',
+                                      style: GoogleFonts.lato(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromRGBO(
+                                              216, 181, 58, 1.0)),
+                                    ),
                                   ),
-
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.fromLTRB(0, 0, 230, 10),
-                                      child: Text(
-                                        'Email:',
-                                        style: GoogleFonts.lato(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w600,
-                                            color: Color.fromRGBO(
-                                                216, 181, 58, 1.0)),
+                                  Container(
+                                    width: 350,
+                                    padding: EdgeInsets.all(20),
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: Colors.black38,
+                                        width: 0.9,
                                       ),
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(bottom: 10),
-                                      width: 350,
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                          color: Colors.black38,
-                                          width: 0.9,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'payraclea19@gmail.com',
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 18.0,
-                                            color:
-                                                Color.fromRGBO(31, 31, 31, 1.0)),
-                                      ),
+                                    child: Text(
+                                      'Clea Payra',
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 18.0,
+                                          color:
+                                              Color.fromRGBO(31, 31, 31, 1.0)),
                                     ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.fromLTRB(0, 0, 230, 10),
-                                      child: Text(
-                                        'Contact:',
-                                        style: GoogleFonts.lato(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w600,
-                                            color: Color.fromRGBO(
-                                                216, 181, 58, 1.0)),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(bottom: 10),
-                                      width: 350,
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                          color: Colors.black38,
-                                          width: 0.9,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        '091232131234',
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 18.0,
-                                            color:
-                                                Color.fromRGBO(31, 31, 31, 1.0)),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.fromLTRB(0, 0, 230, 10),
-                                      child: Text(
-                                        'Date:',
-                                        style: GoogleFonts.lato(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w600,
-                                            color: Color.fromRGBO(
-                                                216, 181, 58, 1.0)),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 350,
-                                      margin: EdgeInsets.only(bottom: 10),
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                          color: Colors.black38,
-                                          width: 0.9,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'January 12,2021',
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 18.0,
-                                            color:
-                                                Color.fromRGBO(31, 31, 31, 1.0)),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.fromLTRB(0, 0, 230, 10),
-                                      child: Text(
-                                        'Request:',
-                                        style: GoogleFonts.lato(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w600,
-                                            color: Color.fromRGBO(
-                                                216, 181, 58, 1.0)),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 350,
-                                      margin: EdgeInsets.only(bottom: 10),
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                          color: Colors.black38,
-                                          width: 0.9,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Ang ganda ganda ko lods Ang ganda ganda ko lods Ang ganda ganda ko lods Ang ganda ganda ko lods Ang ganda ganda ko lods',
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 18.0,
-                                            color:
-                                                Color.fromRGBO(31, 31, 31, 1.0)),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                 Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      FlatButton(
-                                          padding:
-                                              EdgeInsets.fromLTRB(30, 10, 30, 10),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0)),
-                                          color: Color.fromRGBO(237, 237, 237, 1.0),
-                                          onPressed: () {
-                                            _rejectDialog();
-                                          },
-                                          child: Text(
-                                            'Reject',
-                                            style: TextStyle(
-                                              color: Color.fromRGBO(31, 31, 31, 1.0),
-                                              fontSize: 20,
-                                            ),
-                                          ),
-                                        ),
-                                     FlatButton(
-                                          padding:
-                                              EdgeInsets.fromLTRB(35, 10, 35, 10),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0)),
-                                          color: Color.fromRGBO(31, 31, 31, 1.0),
-                                          onPressed: () {
-                                            _showMyDialog();
-                                          },
-                                          child: Text(
-                                            'Accept',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
-                                            ),
-                                          ),
-                                        ),
-                                      
-                                    ],
                                   ),
-                              ],
-                            ),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(0, 0, 230, 10),
+                                    child: Text(
+                                      'Email:',
+                                      style: GoogleFonts.lato(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromRGBO(
+                                              216, 181, 58, 1.0)),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    width: 350,
+                                    padding: EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: Colors.black38,
+                                        width: 0.9,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'payraclea19@gmail.com',
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 18.0,
+                                          color:
+                                              Color.fromRGBO(31, 31, 31, 1.0)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(0, 0, 230, 10),
+                                    child: Text(
+                                      'Contact:',
+                                      style: GoogleFonts.lato(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromRGBO(
+                                              216, 181, 58, 1.0)),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    width: 350,
+                                    padding: EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: Colors.black38,
+                                        width: 0.9,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      '091232131234',
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 18.0,
+                                          color:
+                                              Color.fromRGBO(31, 31, 31, 1.0)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(0, 0, 230, 10),
+                                    child: Text(
+                                      'Date:',
+                                      style: GoogleFonts.lato(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromRGBO(
+                                              216, 181, 58, 1.0)),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 350,
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    padding: EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: Colors.black38,
+                                        width: 0.9,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'January 12,2021',
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 18.0,
+                                          color:
+                                              Color.fromRGBO(31, 31, 31, 1.0)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(0, 0, 230, 10),
+                                    child: Text(
+                                      'Request:',
+                                      style: GoogleFonts.lato(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromRGBO(
+                                              216, 181, 58, 1.0)),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 350,
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    padding: EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: Colors.black38,
+                                        width: 0.9,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Ang ganda ganda ko lods Ang ganda ganda ko lods Ang ganda ganda ko lods Ang ganda ganda ko lods Ang ganda ganda ko lods',
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 18.0,
+                                          color:
+                                              Color.fromRGBO(31, 31, 31, 1.0)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  FlatButton(
+                                    padding:
+                                        EdgeInsets.fromLTRB(30, 10, 30, 10),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0)),
+                                    color: Color.fromRGBO(237, 237, 237, 1.0),
+                                    onPressed: () {
+                                      _rejectDialog();
+                                    },
+                                    child: Text(
+                                      'Reject',
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(31, 31, 31, 1.0),
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  FlatButton(
+                                    padding:
+                                        EdgeInsets.fromLTRB(35, 10, 35, 10),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0)),
+                                    color: Color.fromRGBO(31, 31, 31, 1.0),
+                                    onPressed: () {
+                                      _showMyDialog();
+                                    },
+                                    child: Text(
+                                      'Accept',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
+                      ),
                     ],
                   );
                 },
