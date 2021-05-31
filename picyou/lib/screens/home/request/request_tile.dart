@@ -82,8 +82,9 @@ class _RequestTileState extends State<RequestTile> {
                 child: IconButton(
                   icon: Icon(FontAwesomeIcons.arrowCircleRight),
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Request()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            Request(booking: widget.booking)));
                   },
                 ),
               ),

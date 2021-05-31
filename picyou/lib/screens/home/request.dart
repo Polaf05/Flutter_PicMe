@@ -2,15 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'home.dart';
-import 'package:provider/provider.dart';
 import 'package:picyou/services/database.dart';
+import 'package:picyou/model/booking.dart';
+import 'package:intl/intl.dart';
 
 class Request extends StatefulWidget {
+  final Booking booking;
+  Request({this.booking});
+
   @override
   _RequestState createState() => _RequestState();
 }
 
 class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
+  String contact = ' ';
+  String dp = ' ';
+  String cover = ' ';
+  final DatabaseService _db = DatabaseService();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      dynamic fetch = await _db.fetchClientData(widget.booking.clientId);
+      setState(() {
+        contact = fetch.contact;
+        // dp = fetch.displayPicture;
+        // cover = fetch.coverPicture;
+      });
+    });
+  }
+
   @override
   Future<void> _showMyDialog() async {
     return showDialog<void>(
@@ -202,6 +222,9 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    DateTime date = widget.booking.date.toDate();
+    DateFormat formatter = DateFormat('yyyy-MM-dd');
+    String formatted = formatter.format(date);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
@@ -316,7 +339,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                       ),
                                     ),
                                     child: Text(
-                                      'Clea Payra',
+                                      widget.booking.clientName,
                                       style: GoogleFonts.montserrat(
                                           fontSize: 18.0,
                                           color:
@@ -351,7 +374,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                       ),
                                     ),
                                     child: Text(
-                                      'payraclea19@gmail.com',
+                                      widget.booking.clientEmail,
                                       style: GoogleFonts.montserrat(
                                           fontSize: 18.0,
                                           color:
@@ -386,7 +409,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                       ),
                                     ),
                                     child: Text(
-                                      '091232131234',
+                                      contact,
                                       style: GoogleFonts.montserrat(
                                           fontSize: 18.0,
                                           color:
@@ -421,7 +444,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                       ),
                                     ),
                                     child: Text(
-                                      'January 12,2021',
+                                      "$formatted",
                                       style: GoogleFonts.montserrat(
                                           fontSize: 18.0,
                                           color:
@@ -456,7 +479,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                       ),
                                     ),
                                     child: Text(
-                                      'Ang ganda ganda ko lods Ang ganda ganda ko lods Ang ganda ganda ko lods Ang ganda ganda ko lods Ang ganda ganda ko lods',
+                                      widget.booking.request,
                                       style: GoogleFonts.montserrat(
                                           fontSize: 18.0,
                                           color:
