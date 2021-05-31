@@ -35,7 +35,7 @@ class _RequestTileState extends State<RequestTile> {
     return Container(
       width: MediaQuery.of(context).size.width,
       child: Card(
-        elevation: 2,
+        elevation: 1,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(3.0),
         ),

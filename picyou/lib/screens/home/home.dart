@@ -110,7 +110,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   ),
                   Positioned(
                     top: 130.0,
-                    right: 220.0,
+                    left: 20.0,
                     child: Container(
                       height: 160.0,
                       width: 160.0,
@@ -123,10 +123,29 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           border: Border.all(color: Colors.white, width: 6.0)),
                     ),
                   ),
-                  Positioned(
-                    top: 270,
-                    left: 200,
-                    child: Row(
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 40),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 25),
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          username,
+                          style: GoogleFonts.poppins(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 26,
+                          ),
+                        ),
+                      ),
+                    SizedBox(width: 120,),
+                    Row(
                       children: [
                         TextButton(
                           child: Text("Edit Profile",
@@ -144,31 +163,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                           color: Color.fromRGBO(
                                               216, 181, 58, 1.0))))),
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Edit()));
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) => Edit()));
                           },
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 40),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(left: 25),
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      username,
-                      style: GoogleFonts.poppins(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 26,
-                      ),
-                    ),
+                    ],
                   ),
                   SizedBox(
                     height: 3,
@@ -323,7 +324,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                             );
-                          }),
+                          }
+                          ),
                         RequestDisp(),
                         ReviewDisp(),
                       ],

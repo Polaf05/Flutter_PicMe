@@ -9,8 +9,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
 class Edit extends StatefulWidget {
-  final dynamic user;
-  Edit({this.user});
+  // final dynamic user;
+  // Edit({this.user});
   @override
   _EditState createState() => _EditState();
 }
@@ -124,7 +124,8 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                                 borderRadius: BorderRadius.circular(8.0)),
                             color: Color.fromRGBO(237, 237, 237, 1.0),
                             onPressed: () {
-                              Navigator.of(context).pop();
+                              Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) => Home()));
                             },
                             child: Text(
                               'Proceed',
@@ -168,7 +169,7 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
           },
           child: Icon(
             Icons.keyboard_arrow_left,
-            color: Colors.white,
+            color: Colors.black,
             size: 32,
           ),
         ),
@@ -262,12 +263,17 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                     Positioned(
                       top: 260,
                       left: 220,
-                      child: IconButton(
-                        icon: Icon(Icons.add_a_photo),
-                        color: Colors.white,
-                        onPressed: () async {
-                          uploadImage();
-                        },
+                      child: Container(
+                        decoration: BoxDecoration(
+                  color: Color.fromRGBO(216, 181, 58, 1.0),
+                  borderRadius: BorderRadius.all(Radius.circular(35))),
+                        child: IconButton(
+                          icon: Icon(Icons.add_a_photo),
+                          color: Colors.white,
+                          onPressed: () async {
+                            uploadImage();
+                          },
+                        ),
                       ),
                     ),
                     Container(

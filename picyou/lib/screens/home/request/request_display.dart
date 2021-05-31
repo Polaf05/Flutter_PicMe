@@ -17,7 +17,7 @@ class _RequestDispState extends State<RequestDisp> {
       initialData: List(),
       child: Scaffold(
         body: Container(
-          margin: EdgeInsets.only(top: 68),
+          margin: EdgeInsets.only(top: 8),
           child: RequestList(),
         ),
       ),
