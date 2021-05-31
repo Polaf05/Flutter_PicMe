@@ -17,6 +17,7 @@ class RequestTile extends StatefulWidget {
 
 class _RequestTileState extends State<RequestTile> {
   String picture = ' ';
+  String name = ' ';
   final DatabaseService _db = DatabaseService();
   void initState() {
     super.initState();
@@ -24,6 +25,7 @@ class _RequestTileState extends State<RequestTile> {
       dynamic fetch = await _db.fetchClientData(widget.booking.clientId);
       setState(() {
         picture = fetch.display;
+        name = fetch.name;
       });
     });
   }

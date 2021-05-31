@@ -25,8 +25,8 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
       dynamic fetch = await _db.fetchClientData(widget.booking.clientId);
       setState(() {
         contact = fetch.contact;
-        // dp = fetch.displayPicture;
-        // cover = fetch.coverPicture;
+        dp = fetch.display;
+        cover = fetch.cover;
       });
     });
   }
@@ -260,7 +260,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/en.jpg'),
+                      image: NetworkImage(cover),
                     )),
                   ),
                 )
@@ -299,7 +299,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: AssetImage('assets/11.jpg'),
+                                  image: NetworkImage(dp),
                                 ),
                                 border: Border.all(
                                     color: Colors.white, width: 6.0)),

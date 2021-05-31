@@ -301,28 +301,29 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     child: new TabBarView(
                       controller: _controller,
                       children: <Widget>[
-                        Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(10, 60, 50, 0),
-                              child: Icon(
-                                FontAwesomeIcons.photoVideo,
-                                size: 110,
-                                color: Colors.black12,
+                        GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 150,
+                                  childAspectRatio: 1,
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10),
+                          itemCount: gallery.length,
+                          itemBuilder: (BuildContext ctx, index) {
+                            return Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.amber,
+                                borderRadius:
+                                    BorderRadius.circular(15),
+                                image: DecorationImage(
+                                  image:
+                                      NetworkImage(gallery[index]),
+                                  fit: BoxFit.fill,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Text(
-                              'No Photos/Videos to show',
-                              style: GoogleFonts.lato(
-                                color: Colors.grey,
-                                fontSize: 18,
-                              ),
-                            )
-                          ],
-                        ),
+                            );
+                          }),
                         RequestDisp(),
                         ReviewDisp(),
                       ],

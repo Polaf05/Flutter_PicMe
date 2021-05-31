@@ -54,13 +54,13 @@ class DatabaseService {
   }
 
   Future fetchClientData(String id) async {
-    dynamic result = await reviewCollection.doc(id).get();
+    dynamic result = await clientCollection.doc(id).get();
     DocumentSnapshot snapshot = result;
     return _userDetails(snapshot);
   }
 
   Future fetchBookingData(String id) async {
-    dynamic result = await clientCollection.doc(id).get();
+    dynamic result = await reviewCollection.doc(id).get();
     DocumentSnapshot snapshot = result;
     return _specificbooking(snapshot);
   }
