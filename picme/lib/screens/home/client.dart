@@ -199,7 +199,7 @@ class _ClientProfileState extends State<ClientProfile> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           FlatButton(
-                            padding: EdgeInsets.fromLTRB(125, 10, 125, 10),
+                            padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0)),
                             color: Color.fromRGBO(216, 181, 58, 1.0),
@@ -221,6 +221,18 @@ class _ClientProfileState extends State<ClientProfile> {
                                   letterSpacing: 2.0,
                                 ),
                               ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Color.fromRGBO(31, 31, 31, 1.0),
+                            ),
+                            child: IconButton(
+                              icon: FaIcon(FontAwesomeIcons.powerOff),
+                              color: Color.fromRGBO(216, 181, 58, 1.0),
+                              onPressed: () {},
                             ),
                           ),
                         ],
