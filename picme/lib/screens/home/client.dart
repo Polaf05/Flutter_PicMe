@@ -118,7 +118,8 @@ class _ClientProfileState extends State<ClientProfile> {
             Container(
               width: 350,
               decoration: BoxDecoration(
-                border: Border.all(color:Color.fromRGBO(216, 181, 58, 1.0),width: 3.0)),
+                  border: Border.all(
+                      color: Color.fromRGBO(216, 181, 58, 1.0), width: 3.0)),
               child: Container(
                   padding: EdgeInsets.fromLTRB(20, 20, 15, 20),
                   child: Text(
@@ -156,7 +157,6 @@ class _ClientProfileState extends State<ClientProfile> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  
                   Row(
                     children: <Widget>[
                       Icon(Icons.call,
@@ -223,7 +223,9 @@ class _ClientProfileState extends State<ClientProfile> {
                               ),
                             ),
                           ),
-                          SizedBox(width: 10,),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
@@ -232,7 +234,9 @@ class _ClientProfileState extends State<ClientProfile> {
                             child: IconButton(
                               icon: FaIcon(FontAwesomeIcons.powerOff),
                               color: Color.fromRGBO(216, 181, 58, 1.0),
-                              onPressed: () {},
+                              onPressed: () {
+                                AuthService().signOutUser();
+                              },
                             ),
                           ),
                         ],

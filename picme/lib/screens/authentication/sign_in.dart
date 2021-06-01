@@ -176,9 +176,16 @@ class _SigninState extends State<Signin> {
                                             loading = false;
                                           });
                                         } else {
-                                          await _auth
+                                          dynamic status = await _auth
                                               .signInWithEmailAndPassword(
                                                   email, password);
+                                          if (status == null) {
+                                            setState(() {
+                                              error =
+                                                  'Email and Password did not match';
+                                              loading = false;
+                                            });
+                                          }
                                         }
                                       }
                                     },
