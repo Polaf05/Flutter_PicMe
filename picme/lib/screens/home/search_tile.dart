@@ -1,17 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:picme/models/lensman.dart';
-import 'package:picme/models/user.dart';
-import 'package:picme/screens/home/edit.dart';
 import 'package:picme/screens/home/show_details.dart';
-import 'package:picme/services/auth.dart';
-import 'package:picme/services/database.dart';
-import 'package:picme/screens/home/client.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchTile extends StatelessWidget {
-  final DocumentSnapshot lens;
+  final Lensman lens;
   SearchTile({this.lens});
 
   @override
@@ -19,11 +13,13 @@ class SearchTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.zero,
       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-      height: 160,
+      height: 180,
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ClientProfile()));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ShowDetails(
+                    lens: lens,
+                  )));
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -43,7 +39,7 @@ class SearchTile extends StatelessWidget {
                     color: Colors.black,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/11.jpg'),
+                      image: NetworkImage(lens.display),
                     ),
                   ),
                 ),
@@ -54,7 +50,7 @@ class SearchTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          lens.data()['name'],
+                          lens.name,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.poppins(
                             fontSize: 20,
@@ -70,7 +66,12 @@ class SearchTile extends StatelessWidget {
                               size: 15,
                             ),
                             SizedBox(width: 5),
-                            Text('payraclea19@gmail.com'),
+                            Expanded(
+                              child: Text(
+                                lens.email,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(height: 5),
@@ -82,7 +83,12 @@ class SearchTile extends StatelessWidget {
                               size: 15,
                             ),
                             SizedBox(width: 5),
-                            Text('Tondo Manila'),
+                            Expanded(
+                              child: Text(
+                                lens.address,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(height: 5),
@@ -94,7 +100,12 @@ class SearchTile extends StatelessWidget {
                               size: 15,
                             ),
                             SizedBox(width: 5),
-                            Text('09568076691'),
+                            Expanded(
+                              child: Text(
+                                lens.contact,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(height: 5),

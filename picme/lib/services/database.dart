@@ -97,7 +97,7 @@ class DatabaseService {
   }
 
   //Lensman list from snapshot
-  List<Lensman> _lensmanListFromSnapshot(QuerySnapshot snapshot) {
+  List<Lensman> lensmanListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Lensman(
           name: doc.data()['name'] ?? '',
@@ -206,7 +206,7 @@ class DatabaseService {
   //get client streams
 
   Stream<List<Lensman>> get lensman {
-    return employeeCollection.snapshots().map(_lensmanListFromSnapshot);
+    return employeeCollection.snapshots().map(lensmanListFromSnapshot);
   }
 
   Stream<List<Booking>> get booking {
