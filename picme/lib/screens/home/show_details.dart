@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-
 class ShowDetails extends StatefulWidget {
   final Lensman lens;
   final Client user;
@@ -18,8 +17,8 @@ class ShowDetails extends StatefulWidget {
   _ShowDetailsState createState() => _ShowDetailsState();
 }
 
-class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixin
-{
+class _ShowDetailsState extends State<ShowDetails>
+    with TickerProviderStateMixin {
   TabController _controller;
   @override
   void initState() {
@@ -206,12 +205,12 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(140, 0, 0, 350),
+                      margin: EdgeInsets.fromLTRB(180, 0, 0, 350),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           FlatButton(
-                            padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
+                            padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.0)),
                             color: Color.fromRGBO(216, 181, 58, 1.0),
@@ -232,20 +231,6 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                               ),
                             ),
                           ),
-                          FlatButton(
-                            padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0)),
-                            color: Color.fromRGBO(237, 237, 237, 1.0),
-                            onPressed: () {},
-                            child: Text(
-                              'Reject',
-                              style: TextStyle(
-                                color: Color.fromRGBO(31, 31, 31, 1.0),
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -262,7 +247,7 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                     Stack(
                       children: [
                         Positioned(
-                          top: 450,
+                          top: 500,
                           left: 0,
                           right: 0,
                           child: Container(
@@ -306,7 +291,7 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                           ),
                         ),
                         Positioned(
-                          top: 500,
+                          top: 550,
                           left: 0,
                           right: 0,
                           child: Container(
@@ -321,122 +306,165 @@ class _ShowDetailsState extends State<ShowDetails>  with TickerProviderStateMixi
                               controller: _controller,
                               children: <Widget>[
                                 GridView.builder(
-                          padding: EdgeInsets.zero,
-                          gridDelegate:
-                              SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 150,
-                                  childAspectRatio: 1,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10),
-                          itemCount: widget.lens.gallery.length,
-                          itemBuilder: (BuildContext ctx, index) {
-                            return Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.amber,
-                                borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(
-                                  image:
-                                      NetworkImage(widget.lens.gallery[index]),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            );
-                          }),
-         ListView.builder(
-           padding: EdgeInsets.zero,
-            itemCount: 5,
-            shrinkWrap:true,
-            itemBuilder:(BuildContext context, int index) => 
-            Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 0, vertical:0),
-            child: Card(
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.0),
-                ),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: Color.fromRGBO(216,181,58, 1.0),width: 1),
-                  ) ),
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                 mainAxisAlignment: MainAxisAlignment.start,
-                   children: [
-                      Container(
-                        width: 60,
-                        height: 75.5,
-                        color: Colors.transparent,
-                        child: CircleAvatar(
-                         backgroundColor: Colors.transparent,
-                          backgroundImage: AssetImage(
-                            'assets/en.jpg',
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 15.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                            'Monkey D. Luffy',
-                            style:
-                                GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 18.0),
-                      ),
-                      SizedBox(width: 5),
-                      Container(
-                        child: Text(
-                              'luffytaro@gmail.com',
-                              style:
-                                  GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 10.0,
-                                  color: Colors.black38),
-                              overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                          ],
-                        ),
-                      SizedBox(height: 7), 
-                      Container(
-                        width: 255,
-                        child: Text(
-                            'Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben',
-                            style: GoogleFonts.montserrat(fontSize: 12.0)),
-                      ),
-                      SizedBox(height: 7),
-                       Container(
-                          child: RatingBarIndicator(
-                            rating: 2.75,
-                            itemBuilder: (context, index) => Icon(
-                              Icons.star,
-                              color: Colors.amber,
+                                    padding: EdgeInsets.zero,
+                                    gridDelegate:
+                                        SliverGridDelegateWithMaxCrossAxisExtent(
+                                            maxCrossAxisExtent: 150,
+                                            childAspectRatio: 1,
+                                            crossAxisSpacing: 10,
+                                            mainAxisSpacing: 10),
+                                    itemCount: widget.lens.gallery.length,
+                                    itemBuilder: (BuildContext ctx, index) {
+                                      return Container(
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          color: Colors.amber,
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                widget.lens.gallery[index]),
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                                ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    itemCount: 5,
+                                    shrinkWrap: true,
+                                    itemBuilder: (BuildContext context,
+                                            int index) =>
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 0, vertical: 0),
+                                          child: Card(
+                                            elevation: 0,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(3.0),
+                                            ),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  border: Border(
+                                                bottom: BorderSide(
+                                                    color: Color.fromRGBO(
+                                                        216, 181, 58, 1.0),
+                                                    width: 1),
+                                              )),
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 18.0,
+                                                  vertical: 18.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        width: 60,
+                                                        height: 75.5,
+                                                        color:
+                                                            Colors.transparent,
+                                                        child: CircleAvatar(
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          backgroundImage:
+                                                              AssetImage(
+                                                            'assets/en.jpg',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(width: 15.0),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                'Monkey D. Luffy',
+                                                                style: GoogleFonts.lato(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        18.0),
+                                                              ),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Container(
+                                                                child: Text(
+                                                                  'luffytaro@gmail.com',
+                                                                  style: GoogleFonts.lato(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          10.0,
+                                                                      color: Colors
+                                                                          .black38),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(height: 7),
+                                                          Container(
+                                                            width: 255,
+                                                            child: Text(
+                                                                'Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben',
+                                                                style: GoogleFonts
+                                                                    .montserrat(
+                                                                        fontSize:
+                                                                            12.0)),
+                                                          ),
+                                                          SizedBox(height: 7),
+                                                          Container(
+                                                            child:
+                                                                RatingBarIndicator(
+                                                              rating: 2.75,
+                                                              itemBuilder:
+                                                                  (context,
+                                                                          index) =>
+                                                                      Icon(
+                                                                Icons.star,
+                                                                color: Colors
+                                                                    .amber,
+                                                              ),
+                                                              itemCount: 5,
+                                                              itemSize: 20.0,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        )),
+                              ],
                             ),
-                            itemCount: 5, 
-                            itemSize: 20.0,
                           ),
-                              ),
-                            ],
-                          )
-                          ],
-                          ),
-                      ],
-                      ),
-                    ),
-                  ),
-                  )
-            ),
-                  ],
-            ),
-        ),
                         ),
                       ],
                     ),
