@@ -50,6 +50,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         displayPicture = fetch.displayPicture;
         coverPhoto = fetch.coverPhoto;
       });
+
+      print(displayPicture);
+      print(coverPhoto);
     });
   }
 
@@ -145,31 +148,35 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           ),
                         ),
                       ),
-                    SizedBox(width: 120,),
-                    Row(
-                      children: [
-                        TextButton(
-                          child: Text("Edit Profile",
-                              style: TextStyle(fontSize: 18.0)),
-                          style: ButtonStyle(
-                              padding: MaterialStateProperty.all<EdgeInsets>(
-                                  EdgeInsets.fromLTRB(40, 15, 40, 15)),
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.black),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      side: BorderSide(
-                                          color: Color.fromRGBO(
-                                              216, 181, 58, 1.0))))),
-                          onPressed: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) => Edit()));
-                          },
-                        ),
-                      ],
-                    ),
+                      SizedBox(
+                        width: 120,
+                      ),
+                      Row(
+                        children: [
+                          TextButton(
+                            child: Text("Edit Profile",
+                                style: TextStyle(fontSize: 18.0)),
+                            style: ButtonStyle(
+                                padding: MaterialStateProperty.all<EdgeInsets>(
+                                    EdgeInsets.fromLTRB(40, 15, 40, 15)),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.black),
+                                shape:
+                                    MaterialStateProperty.all<RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0),
+                                            side: BorderSide(
+                                                color: Color.fromRGBO(
+                                                    216, 181, 58, 1.0))))),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Edit()));
+                            },
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -336,7 +343,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ]))
           ]),
         ]),
-
       ),
     );
   }

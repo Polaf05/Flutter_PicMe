@@ -12,6 +12,11 @@ class DatabaseService {
   final AuthService _auth = AuthService();
   final _storage = FirebaseStorage.instance;
 
+  //default image
+
+  String picture =
+      "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20dp%2F360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg?alt=media&token=b1ae5147-b094-4e53-b7ac-518a6f4c218c";
+
   //collection reference
   final CollectionReference lensmenCollection =
       FirebaseFirestore.instance.collection('lensmen');
@@ -39,10 +44,21 @@ class DatabaseService {
       'address': address,
       'contact': contact,
       'email': email,
-      'gallery': [],
-      'displayPicture': displayPicture,
+      'gallery': [
+        picture,
+        picture,
+        picture,
+        picture,
+        picture,
+        picture,
+        picture,
+        picture,
+        picture
+      ],
+      'displayPicture': picture,
       'role': role,
-      'coverPicture': coverPicture,
+      'coverPicture':
+          "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fdefault_cover.jpg?alt=media&token=9e6c8eb3-e5b0-4cfc-a24a-3e4619c885b3",
     });
   }
 
@@ -80,14 +96,14 @@ class DatabaseService {
 
   Lensmen _specificlensman(DocumentSnapshot snapshot) {
     return Lensmen(
-        username: snapshot.data()['username'],
-        name: snapshot.data()['name'],
-        address: snapshot.data()['address'],
-        email: snapshot.data()['email'],
-        contact: snapshot.data()['contact'],
-        displayPicture: snapshot.data()['displayPicture'],
-        gallery: snapshot.data()['gallery'],
-        coverPhoto: snapshot.data()['coverPhoto'] ?? '');
+        username: snapshot.data()['username'] ?? '',
+        name: snapshot.data()['name'] ?? '',
+        address: snapshot.data()['address'] ?? '',
+        email: snapshot.data()['email'] ?? '',
+        contact: snapshot.data()['contact'] ?? '',
+        displayPicture: snapshot.data()['displayPicture'] ?? '',
+        gallery: snapshot.data()['gallery'] ?? '',
+        coverPhoto: snapshot.data()['coverPicture'] ?? '');
   }
 
   Booking _specificbooking(DocumentSnapshot snapshot) {
@@ -204,5 +220,12 @@ class DatabaseService {
 
     String url = await snapshot.ref.getDownloadURL();
     return url;
+  }
+
+//Update GAllery
+  Future updateGallery(int loc, String id, dynamic gallery) async {
+    await lensmenCollection.doc(id).update({
+      'gallery': gallery,
+    });
   }
 }
