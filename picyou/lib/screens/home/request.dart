@@ -72,7 +72,14 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0)),
                             color: Color.fromRGBO(237, 237, 237, 1.0),
-                            onPressed: () async {},
+                            onPressed: () async {
+                              Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()),
+                                    (Route<dynamic> route) => false,
+                                  );
+                            },
                             child: Text(
                               'Proceed',
                               style: TextStyle(
@@ -240,7 +247,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
           ),
         ),
         title: Text(
-          " Edit Profile",
+          " Request",
           style: TextStyle(
             color: Colors.black,
             fontSize: 22,

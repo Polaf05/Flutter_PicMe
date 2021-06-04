@@ -15,7 +15,7 @@ class Edit extends StatefulWidget {
   _EditState createState() => _EditState();
 }
 
-class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
+class _EditState extends State<Edit> {
   final AuthService _auth = AuthService();
   final DatabaseService _db = DatabaseService();
 
@@ -77,8 +77,6 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
     } else {
       print("no path");
     }
-
-    //UploadImage
   }
 
   Widget build(BuildContext context) {
@@ -124,8 +122,8 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                                 borderRadius: BorderRadius.circular(8.0)),
                             color: Color.fromRGBO(237, 237, 237, 1.0),
                             onPressed: () {
-                              Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) => Home()));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Home()));
                             },
                             child: Text(
                               'Proceed',
@@ -250,10 +248,7 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image:
-                                    //(displayPicture != '') ?
-                                    NetworkImage(displayPicture),
-                                // : NetworkImage(def_pic),
+                                image: NetworkImage(displayPicture),
                               ),
                               border:
                                   Border.all(color: Colors.white, width: 6.0)),
@@ -265,8 +260,9 @@ class _EditState extends State<Edit> with SingleTickerProviderStateMixin {
                       left: 220,
                       child: Container(
                         decoration: BoxDecoration(
-                  color: Color.fromRGBO(216, 181, 58, 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(35))),
+                            color: Color.fromRGBO(216, 181, 58, 1.0),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(35))),
                         child: IconButton(
                           icon: Icon(Icons.add_a_photo),
                           color: Colors.white,

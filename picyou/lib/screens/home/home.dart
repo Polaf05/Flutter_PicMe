@@ -149,7 +149,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ),
                       ),
                       SizedBox(
-                        width: 120,
+                        width: 170,
                       ),
                       Row(
                         children: [
