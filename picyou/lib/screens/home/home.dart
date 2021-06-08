@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:picyou/model/lensmen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:custom_switch_button/custom_switch_button.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -20,6 +20,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final AuthService _auth = AuthService();
   final DatabaseService _db = DatabaseService();
   TabController _controller;
+  bool isChecked = false;
+
 
   String username = ' ';
   String name = ' ';
@@ -250,6 +252,35 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           color: Colors.black,
                           fontSize: 18,
                         ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isChecked = !isChecked;
+                                });
+                              },
+                                child: CustomSwitchButton(
+                                  backgroundColor: Color.fromRGBO(216, 181, 58, 1.0),
+                                  unCheckedColor: Colors.white,
+                                  animationDuration: Duration(milliseconds: 400),
+                                  checkedColor: Colors.black,
+                                  checked: isChecked,
+                                ),
+                              ),
+                          SizedBox(width: 10),
+                              Text(
+                                'Is it urgent?',
+                                style: GoogleFonts.montserrat(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                ),
                       ),
                     ],
                   ),
