@@ -27,6 +27,22 @@ class _RatingTileState extends State<RatingTile> {
 
   int ratingNumber = 0;
   String comment = "";
+  int finalRating = 0;
+  String name = '';
+  String display = '';
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      dynamic result = await _db.fetchUserData(widget.booking.lensmanId);
+      setState(() {
+        name = result.name;
+        finalRating = result.rating;
+        display = result.display;
+      });
+      print(result.rating);
+    });
+  }
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(
@@ -61,7 +77,7 @@ class _RatingTileState extends State<RatingTile> {
                           ),
                           Container(
                             child: RatingBar.builder(
-                              initialRating: 5,
+                              initialRating: 0,
                               minRating: 1,
                               direction: Axis.horizontal,
                               allowHalfRating: false,
@@ -146,6 +162,10 @@ class _RatingTileState extends State<RatingTile> {
                                       comment,
                                       ratingNumber,
                                       widget.booking.id);
+                                  await _db.updateFinalRating(
+                                      widget.booking.lensmanId,
+                                      finalRating,
+                                      ratingNumber);
                                   Navigator.pop(context);
                                 },
                                 child: Text(
@@ -215,9 +235,7 @@ class _RatingTileState extends State<RatingTile> {
                     color: Colors.transparent,
                     child: CircleAvatar(
                       backgroundColor: Colors.transparent,
-                      backgroundImage: AssetImage(
-                        'assets/en.jpg',
-                      ),
+                      backgroundImage: NetworkImage(display),
                     ),
                   ),
                   SizedBox(width: 5.0),

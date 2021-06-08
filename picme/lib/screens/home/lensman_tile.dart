@@ -54,14 +54,14 @@ class LensmanTile extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                       Text(
-                            lens.name,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.poppins(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        Text(
+                          lens.name,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
                         SizedBox(height: 7),
                         Row(
                           children: [
@@ -72,7 +72,7 @@ class LensmanTile extends StatelessWidget {
                             ),
                             SizedBox(width: 5),
                             Expanded(
-                               child: Text(
+                              child: Text(
                                 lens.email,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -106,7 +106,7 @@ class LensmanTile extends StatelessWidget {
                             ),
                             SizedBox(width: 5),
                             Expanded(
-                                child: Text(
+                              child: Text(
                                 lens.contact,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -116,7 +116,7 @@ class LensmanTile extends StatelessWidget {
                         SizedBox(height: 5),
                         Container(
                           child: RatingBarIndicator(
-                            rating: 2.75,
+                            rating: lens.rating.toDouble(),
                             itemBuilder: (context, index) => Icon(
                               Icons.star,
                               color: Colors.amber,
