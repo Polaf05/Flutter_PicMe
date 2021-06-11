@@ -24,3 +24,13 @@ class Booking {
       this.status,
       this.id});
 }
+
+class Review {
+  final String clientId;
+  final String lensmanId;
+  final String comment;
+  final int rating;
+  final String id;
+
+  Review({this.clientId, this.lensmanId, this.comment, this.rating, this.id});
+}

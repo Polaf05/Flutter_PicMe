@@ -4,8 +4,7 @@ import 'package:picme/screens/home/book.dart';
 import 'package:picme/models/lensman.dart';
 import 'package:picme/screens/home/home.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:picme/screens/home/reviews/comment_list.dart';
 
 class ShowDetails extends StatefulWidget {
   final Lensman lens;
@@ -329,139 +328,7 @@ class _ShowDetailsState extends State<ShowDetails>
                                         ),
                                       );
                                     }),
-                                ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    itemCount: 5,
-                                    shrinkWrap: true,
-                                    itemBuilder: (BuildContext context,
-                                            int index) =>
-                                        Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 0, vertical: 0),
-                                          child: Card(
-                                            elevation: 0,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(3.0),
-                                            ),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border(
-                                                bottom: BorderSide(
-                                                    color: Color.fromRGBO(
-                                                        216, 181, 58, 1.0),
-                                                    width: 1),
-                                              )),
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 18.0,
-                                                  vertical: 18.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                        width: 60,
-                                                        height: 75.5,
-                                                        color:
-                                                            Colors.transparent,
-                                                        child: CircleAvatar(
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          backgroundImage:
-                                                              AssetImage(
-                                                            'assets/en.jpg',
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(width: 15.0),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                'Monkey D. Luffy',
-                                                                style: GoogleFonts.lato(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        18.0),
-                                                              ),
-                                                              SizedBox(
-                                                                  width: 5),
-                                                              Container(
-                                                                child: Text(
-                                                                  'luffytaro@gmail.com',
-                                                                  style: GoogleFonts.lato(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          10.0,
-                                                                      color: Colors
-                                                                          .black38),
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          SizedBox(height: 7),
-                                                          Container(
-                                                            width: 255,
-                                                            child: Text(
-                                                                'Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben Bastos yan si kiben',
-                                                                style: GoogleFonts
-                                                                    .montserrat(
-                                                                        fontSize:
-                                                                            12.0)),
-                                                          ),
-                                                          SizedBox(height: 7),
-                                                          Container(
-                                                            child:
-                                                                RatingBarIndicator(
-                                                              rating: 2.75,
-                                                              itemBuilder:
-                                                                  (context,
-                                                                          index) =>
-                                                                      Icon(
-                                                                Icons.star,
-                                                                color: Colors
-                                                                    .amber,
-                                                              ),
-                                                              itemCount: 5,
-                                                              itemSize: 20.0,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        )),
+                                CommentList(uid: widget.lens.id)
                               ],
                             ),
                           ),

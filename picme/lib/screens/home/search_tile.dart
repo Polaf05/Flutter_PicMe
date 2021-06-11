@@ -111,12 +111,12 @@ class SearchTile extends StatelessWidget {
                         SizedBox(height: 5),
                         Container(
                           child: RatingBarIndicator(
-                            itemBuilder: (_, __) {
-                              return Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                              );
-                            },
+                            rating: lens.rating.toDouble(),
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            itemCount: 5,
                             itemSize: 20,
                           ),
                         ),

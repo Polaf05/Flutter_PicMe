@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -74,14 +76,17 @@ class DatabaseService {
         id: snapshot.id);
   }
 
-  Lensman _specificlensman(DocumentSnapshot snapshot) {
+  Lensman _specificlensman(DocumentSnapshot doc) {
     return Lensman(
-        name: snapshot.data()['name'] ?? '',
-        email: snapshot.data()['email'] ?? '',
-        contact: snapshot.data()['contact'] ?? '',
-        display: snapshot.data()['displayPicture'] ?? '',
-        gallery: snapshot.data()['gallery'] ?? '',
-        id: snapshot.id);
+        name: doc.data()['name'] ?? '',
+        email: doc.data()['email'] ?? '',
+        contact: doc.data()['contact'] ?? '',
+        display: doc.data()['displayPicture'] ?? '',
+        address: doc.data()['address'] ?? '',
+        username: doc.data()['username'] ?? '',
+        rating: doc.data()['ratings'] ?? 0,
+        gallery: doc.data()['gallery'] ?? '',
+        id: doc.id);
   }
 
   //Get Lensman
@@ -106,6 +111,7 @@ class DatabaseService {
           display: doc.data()['displayPicture'] ?? '',
           address: doc.data()['address'] ?? '',
           username: doc.data()['username'] ?? '',
+          rating: doc.data()['ratings'] ?? 0,
           gallery: doc.data()['gallery'] ?? '',
           id: doc.id);
     }).toList();
@@ -124,6 +130,17 @@ class DatabaseService {
           status: doc.data()['status'] ?? '',
           request: doc.data()['request'] ?? '',
           date: doc.data()['date'] ?? '',
+          id: doc.id ?? '');
+    }).toList();
+  }
+
+  List<Review> _ratingsListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Review(
+          clientId: doc.data()['client_id'] ?? '',
+          lensmanId: doc.data()['lensman_id'] ?? '',
+          comment: doc.data()['comment'] ?? '',
+          rating: doc.data()['rating'] ?? 0,
           id: doc.id ?? '');
     }).toList();
   }
@@ -156,6 +173,20 @@ class DatabaseService {
       'address': address,
       'contact': contact,
       'bio': bio,
+    });
+  }
+
+  Future updateFinalRating(
+      String id, int finalRating, int currentRating) async {
+    double ratings;
+    if (finalRating == 0) {
+      ratings = currentRating.toDouble();
+    } else {
+      ratings = ((finalRating + currentRating) / 2);
+    }
+    print('$finalRating $currentRating $ratings');
+    employeeCollection.doc(id).update({
+      'ratings': ratings.toInt(),
     });
   }
 
@@ -194,13 +225,20 @@ class DatabaseService {
     await ratingCollection.doc(id).set({
       'lensman_id': lensmanId,
       'client_id': clientId,
-      'request': comment,
+      'comment': comment,
       'rating': rate,
     });
 
     await bookingCollection.doc(id).update({
       'status': 'Done',
     });
+  }
+  //get user reviews
+
+  Future reviews(String id) async {
+    dynamic result =
+        await ratingCollection.where('lensman_id', isEqualTo: id).get();
+    return _ratingsListFromSnapshot(result);
   }
 
   //get client streams
@@ -216,6 +254,13 @@ class DatabaseService {
         .where('client_id', isEqualTo: uid.uid)
         .snapshots()
         .map(_bookingListFromSnapshot);
+  }
+
+  Stream<List<Lensman>> get urgent {
+    return employeeCollection
+        .where('urgent', isEqualTo: true)
+        .snapshots()
+        .map(lensmanListFromSnapshot);
   }
 
   //Upload Image
