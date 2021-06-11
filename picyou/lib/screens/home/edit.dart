@@ -32,10 +32,7 @@ class _EditState extends State<Edit> {
   String cadd = ' ';
   String ccon = ' ';
   String cemail = ' ';
-  String def_pic =
-      "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20dp%2F360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg?alt=media&token=b1ae5147-b094-4e53-b7ac-518a6f4c218c";
-  String def_cover =
-      "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fpb.png?alt=media&token=62a61f29-5f5e-4ee8-bcd9-5c08dbd9091b";
+  bool urgent = false;
   @override
   void initState() {
     super.initState();
@@ -56,6 +53,7 @@ class _EditState extends State<Edit> {
         ccon = fetch.contact;
         cemail = fetch.email;
         coverPicture = fetch.coverPicture;
+        urgent = fetch.urgent;
       });
     });
   }
@@ -191,9 +189,7 @@ class _EditState extends State<Edit> {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: (coverPicture != '')
-                        ? NetworkImage(coverPicture)
-                        : NetworkImage(def_cover),
+                    image: NetworkImage(coverPicture),
                   )),
                 ),
               )
@@ -437,7 +433,8 @@ class _EditState extends State<Edit> {
                                             contact,
                                             email,
                                             gallery,
-                                            displayPicture);
+                                            displayPicture,
+                                            urgent);
                                         _showMyDialog();
                                       },
                                       child: Text(

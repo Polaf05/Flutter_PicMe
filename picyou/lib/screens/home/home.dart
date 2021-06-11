@@ -22,7 +22,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _controller;
   bool isChecked = false;
 
-
   String username = ' ';
   String name = ' ';
   String address = ' ';
@@ -31,10 +30,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   dynamic gallery = ' ';
   String displayPicture = ' ';
   String coverPhoto = ' ';
-  String def_pic =
-      "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20dp%2F360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg?alt=media&token=b1ae5147-b094-4e53-b7ac-518a6f4c218c";
-  String def_cover =
-      "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fdefault_cover.jpg?alt=media&token=9e6c8eb3-e5b0-4cfc-a24a-3e4619c885b3";
+  bool urgent = false;
   @override
   void initState() {
     _controller = TabController(initialIndex: 0, length: 3, vsync: this);
@@ -51,6 +47,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         gallery = fetch.gallery;
         displayPicture = fetch.displayPicture;
         coverPhoto = fetch.coverPhoto;
+        urgent = fetch.urgent;
       });
 
       print(displayPicture);
@@ -261,26 +258,33 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   Row(
                     children: <Widget>[
                       GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isChecked = !isChecked;
-                                });
-                              },
-                                child: CustomSwitchButton(
-                                  backgroundColor: Color.fromRGBO(216, 181, 58, 1.0),
-                                  unCheckedColor: Colors.white,
-                                  animationDuration: Duration(milliseconds: 400),
-                                  checkedColor: Colors.black,
-                                  checked: isChecked,
-                                ),
-                              ),
-                          SizedBox(width: 10),
-                              Text(
-                                'Is it urgent?',
-                                style: GoogleFonts.montserrat(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                ),
+                        onTap: () async {
+                          setState(() {
+                            isChecked = !isChecked;
+                            if (urgent == true) {
+                              urgent = false;
+                            } else {
+                              urgent = true;
+                            }
+                          });
+                          await _db.updateData(username, name, address, contact,
+                              email, gallery, displayPicture, urgent);
+                        },
+                        child: CustomSwitchButton(
+                          backgroundColor: Color.fromRGBO(216, 181, 58, 1.0),
+                          unCheckedColor: Colors.white,
+                          animationDuration: Duration(milliseconds: 400),
+                          checkedColor: Colors.black,
+                          checked: isChecked,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        'Is it urgent?',
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
                       ),
                     ],
                   ),

@@ -197,6 +197,7 @@ class DatabaseService {
     String email,
     dynamic gallery,
     String displayPicture,
+    bool urgent,
   ) async {
     dynamic id = _auth.getCurrentUser();
     return await lensmenCollection.doc(id.uid).set({
@@ -207,6 +208,7 @@ class DatabaseService {
       'email': email,
       'gallery': gallery,
       'displayPicture': displayPicture,
+      'urgent': urgent,
     });
   }
 
