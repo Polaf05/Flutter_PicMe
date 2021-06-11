@@ -13,7 +13,7 @@ class _ReviewDispState extends State<ReviewDisp> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Reviews>>.value(
-      value: DatabaseService().review,
+      value: DatabaseService().reviewing,
       initialData: List(),
       child: Scaffold(
         body: Container(

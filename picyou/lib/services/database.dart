@@ -37,6 +37,7 @@ class DatabaseService {
     String displayPicture,
     String role,
     String coverPicture,
+    bool urgent,
   ) async {
     return await lensmenCollection.doc(uid).set({
       'username': username,
@@ -59,6 +60,7 @@ class DatabaseService {
       'role': role,
       'coverPicture':
           "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fdefault_cover.jpg?alt=media&token=9e6c8eb3-e5b0-4cfc-a24a-3e4619c885b3",
+      'urgent': false,
     });
   }
 
@@ -76,7 +78,7 @@ class DatabaseService {
   }
 
   Future fetchBookingData(String id) async {
-    dynamic result = await reviewCollection.doc(id).get();
+    dynamic result = await bookingCollection.doc(id).get();
     DocumentSnapshot snapshot = result;
     return _specificbooking(snapshot);
   }
@@ -103,7 +105,8 @@ class DatabaseService {
         contact: snapshot.data()['contact'] ?? '',
         displayPicture: snapshot.data()['displayPicture'] ?? '',
         gallery: snapshot.data()['gallery'] ?? '',
-        coverPhoto: snapshot.data()['coverPicture'] ?? '');
+        coverPhoto: snapshot.data()['coverPicture'] ?? '',
+        urgent: snapshot.data()['urgent'] ?? '');
   }
 
   Booking _specificbooking(DocumentSnapshot snapshot) {
@@ -132,6 +135,7 @@ class DatabaseService {
         displayPicture: doc.data()['displayPicture'] ?? '',
         gallery: doc.data()['gallery'] ?? '',
         role: doc.data()['role'] ?? '',
+        urgent: doc.data()['urgent'] ?? '',
       );
     }).toList();
   }
@@ -156,9 +160,9 @@ class DatabaseService {
   List<Reviews> _reviewListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Reviews(
-          clientId: doc.data()['client_id'],
-          lensmanId: doc.data()['lensman_id'],
-          rating: doc.data()['rating'],
+          clientId: doc.data()['client_id'] ?? '',
+          lensmanId: doc.data()['lensman_id'] ?? '',
+          rating: doc.data()['rating'] ?? '',
           review: doc.data()['review'] ?? '');
     }).toList();
   }
@@ -176,7 +180,7 @@ class DatabaseService {
         .map(_bookingListFromSnapshot);
   }
 
-  Stream<List<Reviews>> get review {
+  Stream<List<Reviews>> get reviewing {
     dynamic uid = AuthService().getCurrentUser();
     return reviewCollection
         .where('lensman_id', isEqualTo: uid.uid)

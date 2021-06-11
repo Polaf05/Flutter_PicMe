@@ -8,6 +8,7 @@ class Lensmen {
   final String displayPicture;
   final String role;
   final String coverPhoto;
+  final bool urgent;
 
   Lensmen(
       {this.username,
@@ -18,5 +19,6 @@ class Lensmen {
       this.email,
       this.gallery,
       this.role,
-      this.coverPhoto});
+      this.coverPhoto,
+      this.urgent});
 }

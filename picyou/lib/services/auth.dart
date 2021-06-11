@@ -56,15 +56,25 @@ class AuthService {
       List<String> gallery,
       String displayPicture,
       String role,
-      String coverPicture) async {
+      String coverPicture,
+      bool urgent) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
 
       //create new document
-      await DatabaseService(uid: user.uid).updateUserData(username, name,
-          address, contact, email, gallery, displayPicture, role, coverPicture);
+      await DatabaseService(uid: user.uid).updateUserData(
+          username,
+          name,
+          address,
+          contact,
+          email,
+          gallery,
+          displayPicture,
+          role,
+          coverPicture,
+          urgent);
 
       return _userFromFirebaseUser(user);
     } catch (e) {

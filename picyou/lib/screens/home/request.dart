@@ -5,6 +5,8 @@ import 'home.dart';
 import 'package:picyou/services/database.dart';
 import 'package:picyou/model/booking.dart';
 import 'package:intl/intl.dart';
+import 'package:picyou/services/email.dart';
+import 'package:picyou/services/auth.dart';
 
 class Request extends StatefulWidget {
   final Booking booking;
@@ -18,15 +20,29 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
   String contact = ' ';
   String dp = ' ';
   String cover = ' ';
+  String feedback = ' ';
+  String clientEmail = ' ';
+  String clientName = ' ';
+  String lensmanEmail = ' ';
+  String lensmanName = ' ';
   final DatabaseService _db = DatabaseService();
+  final AuthService _auth = AuthService();
+  final MailerService _mail = MailerService();
+
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       dynamic fetch = await _db.fetchClientData(widget.booking.clientId);
+      dynamic id = await _auth.getCurrentUser();
+      dynamic fetchlensman = await _db.fetchUserData(id.uid);
       setState(() {
         contact = fetch.contact;
         dp = fetch.display;
         cover = fetch.cover;
+        clientEmail = fetch.email;
+        clientName = fetch.name;
+        lensmanEmail = fetchlensman.email;
+        lensmanName = fetchlensman.name;
       });
     });
   }
@@ -74,11 +90,10 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                             color: Color.fromRGBO(237, 237, 237, 1.0),
                             onPressed: () async {
                               Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Home()),
-                                    (Route<dynamic> route) => false,
-                                  );
+                                context,
+                                MaterialPageRoute(builder: (context) => Home()),
+                                (Route<dynamic> route) => false,
+                              );
                             },
                             child: Text(
                               'Proceed',
@@ -154,6 +169,9 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                 hintText: 'Enter comment',
                                 labelText: 'Review',
                               ),
+                              onChanged: (val) {
+                                setState(() => feedback = val);
+                              },
                             ),
                           ),
                           Row(
@@ -166,6 +184,14 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                     borderRadius: BorderRadius.circular(8.0)),
                                 color: Color.fromRGBO(237, 237, 237, 1.0),
                                 onPressed: () async {
+                                  await _mail.sendEmailReject(
+                                    clientEmail,
+                                    clientName,
+                                    lensmanEmail,
+                                    lensmanName,
+                                    contact,
+                                    feedback,
+                                  );
                                   Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
@@ -525,7 +551,15 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                         borderRadius:
                                             BorderRadius.circular(8.0)),
                                     color: Color.fromRGBO(31, 31, 31, 1.0),
-                                    onPressed: () {
+                                    onPressed: () async {
+                                      await _mail.sendEmailAccept(
+                                        clientEmail,
+                                        clientName,
+                                        lensmanEmail,
+                                        lensmanName,
+                                        contact,
+                                        feedback,
+                                      );
                                       _showMyDialog();
                                     },
                                     child: Text(

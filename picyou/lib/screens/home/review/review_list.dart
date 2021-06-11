@@ -12,6 +12,7 @@ class _ReviewListState extends State<ReviewList> {
   @override
   Widget build(BuildContext context) {
     final review = Provider.of<List<Reviews>>(context);
+    print(review.length);
     return ListView.builder(
       itemCount: review.length,
       itemBuilder: (context, index) {
