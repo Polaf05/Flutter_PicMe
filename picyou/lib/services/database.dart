@@ -133,6 +133,7 @@ class DatabaseService {
         email: doc.data()['email'] ?? '',
         contact: doc.data()['contact'] ?? '',
         displayPicture: doc.data()['displayPicture'] ?? '',
+        coverPhoto: doc.data()['coverPicture'] ?? '',
         gallery: doc.data()['gallery'] ?? '',
         role: doc.data()['role'] ?? '',
         urgent: doc.data()['urgent'] ?? '',
@@ -197,6 +198,7 @@ class DatabaseService {
     String email,
     dynamic gallery,
     String displayPicture,
+    String coverPhoto,
     bool urgent,
   ) async {
     dynamic id = _auth.getCurrentUser();
@@ -208,6 +210,7 @@ class DatabaseService {
       'email': email,
       'gallery': gallery,
       'displayPicture': displayPicture,
+      'coverPhoto': coverPhoto,
       'urgent': urgent,
     });
   }

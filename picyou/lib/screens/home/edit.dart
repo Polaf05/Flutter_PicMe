@@ -47,6 +47,7 @@ class _EditState extends State<Edit> {
         email = fetch.email;
         gallery = fetch.gallery;
         displayPicture = fetch.displayPicture;
+        coverPicture = fetch.coverPhoto;
         cuser = fetch.username;
         cname = fetch.name;
         cadd = fetch.address;
@@ -58,7 +59,7 @@ class _EditState extends State<Edit> {
     });
   }
 
-  uploadImage() async {
+  uploadImage(int loc) async {
     final _picker = ImagePicker();
     PickedFile image;
 
@@ -69,9 +70,15 @@ class _EditState extends State<Edit> {
     if (image != null) {
       //upload firebase
       String path = await _db.uploadImageToFirebase(email, file);
-      setState(() {
-        displayPicture = path;
-      });
+      if (loc == 1) {
+        setState(() {
+          coverPicture = path;
+        });
+      } else {
+        setState(() {
+          displayPicture = path;
+        });
+      }
     } else {
       print("no path");
     }
@@ -201,9 +208,12 @@ class _EditState extends State<Edit> {
             child: Container(
               height: 40,
               width: 40,
-              child: Icon(
-                Icons.add_a_photo,
+              child: IconButton(
+                icon: Icon(Icons.add_a_photo),
                 color: Colors.white,
+                onPressed: () async {
+                  uploadImage(1);
+                },
               ),
               decoration: BoxDecoration(
                   color: Color.fromRGBO(216, 181, 58, 1.0),
@@ -263,7 +273,7 @@ class _EditState extends State<Edit> {
                           icon: Icon(Icons.add_a_photo),
                           color: Colors.white,
                           onPressed: () async {
-                            uploadImage();
+                            uploadImage(2);
                           },
                         ),
                       ),
@@ -434,6 +444,7 @@ class _EditState extends State<Edit> {
                                             email,
                                             gallery,
                                             displayPicture,
+                                            coverPicture,
                                             urgent);
                                         _showMyDialog();
                                       },

@@ -49,9 +49,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         coverPhoto = fetch.coverPhoto;
         urgent = fetch.urgent;
       });
-
-      print(displayPicture);
-      print(coverPhoto);
     });
   }
 
@@ -267,8 +264,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               urgent = true;
                             }
                           });
-                          await _db.updateData(username, name, address, contact,
-                              email, gallery, displayPicture, urgent);
+                          await _db.updateData(
+                              username,
+                              name,
+                              address,
+                              contact,
+                              email,
+                              gallery,
+                              displayPicture,
+                              coverPhoto,
+                              urgent);
                         },
                         child: CustomSwitchButton(
                           backgroundColor: Color.fromRGBO(216, 181, 58, 1.0),
