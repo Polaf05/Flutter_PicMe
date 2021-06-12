@@ -53,9 +53,10 @@ class _EditState extends State<Edit> {
         cadd = fetch.address;
         ccon = fetch.contact;
         cemail = fetch.email;
-        coverPicture = fetch.coverPicture;
+        coverPicture = fetch.coverPhoto;
         urgent = fetch.urgent;
       });
+      print(name);
     });
   }
 
@@ -127,8 +128,11 @@ class _EditState extends State<Edit> {
                                 borderRadius: BorderRadius.circular(8.0)),
                             color: Color.fromRGBO(237, 237, 237, 1.0),
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Home()));
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => Home()),
+                                (Route<dynamic> route) => false,
+                              );
                             },
                             child: Text(
                               'Proceed',
@@ -167,8 +171,11 @@ class _EditState extends State<Edit> {
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Home()));
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => Home()),
+              (Route<dynamic> route) => false,
+            );
           },
           child: Icon(
             Icons.keyboard_arrow_left,
@@ -415,9 +422,12 @@ class _EditState extends State<Edit> {
                                               BorderRadius.circular(8.0)),
                                       color: Color.fromRGBO(237, 237, 237, 1.0),
                                       onPressed: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) => Home()));
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Home()),
+                                          (Route<dynamic> route) => false,
+                                        );
                                       },
                                       child: Text(
                                         'Cancel',

@@ -183,21 +183,8 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0)),
                                 color: Color.fromRGBO(237, 237, 237, 1.0),
-                                onPressed: () async {
-                                  await _mail.sendEmailReject(
-                                    clientEmail,
-                                    clientName,
-                                    lensmanEmail,
-                                    lensmanName,
-                                    contact,
-                                    feedback,
-                                  );
-                                  Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Home()),
-                                    (Route<dynamic> route) => false,
-                                  );
+                                onPressed: () {
+                                  Navigator.pop(context);
                                 },
                                 child: Text(
                                   'Cancel',
@@ -212,7 +199,17 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0)),
                                 color: Color.fromRGBO(31, 31, 31, 1.0),
-                                onPressed: () {
+                                onPressed: () async {
+                                  await _mail.sendEmailReject(
+                                    clientEmail,
+                                    clientName,
+                                    lensmanEmail,
+                                    lensmanName,
+                                    contact,
+                                    feedback,
+                                  );
+                                  await _db.updateStatus(
+                                      widget.booking.id, "Rejected");
                                   Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
@@ -521,55 +518,186 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  FlatButton(
-                                    padding:
-                                        EdgeInsets.fromLTRB(30, 10, 30, 10),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0)),
-                                    color: Color.fromRGBO(237, 237, 237, 1.0),
-                                    onPressed: () {
-                                      _rejectDialog();
-                                    },
-                                    child: Text(
-                                      'Reject',
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(31, 31, 31, 1.0),
-                                        fontSize: 20,
-                                      ),
+                              Column(
+                                children: [
+                                  if (widget.booking.status == "Pending") ...[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        FlatButton(
+                                          padding: EdgeInsets.fromLTRB(
+                                              30, 10, 30, 10),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0)),
+                                          color: Color.fromRGBO(
+                                              237, 237, 237, 1.0),
+                                          onPressed: () {
+                                            _rejectDialog();
+                                          },
+                                          child: Text(
+                                            'Reject',
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  31, 31, 31, 1.0),
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                        FlatButton(
+                                          padding: EdgeInsets.fromLTRB(
+                                              35, 10, 35, 10),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0)),
+                                          color:
+                                              Color.fromRGBO(31, 31, 31, 1.0),
+                                          onPressed: () async {
+                                            await _mail.sendEmailAccept(
+                                              clientEmail,
+                                              clientName,
+                                              lensmanEmail,
+                                              lensmanName,
+                                              contact,
+                                              feedback,
+                                            );
+                                            print(widget.booking.id);
+                                            await _db.updateStatus(
+                                                widget.booking.id, "Accepted");
+
+                                            _showMyDialog();
+                                          },
+                                          child: Text(
+                                            'Accept',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  FlatButton(
-                                    padding:
-                                        EdgeInsets.fromLTRB(35, 10, 35, 10),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0)),
-                                    color: Color.fromRGBO(31, 31, 31, 1.0),
-                                    onPressed: () async {
-                                      await _mail.sendEmailAccept(
-                                        clientEmail,
-                                        clientName,
-                                        lensmanEmail,
-                                        lensmanName,
-                                        contact,
-                                        feedback,
-                                      );
-                                      _showMyDialog();
-                                    },
-                                    child: Text(
-                                      'Accept',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      ),
+                                  ] else if (widget.booking.status ==
+                                      "Done") ...[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        FlatButton(
+                                          padding: EdgeInsets.fromLTRB(
+                                              35, 10, 35, 10),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0)),
+                                          color:
+                                              Color.fromRGBO(31, 31, 31, 1.0),
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Done',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
+                                  ] else if (widget.booking.status ==
+                                      "Rejected") ...[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        FlatButton(
+                                          padding: EdgeInsets.fromLTRB(
+                                              35, 10, 35, 10),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0)),
+                                          color:
+                                              Color.fromRGBO(31, 31, 31, 1.0),
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Rejected',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ] else if (widget.booking.status ==
+                                      "For Review") ...[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        FlatButton(
+                                          padding: EdgeInsets.fromLTRB(
+                                              35, 10, 35, 10),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0)),
+                                          color:
+                                              Color.fromRGBO(31, 31, 31, 1.0),
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Waiting For Review...',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ] else ...[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        FlatButton(
+                                          padding: EdgeInsets.fromLTRB(
+                                              35, 10, 35, 10),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0)),
+                                          color:
+                                              Color.fromRGBO(31, 31, 31, 1.0),
+                                          onPressed: () async {
+                                            await _db.updateStatus(
+                                                widget.booking.id,
+                                                "For Review");
+                                            Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => Home()),
+                                              (Route<dynamic> route) => false,
+                                            );
+                                          },
+                                          child: Text(
+                                            'Open Review',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ]
                                 ],
                               ),
                             ],

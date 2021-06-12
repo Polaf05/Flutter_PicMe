@@ -9,8 +9,7 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<UserCreds>(context);
 
-   
-    //return either home or authenticate
+    //listener
     if (user == null) {
       return Authenticate();
     } else {

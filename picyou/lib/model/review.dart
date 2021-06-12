@@ -1,7 +1,7 @@
 class Reviews {
   final String clientId;
   final String lensmanId;
-  final double rating;
+  final int rating;
   final String review;
   Reviews({
     this.clientId,

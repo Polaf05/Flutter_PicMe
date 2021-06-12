@@ -17,7 +17,7 @@ class _ReviewTileState extends State<ReviewTile> {
   String picture = ' ';
   String name = ' ';
   String email = ' ';
-  double rating;
+  int rating;
   final DatabaseService _db = DatabaseService();
   void initState() {
     super.initState();
@@ -100,7 +100,7 @@ class _ReviewTileState extends State<ReviewTile> {
                       SizedBox(height: 7),
                       Container(
                         child: RatingBarIndicator(
-                          rating: widget.reviews.rating,
+                          rating: widget.reviews.rating.toDouble(),
                           itemBuilder: (context, index) => Icon(
                             Icons.star,
                             color: Colors.amber,

@@ -1,4 +1,5 @@
 import "package:cloud_firestore/cloud_firestore.dart";
+import 'package:nanoid/async.dart';
 import 'package:picyou/model/lensmen.dart';
 import 'package:picyou/model/booking.dart';
 import 'package:picyou/model/user.dart';
@@ -24,7 +25,7 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('Booking');
   final CollectionReference clientCollection =
       FirebaseFirestore.instance.collection('Clients');
-  final CollectionReference reviewCollection =
+  final CollectionReference ratingCollection =
       FirebaseFirestore.instance.collection('Ratings');
 
   Future updateUserData(
@@ -58,7 +59,7 @@ class DatabaseService {
       ],
       'displayPicture': picture,
       'role': role,
-      'coverPicture':
+      'coverPhoto':
           "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fdefault_cover.jpg?alt=media&token=9e6c8eb3-e5b0-4cfc-a24a-3e4619c885b3",
       'urgent': false,
     });
@@ -105,7 +106,7 @@ class DatabaseService {
         contact: snapshot.data()['contact'] ?? '',
         displayPicture: snapshot.data()['displayPicture'] ?? '',
         gallery: snapshot.data()['gallery'] ?? '',
-        coverPhoto: snapshot.data()['coverPicture'] ?? '',
+        coverPhoto: snapshot.data()['coverPhoto'] ?? '',
         urgent: snapshot.data()['urgent'] ?? '');
   }
 
@@ -133,7 +134,7 @@ class DatabaseService {
         email: doc.data()['email'] ?? '',
         contact: doc.data()['contact'] ?? '',
         displayPicture: doc.data()['displayPicture'] ?? '',
-        coverPhoto: doc.data()['coverPicture'] ?? '',
+        coverPhoto: doc.data()['coverPhoto'] ?? '',
         gallery: doc.data()['gallery'] ?? '',
         role: doc.data()['role'] ?? '',
         urgent: doc.data()['urgent'] ?? '',
@@ -158,13 +159,14 @@ class DatabaseService {
     }).toList();
   }
 
-  List<Reviews> _reviewListFromSnapshot(QuerySnapshot snapshot) {
+  List<Reviews> _ratingListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Reviews(
-          clientId: doc.data()['client_id'] ?? '',
-          lensmanId: doc.data()['lensman_id'] ?? '',
-          rating: doc.data()['rating'] ?? '',
-          review: doc.data()['review'] ?? '');
+        clientId: doc.data()["client_id"] ?? '',
+        lensmanId: doc.data()["lensman_id"] ?? '',
+        rating: doc.data()["rating"] ?? '',
+        review: doc.data()["comment"] ?? '',
+      );
     }).toList();
   }
 
@@ -181,12 +183,12 @@ class DatabaseService {
         .map(_bookingListFromSnapshot);
   }
 
-  Stream<List<Reviews>> get reviewing {
+  Stream<List<Reviews>> get review {
     dynamic uid = AuthService().getCurrentUser();
-    return reviewCollection
+    return ratingCollection
         .where('lensman_id', isEqualTo: uid.uid)
         .snapshots()
-        .map(_reviewListFromSnapshot);
+        .map(_ratingListFromSnapshot);
   }
 
   // update profile
@@ -217,15 +219,10 @@ class DatabaseService {
 
   //upload image
   Future uploadImageToFirebase(String email, dynamic file) async {
-    dynamic id = _auth.getCurrentUser();
+    String id = await nanoid();
 
-    print("working");
-    dynamic snapshot = await _storage
-        .ref()
-        .child('Lensman/' + email + '/' + 'dp')
-        .putFile(file);
-
-    print("work");
+    dynamic snapshot =
+        await _storage.ref().child('Lensman/$email/' + id).putFile(file);
 
     String url = await snapshot.ref.getDownloadURL();
     return url;
@@ -236,5 +233,10 @@ class DatabaseService {
     await lensmenCollection.doc(id).update({
       'gallery': gallery,
     });
+  }
+
+//Update booking Status
+  Future updateStatus(String id, String status) async {
+    await bookingCollection.doc(id).update({'status': status});
   }
 }

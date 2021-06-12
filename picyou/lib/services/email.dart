@@ -17,7 +17,7 @@ class MailerService {
     final message = Message()
       ..from = Address(username, 'PICME')
       ..recipients.add(clientEmail)
-      ..subject = 'Request Reciept'
+      ..subject = 'Request Rejected'
       ..html =
           "<h3>Lensman</h3><p>Name:<b>$lensmanName</b>\nEmail:<b>$lensmanEmail</b>\nFeedback:<b>$feedback</b>\n<h3>Contact Number: </h3>\n<p>$contact</p> \n<h3>Booked by:</h3>\nName:<b>$clientName</b>\nEmail:<b>$clientEmail</b></p>";
 

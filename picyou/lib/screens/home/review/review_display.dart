@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:picyou/model/booking.dart';
+import 'package:picyou/screens/home/request/request_list.dart';
 import 'package:provider/provider.dart';
 import 'package:picyou/services/database.dart';
 import 'package:picyou/screens/home/review/review_list.dart';
@@ -13,7 +15,7 @@ class _ReviewDispState extends State<ReviewDisp> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Reviews>>.value(
-      value: DatabaseService().reviewing,
+      value: DatabaseService().review,
       initialData: List(),
       child: Scaffold(
         body: Container(

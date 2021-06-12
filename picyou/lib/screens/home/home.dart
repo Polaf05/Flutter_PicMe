@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:picyou/screens/authenticate/sign_in.dart';
+import 'package:picyou/screens/authenticate/sign_up.dart';
 import 'package:picyou/screens/home/gallery/galdisp.dart';
 import 'package:picyou/screens/home/request/request_display.dart';
 import 'package:picyou/screens/home/review/review_display.dart';
@@ -49,6 +51,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         coverPhoto = fetch.coverPhoto;
         urgent = fetch.urgent;
       });
+
+      print(coverPhoto);
     });
   }
 
@@ -73,8 +77,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   color: Colors.black,
                 ),
               ),
-              onPressed: () async {
-                await _auth.signOut();
+              onPressed: () {
+                AuthService().signOut();
               },
             )
           ],
