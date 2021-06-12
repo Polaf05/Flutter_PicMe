@@ -8,6 +8,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserCreds>(context);
+    print(user);
 
     //listener
     if (user == null) {

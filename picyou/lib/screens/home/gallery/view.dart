@@ -4,6 +4,7 @@ import 'package:focused_menu/modals.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:picyou/screens/home/home.dart';
+import 'package:picyou/screens/wrapper.dart';
 
 class ViewPic extends StatelessWidget {
   final String picture;
@@ -31,7 +32,7 @@ class ViewPic extends StatelessWidget {
                 onTap: () {
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => Home()),
+                    MaterialPageRoute(builder: (context) => Wrapper()),
                     (Route<dynamic> route) => false,
                   );
                 },

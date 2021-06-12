@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:picme/services/database.dart';
 import 'package:flutter/services.dart';
+import 'package:picme/screens/wrapper.dart';
 
 class Edit extends StatefulWidget {
   final dynamic user;
@@ -122,7 +123,7 @@ class _EditState extends State<Edit> {
 
                               Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(builder: (context) => Home()),
+                                MaterialPageRoute(builder: (context) => Wrapper()),
                                 (Route<dynamic> route) => false,
                               );
                             },
@@ -168,7 +169,7 @@ class _EditState extends State<Edit> {
         leading: GestureDetector(
           onTap: () {
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Home()));
+                .push(MaterialPageRoute(builder: (context) => Wrapper()));
           },
           child: Icon(
             Icons.keyboard_arrow_left,

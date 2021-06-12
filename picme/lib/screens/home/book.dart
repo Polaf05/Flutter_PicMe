@@ -8,6 +8,7 @@ import 'package:picme/services/auth.dart';
 import 'package:picme/services/database.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:picme/services/email.dart';
+import 'package:picme/screens/wrapper.dart';
 import 'package:picme/screens/home/show_details.dart';
 
 class Book extends StatefulWidget {
@@ -102,7 +103,8 @@ class _BookState extends State<Book> {
                           onPressed: () {
                             Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(builder: (context) => Home()),
+                              MaterialPageRoute(
+                                  builder: (context) => Wrapper()),
                               (Route<dynamic> route) => false,
                             );
                           },
@@ -376,7 +378,7 @@ class _BookState extends State<Book> {
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => Home()),
+                                              builder: (context) => Wrapper()),
                                           (Route<dynamic> route) => false,
                                         );
                                       },

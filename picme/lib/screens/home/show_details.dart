@@ -5,6 +5,7 @@ import 'package:picme/models/lensman.dart';
 import 'package:picme/screens/home/home.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:picme/screens/home/reviews/comment_list.dart';
+import 'package:picme/screens/wrapper.dart';
 
 class ShowDetails extends StatefulWidget {
   final Lensman lens;
@@ -34,7 +35,7 @@ class _ShowDetailsState extends State<ShowDetails>
         leading: GestureDetector(
           onTap: () {
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Home()));
+                .push(MaterialPageRoute(builder: (context) => Wrapper()));
           },
           child: Icon(
             Icons.keyboard_arrow_left,

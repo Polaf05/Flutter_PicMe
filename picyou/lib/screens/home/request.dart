@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'home.dart';
+import 'package:picyou/screens/wrapper.dart';
 import 'package:picyou/services/database.dart';
 import 'package:picyou/model/booking.dart';
 import 'package:intl/intl.dart';
@@ -91,7 +91,8 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                             onPressed: () async {
                               Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(builder: (context) => Home()),
+                                MaterialPageRoute(
+                                    builder: (context) => Wrapper()),
                                 (Route<dynamic> route) => false,
                               );
                             },
@@ -213,7 +214,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                   Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Home()),
+                                        builder: (context) => Wrapper()),
                                     (Route<dynamic> route) => false,
                                   );
                                 },
@@ -683,7 +684,8 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                             Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) => Home()),
+                                                  builder: (context) =>
+                                                      Wrapper()),
                                               (Route<dynamic> route) => false,
                                             );
                                           },

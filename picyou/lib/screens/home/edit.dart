@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:picyou/services/auth.dart';
-import 'package:picyou/screens/home/home.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:picyou/services/database.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
+import 'package:picyou/screens/wrapper.dart';
 
 class Edit extends StatefulWidget {
   // final dynamic user;
@@ -130,7 +130,7 @@ class _EditState extends State<Edit> {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(builder: (context) => Home()),
+                                MaterialPageRoute(builder: (context) => Wrapper()),
                                 (Route<dynamic> route) => false,
                               );
                             },
@@ -173,7 +173,7 @@ class _EditState extends State<Edit> {
           onTap: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => Home()),
+              MaterialPageRoute(builder: (context) => Wrapper()),
               (Route<dynamic> route) => false,
             );
           },
@@ -425,7 +425,7 @@ class _EditState extends State<Edit> {
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => Home()),
+                                              builder: (context) => Wrapper()),
                                           (Route<dynamic> route) => false,
                                         );
                                       },
