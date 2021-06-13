@@ -8,6 +8,7 @@ import 'package:picme/screens/home/edit.dart';
 import 'package:picme/services/auth.dart';
 import 'package:picme/services/database.dart';
 import 'package:picme/screens/home/lensman_tile.dart';
+import 'package:picme/services/email.dart';
 import 'home.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class RatingTile extends StatefulWidget {
 
 class _RatingTileState extends State<RatingTile> {
   DatabaseService _db = DatabaseService();
+  MailerService _mail = MailerService();
 
   int ratingNumber = 0;
   String comment = "";
@@ -166,6 +168,16 @@ class _RatingTileState extends State<RatingTile> {
                                       widget.booking.lensmanId,
                                       finalRating,
                                       ratingNumber);
+
+                                  await _mail.sendReview(
+                                      widget.booking.clientEmail,
+                                      widget.booking.clientName,
+                                      widget.booking.lensmanEmail,
+                                      widget.booking.lensmanName,
+                                      widget.booking.id,
+                                      widget.booking.request,
+                                      widget.booking.date);
+
                                   Navigator.pop(context);
                                 },
                                 child: Text(
@@ -204,6 +216,7 @@ class _RatingTileState extends State<RatingTile> {
   @override
   Widget build(BuildContext context) {
     Color getColor(String status) {
+      if (status == 'Rejected') return Colors.red;
       if (status == 'Pending') return Colors.red;
       if (status == 'Accepted') return Colors.green;
       if (status == 'For Review') return Colors.red;
