@@ -26,7 +26,7 @@ class _CommentTileState extends State<CommentTile> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      dynamic fetch = await _db.fetchUserData(widget.reviews.lensmanId);
+      dynamic fetch = await _db.fetchClientData(widget.reviews.clientId);
       setState(() {
         info = fetch;
         name = fetch.name;

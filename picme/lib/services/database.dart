@@ -41,7 +41,7 @@ class DatabaseService {
       'bio': "Bio unavailable",
       'role': role,
       'coverPicture':
-          "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fpb.png?alt=media&token=62a61f29-5f5e-4ee8-bcd9-5c08dbd9091b",
+          "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fdefault_cover.jpg?alt=media&token=9e6c8eb3-e5b0-4cfc-a24a-3e4619c885b3",
       'displayPicture':
           'https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20dp%2F360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg?alt=media&token=b1ae5147-b094-4e53-b7ac-518a6f4c218c',
     });
@@ -184,7 +184,6 @@ class DatabaseService {
     } else {
       ratings = ((finalRating + currentRating) / 2);
     }
-    print('$finalRating $currentRating $ratings');
     employeeCollection.doc(id).update({
       'ratings': ratings.toInt(),
     });

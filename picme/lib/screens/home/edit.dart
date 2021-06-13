@@ -123,7 +123,8 @@ class _EditState extends State<Edit> {
 
                               Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(builder: (context) => Wrapper()),
+                                MaterialPageRoute(
+                                    builder: (context) => Wrapper()),
                                 (Route<dynamic> route) => false,
                               );
                             },
@@ -406,7 +407,14 @@ class _EditState extends State<Edit> {
                                           borderRadius:
                                               BorderRadius.circular(8.0)),
                                       color: Color.fromRGBO(237, 237, 237, 1.0),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Wrapper()),
+                                          (Route<dynamic> route) => false,
+                                        );
+                                      },
                                       child: Text(
                                         'Cancel',
                                         style: TextStyle(

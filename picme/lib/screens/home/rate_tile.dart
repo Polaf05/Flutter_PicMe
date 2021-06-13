@@ -175,8 +175,7 @@ class _RatingTileState extends State<RatingTile> {
                                       widget.booking.lensmanEmail,
                                       widget.booking.lensmanName,
                                       widget.booking.id,
-                                      widget.booking.request,
-                                      widget.booking.date);
+                                      widget.booking.request);
 
                                   Navigator.pop(context);
                                 },
