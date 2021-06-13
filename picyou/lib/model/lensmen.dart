@@ -9,6 +9,7 @@ class Lensmen {
   final String role;
   final String coverPhoto;
   final bool urgent;
+  final int ratings;
 
   Lensmen(
       {this.username,
@@ -20,5 +21,6 @@ class Lensmen {
       this.gallery,
       this.role,
       this.coverPhoto,
-      this.urgent});
+      this.urgent,
+      this.ratings});
 }

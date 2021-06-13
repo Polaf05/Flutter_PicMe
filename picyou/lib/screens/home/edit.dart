@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:picyou/services/auth.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:picyou/services/database.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 import 'package:picyou/screens/wrapper.dart';
 
@@ -33,6 +31,7 @@ class _EditState extends State<Edit> {
   String ccon = ' ';
   String cemail = ' ';
   bool urgent = false;
+  int ratings = 0;
   @override
   void initState() {
     super.initState();
@@ -55,6 +54,7 @@ class _EditState extends State<Edit> {
         cemail = fetch.email;
         coverPicture = fetch.coverPhoto;
         urgent = fetch.urgent;
+        ratings = fetch.ratings;
       });
       print(name);
     });
@@ -130,7 +130,8 @@ class _EditState extends State<Edit> {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(builder: (context) => Wrapper()),
+                                MaterialPageRoute(
+                                    builder: (context) => Wrapper()),
                                 (Route<dynamic> route) => false,
                               );
                             },
@@ -447,15 +448,17 @@ class _EditState extends State<Edit> {
                                       color: Color.fromRGBO(31, 31, 31, 1.0),
                                       onPressed: () async {
                                         await _db.updateData(
-                                            username,
-                                            name,
-                                            address,
-                                            contact,
-                                            email,
-                                            gallery,
-                                            displayPicture,
-                                            coverPicture,
-                                            urgent);
+                                          username,
+                                          name,
+                                          address,
+                                          contact,
+                                          email,
+                                          gallery,
+                                          displayPicture,
+                                          coverPicture,
+                                          urgent,
+                                          ratings,
+                                        );
                                         _showMyDialog();
                                       },
                                       child: Text(

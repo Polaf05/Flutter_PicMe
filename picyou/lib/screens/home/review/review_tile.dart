@@ -78,17 +78,6 @@ class _ReviewTileState extends State<ReviewTile> {
                             style: GoogleFonts.lato(
                                 fontWeight: FontWeight.bold, fontSize: 18.0),
                           ),
-                          SizedBox(width: 5),
-                          Container(
-                            child: Text(
-                              email,
-                              style: GoogleFonts.lato(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10.0,
-                                  color: Colors.black38),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
                         ],
                       ),
                       SizedBox(height: 7),

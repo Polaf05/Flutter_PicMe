@@ -29,6 +29,7 @@ class _SignUpState extends State<SignUp> {
   String coverPicture = " ";
   String role = 'lensmen';
   bool urgent = false;
+  int ratings = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,6 +186,7 @@ class _SignUpState extends State<SignUp> {
                                   role,
                                   coverPicture,
                                   urgent,
+                                  ratings,
                                 );
                                 if (result == null) {
                                   setState(() => error = 'supply vald email');

@@ -33,6 +33,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String displayPicture = ' ';
   String coverPhoto = ' ';
   bool urgent = false;
+  int ratings = 0;
   @override
   void initState() {
     _controller = TabController(initialIndex: 0, length: 3, vsync: this);
@@ -50,6 +51,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         displayPicture = fetch.displayPicture;
         coverPhoto = fetch.coverPhoto;
         urgent = fetch.urgent;
+        if (urgent == false) {
+          isChecked = false;
+        } else {
+          isChecked = true;
+        }
+        ratings = fetch.ratings;
       });
 
       print(coverPhoto);
@@ -277,7 +284,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               gallery,
                               displayPicture,
                               coverPhoto,
-                              urgent);
+                              urgent,
+                              ratings,);
                         },
                         child: CustomSwitchButton(
                           backgroundColor: Color.fromRGBO(216, 181, 58, 1.0),

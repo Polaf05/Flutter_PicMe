@@ -58,7 +58,8 @@ class AuthService {
       String displayPicture,
       String role,
       String coverPicture,
-      bool urgent) async {
+      bool urgent,
+      int ratings) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -75,7 +76,8 @@ class AuthService {
           displayPicture,
           role,
           coverPicture,
-          urgent);
+          urgent,
+          ratings);
 
       return _userFromFirebaseUser(user);
     } catch (e) {

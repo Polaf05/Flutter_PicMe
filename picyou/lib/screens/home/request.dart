@@ -152,7 +152,7 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
                           Text(
-                            'Tell us more about your experience.',
+                            'Tell us more why you cant accept the request.',
                             style: GoogleFonts.lato(fontSize: 18),
                           ),
                           SizedBox(

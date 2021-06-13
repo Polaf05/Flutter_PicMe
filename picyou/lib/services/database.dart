@@ -39,6 +39,7 @@ class DatabaseService {
     String role,
     String coverPicture,
     bool urgent,
+    int ratings,
   ) async {
     return await lensmenCollection.doc(uid).set({
       'username': username,
@@ -62,6 +63,7 @@ class DatabaseService {
       'coverPhoto':
           "https://firebasestorage.googleapis.com/v0/b/picme-4c5ea.appspot.com/o/Assets%2Fdefault%20cover%2Fdefault_cover.jpg?alt=media&token=9e6c8eb3-e5b0-4cfc-a24a-3e4619c885b3",
       'urgent': false,
+      'ratings': 0,
     });
   }
 
@@ -107,7 +109,8 @@ class DatabaseService {
         displayPicture: snapshot.data()['displayPicture'] ?? '',
         gallery: snapshot.data()['gallery'] ?? '',
         coverPhoto: snapshot.data()['coverPhoto'] ?? '',
-        urgent: snapshot.data()['urgent'] ?? '');
+        urgent: snapshot.data()['urgent'] ?? '',
+        ratings: snapshot.data()['ratings'] ?? '');
   }
 
   Booking _specificbooking(DocumentSnapshot snapshot) {
@@ -138,6 +141,7 @@ class DatabaseService {
         gallery: doc.data()['gallery'] ?? '',
         role: doc.data()['role'] ?? '',
         urgent: doc.data()['urgent'] ?? '',
+        ratings: doc.data()['ratings'] ?? '',
       );
     }).toList();
   }
@@ -202,6 +206,7 @@ class DatabaseService {
     String displayPicture,
     String coverPhoto,
     bool urgent,
+    int ratings,
   ) async {
     dynamic id = _auth.getCurrentUser();
     return await lensmenCollection.doc(id.uid).set({
@@ -214,6 +219,7 @@ class DatabaseService {
       'displayPicture': displayPicture,
       'coverPhoto': coverPhoto,
       'urgent': urgent,
+      'ratings': ratings,
     });
   }
 
