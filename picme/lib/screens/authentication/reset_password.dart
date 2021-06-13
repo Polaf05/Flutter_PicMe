@@ -76,14 +76,14 @@ class _ResetPasswordState extends State<ResetPassword> {
                                     EdgeInsets.fromLTRB(80, 15, 80, 15)),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.red[400]),
+                                        Color.fromRGBO(216, 181, 58, 1.0)),
                                 shape: MaterialStateProperty.all<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(30.0),
                                         side: BorderSide(
-                                            color: Colors.red[400])))),
+                                            color: Color.fromRGBO(216, 181, 58, 1.0))))),
                             onPressed: () async {
                               if (_formkey.currentState.validate()) {
                                 await _auth.forgotPassword(email);
@@ -97,7 +97,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       Center(
                         child: Text(
                           error,
-                          style: TextStyle(color: Colors.red, fontSize: 14.0),
+                          style: TextStyle(color: Color.fromRGBO(216, 181, 58, 1.0), fontSize: 14.0),
                         ),
                       ),
                     ]),
@@ -108,7 +108,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   children: <Widget>[
                     Text('Already Have an Account?'),
                     FlatButton(
-                      textColor:  Color.fromRGBO(26, 181, 158, 1.0),
+                      textColor:  Color.fromRGBO(216, 181, 58, 1.0),
                       child: Text(
                         'SIGN IN',
                         style: TextStyle(fontSize: 15, fontFamily: 'Arial'),
