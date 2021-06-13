@@ -563,7 +563,6 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                               lensmanEmail,
                                               lensmanName,
                                               contact,
-                                              feedback,
                                             );
                                             print(widget.booking.id);
                                             await _db.updateStatus(
@@ -678,6 +677,13 @@ class _RequestState extends State<Request> with SingleTickerProviderStateMixin {
                                           color:
                                               Color.fromRGBO(31, 31, 31, 1.0),
                                           onPressed: () async {
+                                            await _mail.sendEmailOpenreview(
+                                              clientEmail,
+                                              clientName,
+                                              lensmanEmail,
+                                              lensmanName,
+                                              contact,
+                                            );
                                             await _db.updateStatus(
                                                 widget.booking.id,
                                                 "For Review");
