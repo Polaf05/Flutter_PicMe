@@ -3,6 +3,8 @@ import 'package:picme/models/lensman.dart';
 import 'package:picme/screens/home/show_details.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:picme/services/auth.dart';
+import 'package:picme/services/database.dart';
 
 class SearchTile extends StatelessWidget {
   final Lensman lens;
@@ -15,11 +17,13 @@ class SearchTile extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
       height: 180,
       child: GestureDetector(
-        onTap: () {
+        onTap: () async {
+          dynamic result = await AuthService().getCurrentUser();
+
+          dynamic user = await DatabaseService().fetchClientData(result.uid);
+
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ShowDetails(
-                    lens: lens,
-                  )));
+              builder: (context) => ShowDetails(lens: lens, user: user)));
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6),
