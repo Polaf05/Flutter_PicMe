@@ -5,6 +5,7 @@ class MailerService {
   final String username = 'kevintest5983@gmail.com';
   final String password = 'Polo5983';
 
+//Send Email Reject
   Future sendEmailReject(
       String clientEmail,
       String clientName,
@@ -32,6 +33,7 @@ class MailerService {
     }
   }
 
+//Send Email Accept
   Future sendEmailAccept(
     String clientEmail,
     String clientName,
@@ -59,6 +61,7 @@ class MailerService {
     }
   }
 
+//Send email Open Review
   Future sendEmailOpenreview(
     String clientEmail,
     String clientName,
