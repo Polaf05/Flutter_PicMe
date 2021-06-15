@@ -30,6 +30,22 @@ class DatabaseService {
   final CollectionReference ratingCollection =
       FirebaseFirestore.instance.collection('Ratings');
 
+  //Check
+
+  Future checkUserData(String name, String email) async {
+    var docRef = clientCollection.doc(uid);
+
+    docRef
+        .get()
+        .then((doc) => {
+              if (doc.exists)
+                print(doc)
+              else
+                updateUserData(name, email, "client")
+            })
+        .onError((error, stackTrace) => null);
+  }
+
   //Create
 
   Future updateUserData(String email, String name, String role) async {

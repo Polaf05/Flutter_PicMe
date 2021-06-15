@@ -105,7 +105,7 @@ class AuthService {
 
       //add database
       await DatabaseService(uid: user.uid)
-          .updateUserData(user.email, user.displayName, "client");
+          .checkUserData(user.email, user.displayName);
 
       return _userFromFirebaseUser(user);
     } catch (e) {
@@ -132,7 +132,7 @@ class AuthService {
 
       //add database
       await DatabaseService(uid: user.uid)
-          .updateUserData(user.email, user.displayName, "client");
+          .checkUserData(user.email, user.displayName);
 
       return _userFromFirebaseUser(user);
     } catch (e) {
