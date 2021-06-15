@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:picyou/screens/authenticate/sign_in.dart';
-import 'package:picyou/screens/authenticate/sign_up.dart';
 import 'package:picyou/screens/home/gallery/galdisp.dart';
 import 'package:picyou/screens/home/request/request_display.dart';
 import 'package:picyou/screens/home/review/review_display.dart';
@@ -276,16 +274,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             }
                           });
                           await _db.updateData(
-                              username,
-                              name,
-                              address,
-                              contact,
-                              email,
-                              gallery,
-                              displayPicture,
-                              coverPhoto,
-                              urgent,
-                              ratings,);
+                            username,
+                            name,
+                            address,
+                            contact,
+                            email,
+                            gallery,
+                            displayPicture,
+                            coverPhoto,
+                            urgent,
+                            ratings,
+                          );
                         },
                         child: CustomSwitchButton(
                           backgroundColor: Color.fromRGBO(216, 181, 58, 1.0),
