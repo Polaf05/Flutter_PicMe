@@ -47,7 +47,7 @@ class _BookState extends State<Book> {
     DateTime _datePicker = await showDatePicker(
       context: context,
       initialDate: _date,
-      firstDate: DateTime(1947),
+      firstDate: DateTime.now().subtract(Duration(days: 1)),
       lastDate: DateTime(2030),
     );
 

@@ -224,7 +224,7 @@ class _ShowDetailsState extends State<ShowDetails>
                               );
                             },
                             child: Text(
-                              'Accept',
+                              'Book!!',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
