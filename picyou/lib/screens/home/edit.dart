@@ -351,29 +351,6 @@ class _EditState extends State<Edit> {
                                           borderSide: BorderSide(
                                               color: Color.fromRGBO(
                                                   216, 181, 58, 1.0))),
-                                      hintText: email,
-                                      labelText: 'Enter Email',
-                                      prefixIcon: const Icon(
-                                        Icons.email_outlined,
-                                        color:
-                                            Color.fromRGBO(216, 181, 58, 1.0),
-                                      ),
-                                    ),
-                                    onChanged: (val) {
-                                      setState(() => email = val);
-                                    },
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(bottom: 20),
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                          borderSide: BorderSide(
-                                              color: Color.fromRGBO(
-                                                  216, 181, 58, 1.0))),
                                       hintText: address,
                                       labelText: 'Enter Address',
                                       prefixIcon: const Icon(

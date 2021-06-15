@@ -61,13 +61,8 @@ class MailerService {
     }
   }
 
-  Future sendReview(
-      String clientEmail,
-      String clientName,
-      String lensmanEmail,
-      String lensmanName,
-      String bookingId,
-      String request) async {
+  Future sendReview(String clientEmail, String clientName, String lensmanEmail,
+      String lensmanName, String bookingId, String request) async {
     final smtpServer = gmail(username, password);
 
     final message = Message()
